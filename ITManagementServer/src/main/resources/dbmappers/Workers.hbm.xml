@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="models.entities.Worker" table="Workers" catalog="ITManagementDb">
+        <id name="id" type="java.lang.Integer">
+            <column name="Id" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="Name" length="200" not-null="false"/>
+        </property>
+        <property name="position" type="java.lang.Integer">
+            <column name="Position" not-null="true" />
+        </property>
+        <property name="salary" type="java.lang.Double">
+            <column name="Salary" not-null="false"/>
+        </property>
+        <property name="birthDate" type="java.util.Date">
+            <column name="BirthDate" not-null="false"/>
+        </property>
+        <property name="hireDate" type="java.util.Date">
+            <column name="HireDate" not-null="false"/>
+        </property>
+        <property name="active" type="java.lang.Boolean">
+            <column name="Active" not-null="true" default="true"/>
+        </property>
+        <property name="englishLevel" type="string">
+            <column name="EnglishLevel" length="50" not-null="false"/>
+        </property>
+        <property name="departmentId" type="java.lang.Integer">
+            <column name="DepartmentId" not-null="false"/>
+        </property>
+        <property name="login" type="string">
+            <column name="Login" length="500" not-null="true"/>
+        </property>
+        <property name="password" type="string">
+            <column name="Password" length="500" not-null="true"/>
+        </property>
+        <property name="salt" type="string">
+            <column name="Salt" length="500" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

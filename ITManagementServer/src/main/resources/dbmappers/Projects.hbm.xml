@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="models.entities.Project" table="Projects" catalog="ITManagementDb">
+        <id name="id" type="java.lang.Integer">
+            <column name="Id" />
+            <generator class="identity" />
+        </id>
+        <property name="title" type="string">
+            <column name="Title" length="500" />
+        </property>
+        <property name="description" type="string">
+            <column name="Description" length="1000" />
+        </property>
+        <property name="technologiesStack" type="string">
+            <column name="TechnologiesStack" length="500" />
+        </property>
+        <property name="startDate" type="java.util.Date">
+            <column name="StartDate" />
+        </property>
+        <property name="active" type="java.lang.Boolean">
+            <column name="Active" />
+        </property>
+    </class>
+</hibernate-mapping>

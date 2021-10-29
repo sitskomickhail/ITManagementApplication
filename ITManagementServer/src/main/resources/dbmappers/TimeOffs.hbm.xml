@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="models.entities.TimeOff" table="TimeOffs" catalog="ITManagementDb">
+        <id name="id" type="java.lang.Integer">
+            <column name="Id" />
+            <generator class="identity" />
+        </id>
+        <property name="dateFrom" type="java.util.Date">
+            <column name="DateFrom" not-null="true" />
+        </property>
+        <property name="dateBefore" type="java.util.Date">
+            <column name="DateBefore" not-null="true" />
+        </property>
+        <property name="paid" type="java.lang.Boolean">
+            <column name="Paid" not-null="true" />
+        </property>
+        <property name="reason" type="java.lang.Integer">
+            <column name="Reason" />
+        </property>
+        <property name="comment" type="string">
+            <column name="Comment" length="500" />
+        </property>
+        <property name="workerId" type="java.lang.Integer">
+            <column name="WorkerId" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>
