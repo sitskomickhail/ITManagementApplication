@@ -1,24 +1,20 @@
-import models.entities.Department;
-import models.entities.Worker;
-import org.hibernate.Session;
-import utils.HibernateUtil;
+import db.context.DepartmentContext;
+import java.io.IOException;
+import java.sql.SQLException;
 
 public class Program {
     public static void main(String[] args) {
-        System.out.println("Maven + Hibernate + MySQL");
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            var departmentsList = DepartmentContext.getDepartments();
 
-        session.beginTransaction();
+            for (var dep : departmentsList) {
+                System.out.println(dep.getId() + " " + dep.getTitle() + " " + dep.getWorkerDuties());
+            }
 
-        Worker netWorker = new Worker();
-//        netWorker.setDepartmentId(1);
-        netWorker.setPosition(1);
-        netWorker.setName("Иван Шатухо");
-        netWorker.setLogin("shatukho");
-        netWorker.setPassword("pass");
-        netWorker.setSalt("salt");
-
-        session.save(netWorker);
-        session.getTransaction().commit();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }
