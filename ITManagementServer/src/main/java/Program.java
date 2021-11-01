@@ -1,20 +1,79 @@
-import db.context.DepartmentContext;
+import com.google.gson.Gson;
+import connectors.TcpConnector;
+import connectors.interfaces.ITcpConnector;
+import constants.ExecutionResults;
+import constants.HandlerCodes;
+import handlers.HandlerThread;
+import helpers.ConfigHelper;
+import helpers.RandomHelper;
+import models.requestModels.connectors.StartConnectionRequestModel;
+import models.responseModels.connectors.StartConnectionResponseModel;
+import models.transferModels.TransferRequestModel;
+import models.transferModels.TransferResponseModel;
+import models.transferModels.responses.SuccessTransferResponseModel;
+
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class Program {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        ConfigHelper configHelper = new ConfigHelper();
+        String portConfig = null;
+
+        TransferRequestModel requestModel = new TransferRequestModel();
+        requestModel.actionCode = HandlerCodes.START_CONNECTION;
+        requestModel.actionModel = new Gson().toJson(new StartConnectionRequestModel());
+
+        System.out.println(new Gson().toJson(requestModel));
+
         try {
-            var departmentsList = DepartmentContext.getDepartments();
-
-            for (var dep : departmentsList) {
-                System.out.println(dep.getId() + " " + dep.getTitle() + " " + dep.getWorkerDuties());
-            }
-
+            portConfig = configHelper.GetPropertyValue("tcpPort");
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        }
+
+        if (portConfig == null || portConfig.isEmpty()) {
+            System.out.println("Порт не получен...");
+            return;
+        }
+
+        int tcpPort = Integer.parseInt(portConfig);
+        ITcpConnector initialTcpConnector = new TcpConnector(tcpPort);
+
+        System.out.println("Server started on 127.0.0.1:" + portConfig + "!");
+        try {
+            while (true) {
+                System.out.println("Listening for client");
+                initialTcpConnector.StartConnection();
+                System.out.println("New client accepted");
+                var clientMessage = initialTcpConnector.GetClientMessage();
+
+                if (clientMessage.actionCode == HandlerCodes.START_CONNECTION) {
+                    System.out.println("Creating new thread for client");
+                    int connectionPort = RandomHelper.Randomize();
+
+                    SuccessTransferResponseModel<StartConnectionResponseModel> connectionModel = new SuccessTransferResponseModel<>();
+                    connectionModel.responseModel = new StartConnectionResponseModel();
+                    connectionModel.responseModel.setPort(connectionPort);
+
+                    TransferResponseModel response = new TransferResponseModel();
+                    response.executionCode = ExecutionResults.SUCCESS_CODE;
+                    response.executionResult = new Gson().toJson(connectionModel);
+
+                    initialTcpConnector.SendMessageToClient(response);
+
+                    System.out.println("Client will run on port " + connectionPort);
+                    Thread handlerThread = new Thread(new HandlerThread(connectionPort));
+                    handlerThread.start();
+                }
+
+                Thread.sleep(3000);
+                initialTcpConnector.CloseConnection();
+                System.out.println("Connection closed");
+            }
+        } catch (IOException | ClassNotFoundException | InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            initialTcpConnector.CloseConnection();
         }
     }
 }
