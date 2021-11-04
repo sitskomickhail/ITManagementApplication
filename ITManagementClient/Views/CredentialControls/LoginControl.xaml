@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="ITManagementClient.Views.CredentialControls.LoginControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Background="{DynamicResource MaterialDesignPaper}"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1200">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <GroupBox
+                Header="Вход в систему"
+                Style="{DynamicResource MaterialDesignGroupBox}"
+                Margin="50"
+                materialDesign:ColorZoneAssist.Mode="SecondaryMid">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.6*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Image Margin="15" Source="../../Content/Images/IT_management.png"/>
+                <StackPanel Grid.Column="1" Margin="5, 40">
+                    <TextBox
+                            FontSize="14"
+                            x:Name="NameTextBox"
+                            materialDesign:HintAssist.Hint="Логин"
+                            materialDesign:HintAssist.HelperText="*Обязательное поле">
+                        <TextBox.Text>
+                            <Binding
+                                    Path="Name"
+                                    UpdateSourceTrigger="PropertyChanged">
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <PasswordBox
+                            x:Name="PasswordBox"
+                            materialDesign:HintAssist.Hint="Пароль"
+                            materialDesign:TextFieldAssist.HasClearButton="True"
+                            Margin="0, 40"
+                            FontSize="14"
+                            materialDesign:HintAssist.HelperText="*Минимум 8 символов" />
+
+                    <Button
+                            Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                            Content="ВОЙТИ"/>
+                    <Button
+                            Margin="0 30"
+                            Style="{StaticResource MaterialDesignPaperLightButton}"
+                            ToolTip="Resource name: MaterialDesignPaperLightButton"
+                            Content="РЕГИСТРАЦИЯ"
+                            Command="{Binding GoTo2}"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"></Button>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

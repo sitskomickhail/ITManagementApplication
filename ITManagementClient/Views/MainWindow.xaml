@@ -1,0 +1,38 @@
+﻿<Window x:Class="ITManagementClient.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        WindowState="Maximized"
+        WindowStyle="None"
+        Title="MainWindow">
+    <Grid>
+        <GroupBox
+            Style="{DynamicResource MaterialDesignGroupBox}"
+            materialDesign:ShadowAssist.ShadowDepth="Depth3"
+            BorderThickness="0"
+            Margin="0">
+            <GroupBox.Header>
+                <DockPanel Margin="0">
+                    <Label VerticalAlignment="Center"
+                           FontSize="16">IT-management app</Label>
+                    <Menu IsMainMenu="True" HorizontalAlignment="Right">
+                        <MenuItem Icon="{materialDesign:PackIcon Kind=DotsVertical}" Width="50" Background="Transparent">
+                            <MenuItem Header="My Profile" Icon="{materialDesign:PackIcon Kind=AccountOutline}"></MenuItem>
+                            <MenuItem Header="Logout" Icon="{materialDesign:PackIcon Kind=Logout}"/>
+                            <Separator />
+                            <MenuItem Header="Exit" Icon="{materialDesign:PackIcon Kind=ExitToApp}" />
+                        </MenuItem>
+                    </Menu>
+                </DockPanel>
+            </GroupBox.Header>
+
+            <ContentControl Content="{Binding CurrentPageViewModel}"/>
+
+        </GroupBox>
+    </Grid>
+</Window>
