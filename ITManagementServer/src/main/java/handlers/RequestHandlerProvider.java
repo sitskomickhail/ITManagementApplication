@@ -28,8 +28,8 @@ public class RequestHandlerProvider implements IRequestHandlerProvider {
         responseModel.executionResult = new Gson().toJson(errorModel);
 
         for (var handler : requestHandlers) {
-            if (handler.GetHandlerCode() == requestModel.actionCode) {
-                responseModel = handler.HandleRequest(requestModel.actionModel);
+            if (handler.GetHandlerCode() == requestModel.ActionCode) {
+                responseModel = handler.HandleRequest(requestModel.ActionModel);
             }
         }
 

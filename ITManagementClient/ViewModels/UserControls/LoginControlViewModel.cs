@@ -13,11 +13,11 @@ namespace ITManagementClient.ViewModels.UserControls
 {
     public class LoginControlViewModel : BaseViewModel, IPageViewModel
     {
-        public ICommand GoTo2 { get; set; }
+        public ICommand NavigateToRegisterPage { get; set; }
 
         public LoginControlViewModel()
         {
-            GoTo2 = new RelayCommand(x =>
+            NavigateToRegisterPage = new RelayCommand(x =>
             {
                 Mediator.Notify("OnGo2Screen");
             });

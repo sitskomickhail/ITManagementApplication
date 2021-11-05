@@ -1,13 +1,13 @@
 package models.responseModels.connectors;
 
 public class StartConnectionResponseModel {
-    private int port;
+    private int Port;
 
     public int getPort() {
-        return port;
+        return Port;
     }
 
     public void setPort(int port) {
-        this.port = port;
+        this.Port = port;
     }
 }

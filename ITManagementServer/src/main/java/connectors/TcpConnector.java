@@ -5,9 +5,7 @@ import connectors.interfaces.ITcpConnector;
 import models.transferModels.TransferRequestModel;
 import models.transferModels.TransferResponseModel;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -18,9 +16,6 @@ public class TcpConnector implements ITcpConnector {
     ServerSocket serverSocket;
     Socket clientAccepted;
 
-    ObjectInputStream inputStream;
-    ObjectOutputStream outputStream;
-
     public TcpConnector(int port) {
         _port = port;
     }
@@ -29,32 +24,28 @@ public class TcpConnector implements ITcpConnector {
     public void StartConnection() throws IOException {
         serverSocket = new ServerSocket(_port);
         clientAccepted = serverSocket.accept();
-
-        inputStream = new ObjectInputStream(clientAccepted.getInputStream());
-        outputStream = new ObjectOutputStream(clientAccepted.getOutputStream());
-
     }
 
     @Override
-    public TransferRequestModel GetClientMessage() throws IOException, ClassNotFoundException {
-        inputStream = new ObjectInputStream(clientAccepted.getInputStream());
-        String jsonObject = (String)inputStream.readObject();
+    public TransferRequestModel GetClientMessage() throws IOException{
+        var inputStream = new BufferedReader(new InputStreamReader(clientAccepted.getInputStream()));
+        String jsonObject = inputStream.readLine();
 
         return new Gson().fromJson(jsonObject, TransferRequestModel.class);
     }
 
     @Override
     public void SendMessageToClient(TransferResponseModel transferObject) throws IOException {
-        outputStream = new ObjectOutputStream(clientAccepted.getOutputStream());
+        DataOutputStream outputStream = new DataOutputStream(clientAccepted.getOutputStream());
 
         var jsonObject = new Gson().toJson(transferObject);
-        outputStream.writeObject(jsonObject);
+
+        byte[] buffer = jsonObject.getBytes();
+        outputStream.write(buffer, 0, buffer.length);
     }
 
     @Override
     public void CloseConnection() throws IOException {
-        inputStream.close();
-        outputStream.close();
         clientAccepted.close();
         serverSocket.close();
     }

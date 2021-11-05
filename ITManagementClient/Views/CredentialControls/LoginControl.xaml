@@ -57,7 +57,7 @@
                             Style="{StaticResource MaterialDesignPaperLightButton}"
                             ToolTip="Resource name: MaterialDesignPaperLightButton"
                             Content="РЕГИСТРАЦИЯ"
-                            Command="{Binding GoTo2}"
+                            Command="{Binding NavigateToRegisterPage}"
                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"></Button>
                 </StackPanel>
             </Grid>
