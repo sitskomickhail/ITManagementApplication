@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using ITManagementClient.Navigation;
 using ITManagementClient.ViewModels.Base;
 using ITManagementClient.ViewModels.Interfaces;
@@ -14,12 +11,9 @@ namespace ITManagementClient.ViewModels
     public class MainWindowViewModel : BaseViewModel
     {
         private IPageViewModel _currentPageViewModel;
-        private List<IPageViewModel> _pageViewModels;
+        private Dictionary<string, IPageViewModel> _pageViewModels;
 
-        public List<IPageViewModel> PageViewModels
-        {
-            get { return _pageViewModels ?? (_pageViewModels = new List<IPageViewModel>()); }
-        }
+        public Dictionary<string, IPageViewModel> PageViewModels => _pageViewModels ?? (_pageViewModels = new Dictionary<string, IPageViewModel>());
 
         public IPageViewModel CurrentPageViewModel
         {
@@ -33,32 +27,30 @@ namespace ITManagementClient.ViewModels
 
         public MainWindowViewModel()
         {
-            PageViewModels.Add(new LoginControlViewModel());
-            PageViewModels.Add(new RegisterControlViewModel());
+            var types = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes()).Where(x =>
+                typeof(IPageViewModel).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract);
 
-            CurrentPageViewModel = PageViewModels[0];
+            foreach (var viewModel in types)
+            {
+                var viewModelInstance = (IPageViewModel)viewModel.GetConstructor(Type.EmptyTypes)?.Invoke(new object[] { });
+                if (viewModelInstance != null)
+                {
+                    PageViewModels.Add(viewModel.Name, viewModelInstance);
+                    Mediator.Subscribe(viewModel.Name, ChangeViewModel);
+                }
+            }
 
-            Mediator.Subscribe("OnGo1Screen", OnGo1Screen);
-            Mediator.Subscribe("OnGo2Screen", OnGo2Screen);
+            CurrentPageViewModel = PageViewModels[nameof(LoginControlViewModel)];
         }
 
-        private void ChangeViewModel(IPageViewModel viewModel)
+        private void ChangeViewModel(object obj)
         {
-            if(!PageViewModels.Contains(viewModel))
-                PageViewModels.Add(viewModel);
+            var viewModelName = (string)obj;
 
-            CurrentPageViewModel = PageViewModels
-                .FirstOrDefault(vm => vm == viewModel);
-        }
+            if (!PageViewModels.Keys.Contains(viewModelName))
+                throw new NullReferenceException($"{viewModelName} View Model was not found");
 
-        private void OnGo1Screen(object obj)
-        {
-            ChangeViewModel(PageViewModels[0]);
-        }
-        
-        private void OnGo2Screen(object obj)
-        {
-            ChangeViewModel(PageViewModels[1]);
+            CurrentPageViewModel = PageViewModels[viewModelName];
         }
     }
 }

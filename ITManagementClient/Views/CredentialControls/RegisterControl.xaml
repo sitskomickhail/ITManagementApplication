@@ -87,7 +87,7 @@
                     <Button
                         Style="{StaticResource MaterialDesignRaisedButton}"
                         Margin="0, 20"
-                        Command="{Binding GoTo1}"
+                        Command="{Binding ReturnToLoginPage}"
                         Content="НАЗАД">
                     </Button>
                 </StackPanel>

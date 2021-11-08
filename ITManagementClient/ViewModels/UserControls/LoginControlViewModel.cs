@@ -17,10 +17,7 @@ namespace ITManagementClient.ViewModels.UserControls
 
         public LoginControlViewModel()
         {
-            NavigateToRegisterPage = new RelayCommand(x =>
-            {
-                Mediator.Notify("OnGo2Screen");
-            });
+            NavigateToRegisterPage = new RelayCommand(x => { Mediator.Notify(nameof(RegisterControlViewModel), nameof(RegisterControlViewModel)); });
         }
     }
 }

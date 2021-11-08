@@ -69,6 +69,8 @@
     <Compile Include="Exceptions\HandlerExecutionException.cs" />
     <Compile Include="Handlers\Base\BaseActionHandler.cs" />
     <Compile Include="Handlers\Connectors\StartConnectionActionHandler.cs" />
+    <Compile Include="Handlers\Workers\LoginWorkerActionHandler.cs" />
+    <Compile Include="Handlers\Workers\RegisterWorkerActionHandler.cs" />
     <Compile Include="Managers\Interfaces\ITcpHandlerManager.cs" />
     <Compile Include="Managers\TcpHandlerManager.cs" />
     <Compile Include="Models\Enums\ExecutionCode.cs" />
