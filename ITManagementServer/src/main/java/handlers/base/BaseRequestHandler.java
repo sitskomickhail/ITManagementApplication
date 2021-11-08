@@ -5,7 +5,9 @@ import com.google.gson.reflect.TypeToken;
 import constants.ExecutionResults;
 import models.transferModels.TransferResponseModel;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
+import java.sql.SQLException;
 
 public abstract class BaseRequestHandler<ModelIn, ModelOut> {
 
@@ -30,5 +32,5 @@ public abstract class BaseRequestHandler<ModelIn, ModelOut> {
 
     public abstract int GetHandlerCode();
 
-    protected abstract ModelOut Execute(ModelIn model);
+    protected abstract ModelOut Execute(ModelIn model) throws Exception;
 }

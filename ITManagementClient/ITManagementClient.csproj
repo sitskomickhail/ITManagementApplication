@@ -73,8 +73,13 @@
     <Compile Include="Managers\TcpHandlerManager.cs" />
     <Compile Include="Models\Enums\ExecutionCode.cs" />
     <Compile Include="Models\Enums\HandlerCodes.cs" />
+    <Compile Include="Models\Enums\UserRoles.cs" />
     <Compile Include="Models\RequestModels\Connectors\StartConnectionRequestModel.cs" />
+    <Compile Include="Models\RequestModels\Workers\LoginRequestModel.cs" />
+    <Compile Include="Models\RequestModels\Workers\RegisterRequestModel.cs" />
     <Compile Include="Models\ResponseModels\Connectors\StartConnectionResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\Workers\LoginResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\Workers\RegisterResponseModel.cs" />
     <Compile Include="Models\TransferModels\ResponseModels\ErrorTransferResponseModel.cs" />
     <Compile Include="Models\TransferModels\ResponseModels\SuccessTransferResponseModel.cs" />
     <Compile Include="Models\TransferModels\TransferRequestModel.cs" />

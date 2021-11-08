@@ -70,15 +70,23 @@
                             FontSize="14"
                             materialDesign:HintAssist.HelperText="*Минимум 8 символов" />
 
+                    <PasswordBox
+                        x:Name="AdministerPassword"
+                        materialDesign:HintAssist.Hint="Пароль администратора"
+                        materialDesign:TextFieldAssist.HasClearButton="True"
+                            Margin="0, 40"
+                        FontSize="14"
+                        materialDesign:HintAssist.HelperText="*Обязательное поле" />
+
                     <Button
                         Style="{StaticResource MaterialDesignRaisedAccentButton}"
                         Content="ЗАРЕГИСТРИРОВАТЬСЯ"
-                        Margin="0, 40"/>
+                        Margin="0, 20"/>
 
 
                     <Button
                         Style="{StaticResource MaterialDesignRaisedButton}"
-                        Margin="0, 40"
+                        Margin="0, 20"
                         Command="{Binding GoTo1}"
                         Content="НАЗАД">
                     </Button>
