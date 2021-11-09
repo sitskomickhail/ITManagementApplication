@@ -30,9 +30,10 @@
                     </Menu>
                 </DockPanel>
             </GroupBox.Header>
-
-            <ContentControl Content="{Binding CurrentPageViewModel}"/>
-
+            <DockPanel LastChildFill="True">
+                <materialDesign:Snackbar MessageQueue="{Binding MessageQueue}" DockPanel.Dock="Top" HorizontalAlignment="Right"/>
+                <ContentControl Content="{Binding CurrentPageViewModel}"/>
+            </DockPanel>
         </GroupBox>
     </Grid>
 </Window>

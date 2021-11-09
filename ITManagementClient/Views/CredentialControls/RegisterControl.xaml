@@ -4,6 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:controls="clr-namespace:ITManagementClient.Controls"
+
              Background="{DynamicResource MaterialDesignPaper}"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              mc:Ignorable="d" 
@@ -29,24 +32,10 @@
                 <Image Margin="15" Source="../../Content/Images/IT_management.png"/>
                 <StackPanel Grid.Column="1" Margin="5, 40">
                     <Label>Внимание! Данная страница предназначена только для администратора!</Label>
-                    <TextBox
-                        FontSize="14"
-                        x:Name="Name"
-                        materialDesign:HintAssist.Hint="ФИО"
-                        Margin="0,20">
-                        <TextBox.Text>
-                            <Binding
-                                Path="Name"
-                                UpdateSourceTrigger="PropertyChanged">
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
 
-                    <TextBox
-                            FontSize="14"
-                            x:Name="Login"
-                            materialDesign:HintAssist.Hint="Логин"
-                            materialDesign:HintAssist.HelperText="*Обязательное поле">
+                    <TextBox FontSize="14"
+                                materialDesign:HintAssist.Hint="Логин"
+                                materialDesign:HintAssist.HelperText="*Обязательное поле">
                         <TextBox.Text>
                             <Binding
                                     Path="Login"
@@ -55,39 +44,21 @@
                         </TextBox.Text>
                     </TextBox>
 
-                    <PasswordBox
-                            x:Name="PasswordBox"
-                            materialDesign:HintAssist.Hint="Пароль"
-                            materialDesign:TextFieldAssist.HasClearButton="True"
-                            Margin="0, 40"
-                            FontSize="14"
-                            materialDesign:HintAssist.HelperText="*Минимум 8 символов" />
-
-                    <PasswordBox
-                            x:Name="RepeatPasswordBox"
-                            materialDesign:HintAssist.Hint="Повторите пароль"
-                            materialDesign:TextFieldAssist.HasClearButton="True"
-                            FontSize="14"
-                            materialDesign:HintAssist.HelperText="*Минимум 8 символов" />
-
-                    <PasswordBox
-                        x:Name="AdministerPassword"
-                        materialDesign:HintAssist.Hint="Пароль администратора"
-                        materialDesign:TextFieldAssist.HasClearButton="True"
-                            Margin="0, 40"
-                        FontSize="14"
-                        materialDesign:HintAssist.HelperText="*Обязательное поле" />
+                    <controls:PasswordControl Margin="0, 40" SecurePassword="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <controls:RepeatPasswordControl RepeatSecurePassword="{Binding RepeatPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <controls:AdminPasswordControl AdminSecurePassword="{Binding AdministratorPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                   Margin="0, 40"/>
 
                     <Button
                         Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                        Command="{Binding RegisterUserCommand}"
                         Content="ЗАРЕГИСТРИРОВАТЬСЯ"
                         Margin="0, 20"/>
 
-
                     <Button
                         Style="{StaticResource MaterialDesignRaisedButton}"
-                        Margin="0, 20"
                         Command="{Binding ReturnToLoginPage}"
+                        Margin="0, 20"
                         Content="НАЗАД">
                     </Button>
                 </StackPanel>

@@ -4,6 +4,7 @@ using ITManagementClient.Managers;
 using ITManagementClient.Models.Enums;
 using ITManagementClient.Models.TransferModels;
 using ITManagementClient.Models.TransferModels.ResponseModels;
+using ITManagementClient.Navigation;
 using Newtonsoft.Json;
 
 namespace ITManagementClient.Handlers.Base
@@ -38,7 +39,7 @@ namespace ITManagementClient.Handlers.Base
             }
             catch (HandlerExecutionException handlerException)
             {
-                //Notify result in mediator
+                Mediator.Notify("SnackbarMessageShow", handlerException.Message);
             }
             catch (Exception e)
             {

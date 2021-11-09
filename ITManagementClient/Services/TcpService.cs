@@ -1,4 +1,5 @@
-﻿using System.Net.Sockets;
+﻿using System;
+using System.Net.Sockets;
 using System.Text;
 using ITManagementClient.Models.TransferModels;
 using ITManagementClient.Services.Interfaces;
@@ -25,17 +26,21 @@ namespace ITManagementClient.Services
         {
             string json = JsonConvert.SerializeObject(requestModel);
 
-            byte[] data = Encoding.UTF8.GetBytes(json);
-            ClientSocket.Send(data);
-            ClientSocket.Disconnect(false);
+            int toSendLen = System.Text.Encoding.ASCII.GetByteCount(json);
+            byte[] toSendBytes = System.Text.Encoding.ASCII.GetBytes(json);
+            byte[] toSendLenBytes = System.BitConverter.GetBytes(toSendLen);
+            ClientSocket.Send(toSendLenBytes);
+            ClientSocket.Send(toSendBytes);
         }
 
         public TransferResponseModel ReadStream()
         {
-            byte[] data = new byte[100000];
-
-            int bytesRead = ClientSocket.Receive(data);
-            string message = Encoding.UTF8.GetString(data, 0, bytesRead);
+            byte[] rcvLenBytes = new byte[4];
+            ClientSocket.Receive(rcvLenBytes);
+            int rcvLen = System.BitConverter.ToInt32(rcvLenBytes, 0);
+            byte[] rcvBytes = new byte[rcvLen];
+            ClientSocket.Receive(rcvBytes);
+            String message = System.Text.Encoding.ASCII.GetString(rcvBytes);
 
             var response = JsonConvert.DeserializeObject<TransferResponseModel>(message);
             return response;
