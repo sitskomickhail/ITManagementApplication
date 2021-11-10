@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:controls="clr-namespace:ITManagementClient.Controls"
              Background="{DynamicResource MaterialDesignPaper}"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              mc:Ignorable="d" 
@@ -35,30 +36,26 @@
                             materialDesign:HintAssist.HelperText="*Обязательное поле">
                         <TextBox.Text>
                             <Binding
-                                    Path="Name"
+                                    Path="Login"
                                     UpdateSourceTrigger="PropertyChanged">
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
 
-                    <PasswordBox
-                            x:Name="PasswordBox"
-                            materialDesign:HintAssist.Hint="Пароль"
-                            materialDesign:TextFieldAssist.HasClearButton="True"
+                    <controls:PasswordControl
                             Margin="0, 40"
-                            FontSize="14"
-                            materialDesign:HintAssist.HelperText="*Минимум 8 символов" />
+                            SecurePassword="{Binding Password,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <Button
                             Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                            Content="ВОЙТИ"/>
+                            Content="ВОЙТИ"
+                            Command="{Binding LoginCommand}"/>
                     <Button
                             Margin="0 30"
                             Style="{StaticResource MaterialDesignPaperLightButton}"
                             ToolTip="Resource name: MaterialDesignPaperLightButton"
                             Content="РЕГИСТРАЦИЯ"
-                            Command="{Binding GoTo2}"
-                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"></Button>
+                            Command="{Binding NavigateToRegisterPage}"></Button>
                 </StackPanel>
             </Grid>
         </GroupBox>

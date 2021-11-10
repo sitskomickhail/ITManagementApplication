@@ -20,8 +20,8 @@ public class Program {
         String portConfig = null;
 
         TransferRequestModel requestModel = new TransferRequestModel();
-        requestModel.actionCode = HandlerCodes.START_CONNECTION;
-        requestModel.actionModel = new Gson().toJson(new StartConnectionRequestModel());
+        requestModel.ActionCode = HandlerCodes.START_CONNECTION;
+        requestModel.ActionModel = new Gson().toJson(new StartConnectionRequestModel());
 
         System.out.println(new Gson().toJson(requestModel));
 
@@ -47,7 +47,7 @@ public class Program {
                 System.out.println("New client accepted");
                 var clientMessage = initialTcpConnector.GetClientMessage();
 
-                if (clientMessage.actionCode == HandlerCodes.START_CONNECTION) {
+                if (clientMessage.ActionCode == HandlerCodes.START_CONNECTION) {
                     System.out.println("Creating new thread for client");
                     int connectionPort = RandomHelper.Randomize();
 

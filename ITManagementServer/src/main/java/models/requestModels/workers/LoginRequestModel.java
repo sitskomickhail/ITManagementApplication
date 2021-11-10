@@ -1,22 +1,22 @@
 package models.requestModels.workers;
 
 public class LoginRequestModel {
-    private String login;
-    private String password;
+    private String Login;
+    private String Password;
 
     public String getLogin() {
-        return login;
+        return Login;
     }
 
     public void setLogin(String login) {
-        this.login = login;
+        this.Login = login;
     }
 
     public String getPassword() {
-        return password;
+        return Password;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.Password = password;
     }
 }

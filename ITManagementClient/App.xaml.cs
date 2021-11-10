@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
+using ITManagementClient.Handlers.Base;
+using ITManagementClient.Handlers.Connectors;
+using ITManagementClient.Managers;
+using ITManagementClient.Models.RequestModels.Connectors;
+using ITManagementClient.Models.ResponseModels.Connectors;
 using ITManagementClient.ViewModels;
 using ITManagementClient.Views;
 
@@ -18,6 +17,11 @@ namespace ITManagementClient
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
+            BaseActionHandler<StartConnectionRequestModel, StartConnectionResponseModel> actionHandler = new StartConnectionActionHandler();
+
+            var connectionResponse = actionHandler.ExecuteHandler(new StartConnectionRequestModel());
+            TcpHandlerManager.GetTcpHandlerManager().SetTcpPort(connectionResponse.Port);
 
             MainWindow app = new MainWindow();
             MainWindowViewModel context = new MainWindowViewModel();

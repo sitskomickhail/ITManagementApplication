@@ -22,17 +22,21 @@
                            FontSize="16">IT-management app</Label>
                     <Menu IsMainMenu="True" HorizontalAlignment="Right">
                         <MenuItem Icon="{materialDesign:PackIcon Kind=DotsVertical}" Width="50" Background="Transparent">
-                            <MenuItem Header="My Profile" Icon="{materialDesign:PackIcon Kind=AccountOutline}"></MenuItem>
-                            <MenuItem Header="Logout" Icon="{materialDesign:PackIcon Kind=Logout}"/>
+                            <MenuItem Header="My Profile" Icon="{materialDesign:PackIcon Kind=AccountOutline}"
+                                      Visibility="{Binding WorkerNavElementsVisibility, UpdateSourceTrigger=PropertyChanged}"></MenuItem>
+                            <MenuItem Header="Logout" Icon="{materialDesign:PackIcon Kind=Logout}"
+                                      Visibility="{Binding WorkerNavElementsVisibility, UpdateSourceTrigger=PropertyChanged}"/>
                             <Separator />
-                            <MenuItem Header="Exit" Icon="{materialDesign:PackIcon Kind=ExitToApp}" />
+                            <MenuItem Header="Exit" Icon="{materialDesign:PackIcon Kind=ExitToApp}" 
+                                      Command="{Binding CloseApplicationCommand}"/>
                         </MenuItem>
                     </Menu>
                 </DockPanel>
             </GroupBox.Header>
-
-            <ContentControl Content="{Binding CurrentPageViewModel}"/>
-
+            <DockPanel LastChildFill="True">
+                <materialDesign:Snackbar MessageQueue="{Binding MessageQueue}" DockPanel.Dock="Top" HorizontalAlignment="Right"/>
+                <ContentControl Content="{Binding CurrentPageViewModel}"/>
+            </DockPanel>
         </GroupBox>
     </Grid>
 </Window>

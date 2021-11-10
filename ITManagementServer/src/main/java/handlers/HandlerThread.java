@@ -23,7 +23,7 @@ public class HandlerThread implements Runnable {
             while (true) {
                 var clientMessage = tcpConnector.GetClientMessage();
 
-                if(clientMessage.actionCode == HandlerCodes.CLOSE_CONNECTION) {
+                if(clientMessage.ActionCode == HandlerCodes.CLOSE_CONNECTION) {
                     tcpConnector.CloseConnection();
                     break;
                 }
