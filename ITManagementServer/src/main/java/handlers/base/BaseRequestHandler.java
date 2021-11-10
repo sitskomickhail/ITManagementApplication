@@ -1,13 +1,10 @@
 package handlers.base;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import constants.ExecutionResults;
 import models.transferModels.TransferResponseModel;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
-import java.sql.SQLException;
 
 public abstract class BaseRequestHandler<ModelIn, ModelOut> {
 
@@ -15,9 +12,7 @@ public abstract class BaseRequestHandler<ModelIn, ModelOut> {
         var responseModel = new TransferResponseModel();
 
         try {
-            Type typeToken = new TypeToken<ModelIn>() {
-            }.getType();
-            ModelIn incomingModel = new Gson().fromJson(jsonModel, typeToken);
+            ModelIn incomingModel = new Gson().fromJson(jsonModel, getIncomingModelType());
 
             var resultModel = Execute(incomingModel);
             responseModel.executionResult = new Gson().toJson(resultModel);
@@ -31,6 +26,8 @@ public abstract class BaseRequestHandler<ModelIn, ModelOut> {
     }
 
     public abstract int GetHandlerCode();
+
+    public abstract Type getIncomingModelType();
 
     protected abstract ModelOut Execute(ModelIn model) throws Exception;
 }

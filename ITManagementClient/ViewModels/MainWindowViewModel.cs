@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
+using System.Windows.Input;
+using ITManagementClient.Infrastructure;
+using ITManagementClient.Managers;
 using ITManagementClient.Navigation;
 using ITManagementClient.ViewModels.Base;
 using ITManagementClient.ViewModels.Interfaces;
@@ -30,8 +34,17 @@ namespace ITManagementClient.ViewModels
         public ISnackbarMessageQueue MessageQueue
         {
             get => _messageQueue;
-            set { _messageQueue = value; OnPropertyChanged(nameof(MessageQueue));}
+            set { _messageQueue = value; OnPropertyChanged(nameof(MessageQueue)); }
         }
+
+        private Visibility _workerNavElementsVisibility;
+        public Visibility WorkerNavElementsVisibility
+        {
+            get => _workerNavElementsVisibility;
+            set { _workerNavElementsVisibility = value; OnPropertyChanged(nameof(WorkerNavElementsVisibility)); }
+        }
+
+        public ICommand CloseApplicationCommand { get; set; }
 
         public MainWindowViewModel()
         {
@@ -51,6 +64,11 @@ namespace ITManagementClient.ViewModels
 
             CurrentPageViewModel = PageViewModels[nameof(LoginControlViewModel)];
             Mediator.Subscribe("SnackbarMessageShow", ShowSnackbar);
+            Mediator.Subscribe("EnableUserManagementElements", ShowUserManagementElements);
+            Mediator.Subscribe("DisableUserManagementElements", HideUserManagementElements);
+
+            WorkerNavElementsVisibility = Visibility.Hidden;
+            CloseApplicationCommand = new RelayCommand(ShutdownApplication);
         }
 
         private void ChangeViewModel(object obj)
@@ -73,9 +91,24 @@ namespace ITManagementClient.ViewModels
         {
             if (obj != null)
             {
-                string message = (string) obj;
+                string message = (string)obj;
                 MessageQueue.Enqueue(message);
             }
+        }
+
+        private void ShowUserManagementElements(object obj)
+        {
+            WorkerNavElementsVisibility = Visibility.Visible;
+        }
+
+        private void HideUserManagementElements(object obj)
+        {
+            WorkerNavElementsVisibility = Visibility.Hidden;
+        }
+
+        private void ShutdownApplication(object obj)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

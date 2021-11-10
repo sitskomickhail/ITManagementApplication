@@ -9,7 +9,7 @@ namespace ITManagementClient.Services
 {
     public class TcpService : ITcpService
     {
-        private Socket ClientSocket { get; set; }
+        private Socket ClientSocket { get; }
 
         public TcpService()
         {
@@ -19,16 +19,16 @@ namespace ITManagementClient.Services
         public void CreateConnection(string ip, int port)
         {
             ClientSocket.Connect(ip, port);
-
         }
 
         public void WriteStream(TransferRequestModel requestModel)
         {
             string json = JsonConvert.SerializeObject(requestModel);
 
-            int toSendLen = System.Text.Encoding.ASCII.GetByteCount(json);
-            byte[] toSendBytes = System.Text.Encoding.ASCII.GetBytes(json);
-            byte[] toSendLenBytes = System.BitConverter.GetBytes(toSendLen);
+            int toSendLen = Encoding.UTF8.GetByteCount(json);
+            byte[] toSendBytes = Encoding.UTF8.GetBytes(json);
+            byte[] toSendLenBytes = BitConverter.GetBytes(toSendLen);
+
             ClientSocket.Send(toSendLenBytes);
             ClientSocket.Send(toSendBytes);
         }
@@ -40,7 +40,7 @@ namespace ITManagementClient.Services
             int rcvLen = System.BitConverter.ToInt32(rcvLenBytes, 0);
             byte[] rcvBytes = new byte[rcvLen];
             ClientSocket.Receive(rcvBytes);
-            String message = System.Text.Encoding.ASCII.GetString(rcvBytes);
+            string message = Encoding.UTF8.GetString(rcvBytes);
 
             var response = JsonConvert.DeserializeObject<TransferResponseModel>(message);
             return response;

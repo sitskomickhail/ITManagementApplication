@@ -19,7 +19,7 @@ public class WorkerContext {
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, worker.getName());
         preparedStatement.setInt(2, worker.getPosition());
-        preparedStatement.setDouble(3, worker.getSalary());
+        preparedStatement.setDouble(3, worker.getSalary() == null ? 0 : worker.getSalary());
         preparedStatement.setDate(4, worker.getBirthDate());
         preparedStatement.setDate(5, worker.getHireDate());
         preparedStatement.setBoolean(6, true);
@@ -36,7 +36,7 @@ public class WorkerContext {
         preparedStatement.setString(10, PasswordHelper.GenerateSecurePassword(worker.getPassword(), passwordSalt));
         preparedStatement.setString(11, passwordSalt);
 
-        preparedStatement.executeQuery();
+        preparedStatement.executeUpdate();
         connection.close();
     }
 

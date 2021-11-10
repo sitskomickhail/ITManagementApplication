@@ -109,13 +109,10 @@ namespace ITManagementClient.ViewModels.UserControls
                     Login = Login,
                     AdministerPassword = AdministratorPassword
                 });
+
                 ReturnToLoginPage.Execute(null);
             }
-            catch (Exception e)
-            {
-                Mediator.Notify("SnackbarMessageShow", e.Message);
-                throw;
-            }
+            catch { }
 
         }
 

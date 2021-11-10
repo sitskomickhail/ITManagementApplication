@@ -8,10 +8,17 @@ import helpers.PasswordHelper;
 import models.requestModels.workers.LoginRequestModel;
 import models.responseModels.workers.LoginResponseModel;
 
+import java.lang.reflect.Type;
+
 public class LoginWorkerRequestHandler extends BaseRequestHandler<LoginRequestModel, LoginResponseModel> {
     @Override
     public int GetHandlerCode() {
         return HandlerCodes.LOGIN_WORKER;
+    }
+
+    @Override
+    public Type getIncomingModelType() {
+        return LoginRequestModel.class;
     }
 
     @Override

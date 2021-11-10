@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using ITManagementClient.Exceptions;
 using ITManagementClient.Managers;
 using ITManagementClient.Models.Enums;
@@ -24,7 +25,7 @@ namespace ITManagementClient.Handlers.Base
 
         public TOutgoingModel ExecuteHandler(TIncomingModel model)
         {
-            TOutgoingModel outgoingModel = null;
+            TOutgoingModel outgoingModel;
             try
             {
                 var result = HandleResult(model);
@@ -40,10 +41,13 @@ namespace ITManagementClient.Handlers.Base
             catch (HandlerExecutionException handlerException)
             {
                 Mediator.Notify("SnackbarMessageShow", handlerException.Message);
+                throw;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Mediator.Notify("SnackbarMessageShow", "Exception appeared while making request!");
+                Mediator.Notify("SnackbarMessageShow", e.Message);
+                Debug.Write(e.Message);
                 throw;
             }
 

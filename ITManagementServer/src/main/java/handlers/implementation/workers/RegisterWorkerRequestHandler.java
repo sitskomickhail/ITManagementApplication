@@ -8,6 +8,8 @@ import models.entities.Worker;
 import models.requestModels.workers.RegisterRequestModel;
 import models.responseModels.workers.RegisterResponseModel;
 
+import java.lang.reflect.Type;
+
 public class RegisterWorkerRequestHandler extends BaseRequestHandler<RegisterRequestModel, RegisterResponseModel> {
     private String administrator_secure_password = "cbybq hs,fr";
 
@@ -17,8 +19,13 @@ public class RegisterWorkerRequestHandler extends BaseRequestHandler<RegisterReq
     }
 
     @Override
+    public Type getIncomingModelType() {
+        return RegisterRequestModel.class;
+    }
+
+    @Override
     protected RegisterResponseModel Execute(RegisterRequestModel registerRequestModel) throws Exception {
-        if (administrator_secure_password != registerRequestModel.getAdministerPassword()) {
+        if (!administrator_secure_password.equals(registerRequestModel.getAdministerPassword())) {
             throw new Exception("Некорректный ключ доступа");
         }
 
