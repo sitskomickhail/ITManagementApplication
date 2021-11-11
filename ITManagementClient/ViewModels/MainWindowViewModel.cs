@@ -5,21 +5,22 @@ using System.Windows;
 using System.Windows.Input;
 using ITManagementClient.Infrastructure;
 using ITManagementClient.Managers;
+using ITManagementClient.Models.Enums;
 using ITManagementClient.Navigation;
+using ITManagementClient.ViewModels.Administrator;
 using ITManagementClient.ViewModels.Base;
+using ITManagementClient.ViewModels.CredentialControls;
 using ITManagementClient.ViewModels.Interfaces;
-using ITManagementClient.ViewModels.UserControls;
 using MaterialDesignThemes.Wpf;
 
 namespace ITManagementClient.ViewModels
 {
     public class MainWindowViewModel : BaseViewModel
     {
-        private IPageViewModel _currentPageViewModel;
         private Dictionary<string, IPageViewModel> _pageViewModels;
-
         public Dictionary<string, IPageViewModel> PageViewModels => _pageViewModels ?? (_pageViewModels = new Dictionary<string, IPageViewModel>());
 
+        private IPageViewModel _currentPageViewModel;
         public IPageViewModel CurrentPageViewModel
         {
             get => _currentPageViewModel;
@@ -46,6 +47,10 @@ namespace ITManagementClient.ViewModels
 
         public ICommand CloseApplicationCommand { get; set; }
 
+        public ICommand LogoutUserCommand { get; set; }
+
+        public ICommand ShowUserInfoCommand { get; set; }
+
         public MainWindowViewModel()
         {
             MessageQueue = new SnackbarMessageQueue(new TimeSpan(0, 0, 0, 3));
@@ -55,6 +60,7 @@ namespace ITManagementClient.ViewModels
             foreach (var viewModel in types)
             {
                 var viewModelInstance = (IPageViewModel)viewModel.GetConstructor(Type.EmptyTypes)?.Invoke(new object[] { });
+
                 if (viewModelInstance != null)
                 {
                     PageViewModels.Add(viewModel.Name, viewModelInstance);
@@ -64,11 +70,12 @@ namespace ITManagementClient.ViewModels
 
             CurrentPageViewModel = PageViewModels[nameof(LoginControlViewModel)];
             Mediator.Subscribe("SnackbarMessageShow", ShowSnackbar);
-            Mediator.Subscribe("EnableUserManagementElements", ShowUserManagementElements);
-            Mediator.Subscribe("DisableUserManagementElements", HideUserManagementElements);
+            Mediator.Subscribe("EnableUserManagementControls", EnableUserManagementControls);
 
             WorkerNavElementsVisibility = Visibility.Hidden;
             CloseApplicationCommand = new RelayCommand(ShutdownApplication);
+            LogoutUserCommand = new RelayCommand(LogoutUserCommandExecute);
+            ShowUserInfoCommand = new RelayCommand(ShowUserInfoCommandExecute);
         }
 
         private void ChangeViewModel(object obj)
@@ -83,6 +90,7 @@ namespace ITManagementClient.ViewModels
 
             PageViewModels[viewModelName] = viewModelInstance;
             Mediator.Subscribe(viewModelName, ChangeViewModel);
+            Mediator.Subscribe("RefreshAllControls", RefreshAllControls);
 
             CurrentPageViewModel = viewModelInstance;
         }
@@ -96,19 +104,59 @@ namespace ITManagementClient.ViewModels
             }
         }
 
-        private void ShowUserManagementElements(object obj)
+        private void EnableUserManagementControls(object obj)
         {
-            WorkerNavElementsVisibility = Visibility.Visible;
+            var connectedUser = UserManager.GetCurrentConnectedUser();
+
+            if (connectedUser != null)
+            {
+                WorkerNavElementsVisibility = Visibility.Visible;
+                switch (connectedUser.Role)
+                {
+                    case UserRoles.Administrator:
+                        Mediator.Notify(nameof(AdministratorControlViewModel), nameof(AdministratorControlViewModel));
+                        break;
+                    case UserRoles.Developer:
+                        //Mediator.Notify(nameof(AdministratorControlViewModel));
+                        break;
+                    case UserRoles.HrManager:
+                        //Mediator.Notify(nameof(AdministratorControlViewModel));
+                        break;
+                    case UserRoles.ResourceManager:
+                        //Mediator.Notify(nameof(AdministratorControlViewModel));
+                        break;
+                    default:
+                        Mediator.Notify("SnackbarMessageShow", "Incorrect role");
+                        break;
+                }
+            }
         }
 
-        private void HideUserManagementElements(object obj)
+        private void RefreshAllControls(object obj)
         {
-            WorkerNavElementsVisibility = Visibility.Hidden;
+            CurrentPageViewModel = (IPageViewModel)obj;
         }
 
         private void ShutdownApplication(object obj)
         {
             Application.Current.Shutdown();
+        }
+
+        private void LogoutUserCommandExecute(object obj)
+        {
+            UserManager.DisconnectCurrentUser();
+            Mediator.Notify(nameof(LoginControlViewModel), nameof(LoginControlViewModel));
+            WorkerNavElementsVisibility = Visibility.Hidden;
+        }
+
+        private void ShowUserInfoCommandExecute(object obj)
+        {
+            var connectedUser = UserManager.GetCurrentConnectedUser();
+
+            if (connectedUser != null)
+            {
+                //Mediator.Notify(User info popup);
+            }
         }
     }
 }

@@ -88,8 +88,12 @@
     <Compile Include="Handlers\Workers\RegisterWorkerActionHandler.cs" />
     <Compile Include="Managers\Interfaces\ITcpHandlerManager.cs" />
     <Compile Include="Managers\TcpHandlerManager.cs" />
+    <Compile Include="Managers\ConnectedUserManager.cs" />
+    <Compile Include="Models\Common\ConnectedUserModel.cs" />
+    <Compile Include="Models\Common\ObservableModels\WorkerObservableModel.cs" />
     <Compile Include="Models\Enums\ExecutionCode.cs" />
     <Compile Include="Models\Enums\HandlerCodes.cs" />
+    <Compile Include="Models\Enums\PageComponent.cs" />
     <Compile Include="Models\Enums\UserRoles.cs" />
     <Compile Include="Models\RequestModels\Connectors\StartConnectionRequestModel.cs" />
     <Compile Include="Models\RequestModels\Workers\LoginRequestModel.cs" />
@@ -105,15 +109,24 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\Interfaces\ITcpService.cs" />
     <Compile Include="Services\TcpService.cs" />
+    <Compile Include="ViewModels\Administrator\AdministratorControlViewModel.cs" />
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IControlViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\UserControls\LoginControlViewModel.cs" />
-    <Compile Include="ViewModels\UserControls\RegisterControlViewModel.cs" />
+    <Compile Include="ViewModels\CredentialControls\LoginControlViewModel.cs" />
+    <Compile Include="ViewModels\CredentialControls\RegisterControlViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\WorkersListViewModel.cs" />
+    <Compile Include="Views\AdministratorControls\AdministratorMainControl.xaml.cs">
+      <DependentUpon>AdministratorMainControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CredentialControls\LoginControl.xaml.cs">
       <DependentUpon>LoginControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CredentialControls\RegisterControl.xaml.cs">
       <DependentUpon>RegisterControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\WorkersListControl.xaml.cs">
+      <DependentUpon>WorkersListControl.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\AdminPasswordControl.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -124,6 +137,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\PasswordControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AdministratorControls\AdministratorMainControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -148,6 +165,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CredentialControls\RegisterControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\WorkersListControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

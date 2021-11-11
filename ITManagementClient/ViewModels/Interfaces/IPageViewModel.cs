@@ -1,7 +1,4 @@
-﻿namespace ITManagementClient.ViewModels.Interfaces
+﻿namespace ITManagementClient.ViewModels.Interfaces 
 {
-    public interface IPageViewModel
-    {
-
-    }
+    public interface IPageViewModel { }
 }
