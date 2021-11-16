@@ -2,10 +2,12 @@ package db.context;
 
 import db.context.base.MySqlContext;
 import helpers.PasswordHelper;
+import models.common.GridWorkerContextModel;
 import models.entities.Worker;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class WorkerContext {
     public static void CreateNewWorker(Worker worker) throws IOException, SQLException {
@@ -70,5 +72,38 @@ public class WorkerContext {
 
         connection.close();
         return worker;
+    }
+
+    public static ArrayList<GridWorkerContextModel> SearchWorkerByParameter(String searchParameter) throws IOException, SQLException {
+        var connection = MySqlContext.getInstance().getConnection();
+
+        String sql = "SELECT w.Id, w.DepartmentId, w.Name, w.Salary, w.HireDate, d.Title as Department FROM itmanagementdb.workers as w " +
+                "LEFT JOIN itmanagementdb.departments AS d ON d.Id = w.DepartmentId " +
+                "WHERE Name LIKE '%" + searchParameter + "%' OR d.Title LIKE '%" + searchParameter + "%' OR w.Salary LIKE '%" + searchParameter + "%' OR w.HireDate LIKE '%" + searchParameter + "%';";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+//        preparedStatement.setString(1, searchParameter);
+//        preparedStatement.setString(2, searchParameter);
+//        preparedStatement.setString(3, searchParameter);
+//        preparedStatement.setString(4, searchParameter);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        ArrayList<GridWorkerContextModel> gridWorkersList = new ArrayList<>();
+        while (resultSet.next()) {
+            GridWorkerContextModel gridWorker = new GridWorkerContextModel();
+
+            gridWorker.setId(resultSet.getInt("Id"));
+            gridWorker.setDepartmentId(resultSet.getInt("DepartmentId"));
+            gridWorker.setName(resultSet.getString("Name"));
+            gridWorker.setSalary(resultSet.getDouble("Salary"));
+            gridWorker.setHireDate(resultSet.getDate("HireDate"));
+            gridWorker.setDepartment(resultSet.getString("Department"));
+
+            gridWorkersList.add(gridWorker);
+        }
+
+        connection.close();
+        return gridWorkersList;
     }
 }

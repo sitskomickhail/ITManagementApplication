@@ -5,4 +5,7 @@ public class HandlerCodes {
     public static final int CLOSE_CONNECTION = 2;
     public static final int LOGIN_WORKER = 3;
     public static final int REGISTER_WORKER = 4;
+    public static final int GET_WORKER_BY_ID = 5;
+    public static final int GET_WORKERS_LIST = 6;
+    public static final int UPDATE_WORKER = 7;
 }
