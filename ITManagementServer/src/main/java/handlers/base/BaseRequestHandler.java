@@ -24,7 +24,6 @@ public abstract class BaseRequestHandler<ModelIn, ModelOut> {
 
             Gson gson = new GsonBuilder().setDateFormat("MM.dd.yyyy").create();
             responseModel.executionResult = gson.toJson(successResultModel);
-//            responseModel.executionResult = new Gson().toJson(successResultModel);
         } catch (Exception ex) {
             responseModel.executionCode = ExecutionResults.ERROR_CODE;
             var errorModel = new ErrorTransferResponseModel();
