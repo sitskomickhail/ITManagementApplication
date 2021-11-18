@@ -16,7 +16,7 @@ namespace ITManagementClient.Models.ResponseModels.Workers
 
         public decimal Salary { get; set; }
 
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         public DateTime HireDate { get; set; }
 

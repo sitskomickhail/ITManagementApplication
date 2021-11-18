@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class WorkerGridResponseModel {
     private int WorkerId;
-    private int DepartmentId;
+    private Integer DepartmentId;
     private String Name;
     private String Department;
     private double Salary;
@@ -18,11 +18,11 @@ public class WorkerGridResponseModel {
         WorkerId = workerId;
     }
 
-    public int getDepartmentId() {
+    public Integer getDepartmentId() {
         return DepartmentId;
     }
 
-    public void setDepartmentId(int departmentId) {
+    public void setDepartmentId(Integer departmentId) {
         DepartmentId = departmentId;
     }
 

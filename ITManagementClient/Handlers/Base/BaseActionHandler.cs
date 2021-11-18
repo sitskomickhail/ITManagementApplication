@@ -60,7 +60,10 @@ namespace ITManagementClient.Handlers.Base
             return new TransferRequestModel
             {
                 ActionCode = HandlerCode,
-                ActionModel = JsonConvert.SerializeObject(model)
+                ActionModel = JsonConvert.SerializeObject(model, new JsonSerializerSettings
+                {
+                    DateFormatString = "MM.dd.yyyy",
+                })
             };
         }
     }

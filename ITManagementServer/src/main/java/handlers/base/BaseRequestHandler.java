@@ -15,14 +15,14 @@ public abstract class BaseRequestHandler<ModelIn, ModelOut> {
         var responseModel = new TransferResponseModel();
 
         try {
-            ModelIn incomingModel = new Gson().fromJson(jsonModel, getIncomingModelType());
+            Gson gson = new GsonBuilder().setDateFormat("MM.dd.yyyy").create();
+            ModelIn incomingModel = gson.fromJson(jsonModel, getIncomingModelType());
 
             var resultModel = Execute(incomingModel);
             responseModel.executionCode = ExecutionResults.SUCCESS_CODE;
             var successResultModel = new SuccessTransferResponseModel<ModelOut>();
             successResultModel.responseModel = resultModel;
 
-            Gson gson = new GsonBuilder().setDateFormat("MM.dd.yyyy").create();
             responseModel.executionResult = gson.toJson(successResultModel);
         } catch (Exception ex) {
             responseModel.executionCode = ExecutionResults.ERROR_CODE;

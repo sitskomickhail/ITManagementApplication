@@ -140,27 +140,6 @@ namespace ITManagementClient.ViewModels.UserControls
         {
             WorkersList = new ObservableCollection<WorkerObservableModel>();
             SearchParameter = String.Empty;
-            //WorkersList.Add(new WorkerObservableModel()
-            //{
-            //    Number = 1,
-            //    Name = "Тест 1",
-            //    Department = "Python",
-            //    HireDate = "12.12.2020",
-            //    Salary = 1100,
-            //    WorkerId = 5,
-            //    ShowWorkerDetailsCommand = new RelayCommand(ShowWorkerDetailsCommandExecute)
-            //});
-
-            //WorkersList.Add(new WorkerObservableModel()
-            //{
-            //    Number = 2,
-            //    Name = "Тест 2",
-            //    Department = "",
-            //    HireDate = "26.05.2020",
-            //    Salary = 2500.60m,
-            //    WorkerId = 10,
-            //    ShowWorkerDetailsCommand = new RelayCommand(ShowWorkerDetailsCommandExecute)
-            //});
 
             SaveUpdatedWorkerCommand = new RelayCommand(SaveUpdatedWorkerCommandExecute);
             SearchByParameterCommand = new RelayCommand(SearchByParameterCommandExecute);
@@ -186,11 +165,11 @@ namespace ITManagementClient.ViewModels.UserControls
                 EditingWorkerId = actionResult.WorkerId;
                 WorkerEnglishLevel = actionResult.EnglishLevel;
                 WorkerAccountActive = actionResult.Active;
-                WorkerBirthDate = actionResult.BirthDate;
+                WorkerBirthDate = actionResult.BirthDate ?? DateTime.Now;
                 WorkerDepartmentName = actionResult.Department;
                 WorkerHireDate = actionResult.HireDate;
                 WorkerName = actionResult.Name;
-                WorkerSalary = actionResult.Salary.ToString(CultureInfo.InvariantCulture);
+                WorkerSalary = actionResult.Salary.ToString();
                 SelectedRole = ((UserRoles)actionResult.Position).GetDescription();
             }
             catch { }
@@ -226,7 +205,7 @@ namespace ITManagementClient.ViewModels.UserControls
                     SearchParameter = SearchParameter
                 });
 
-                WorkersList.Clear();
+                WorkersList.Clear();    
                 int listCounter = 1;
                 foreach (var worker in actionResult.WorkersList)
                 {

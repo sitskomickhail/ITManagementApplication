@@ -6,7 +6,7 @@ namespace ITManagementClient.Models.ResponseModels.Workers
     {
         public int WorkerId { get; set; }
 
-        public int DepartmentId { get; set; }
+        public int? DepartmentId { get; set; }
 
         public string Name { get; set; }
 

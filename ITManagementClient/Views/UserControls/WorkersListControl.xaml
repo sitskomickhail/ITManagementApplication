@@ -13,9 +13,9 @@
         <materialDesign:DrawerHost
             x:Name="DrawerHost"
             BottomDrawerCornerRadius="20 20 0 0"
-            BottomDrawerBackground="Gray">
+            BottomDrawerBackground="#423f3e">
             <materialDesign:DrawerHost.BottomDrawerContent>
-                <Grid Height="400" >
+                <Grid Height="440" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="0.5*"/>
@@ -49,7 +49,7 @@
 
                     <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical" Margin="10">
                         <Label FontSize="16">Дата рождения</Label>
-                        <DatePicker
+                        <DatePicker FontSize="14"
                             materialDesign:HintAssist.Hint="Выберите дату"
                             SelectedDate="{Binding WorkerBirthDate, UpdateSourceTrigger=PropertyChanged}"
                             Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
@@ -57,28 +57,28 @@
 
                     <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Vertical" Margin="10">
                         <Label FontSize="16">Дата приема на работу</Label>
-                        <DatePicker
-                            IsEnabled="False"
-                            SelectedDate="{Binding WorkerHireDate, UpdateSourceTrigger=PropertyChanged}"
-                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                        <DatePicker FontSize="14"
+                                    IsEnabled="False"
+                                    SelectedDate="{Binding WorkerHireDate, UpdateSourceTrigger=PropertyChanged}"
+                                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Vertical" Margin="10">
-                        <Label FontSize="16">Активен</Label>
+                        <Label FontSize="16">Активный аккаунт</Label>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-                            <Label>Не активен</Label>
+                            <Label FontSize="14">Нет</Label>
                             <ToggleButton
                                 Style="{StaticResource MaterialDesignSwitchDarkToggleButton}"
                                 ToolTip="MaterialDesignSwitchDarkToggleButton"
                                 IsChecked="{Binding WorkerAccountActive, UpdateSourceTrigger=PropertyChanged}" />
-                            <Label>Активен</Label>
+                            <Label FontSize="14">Да</Label>
                         </StackPanel>
                     </StackPanel>
 
                     <StackPanel Grid.Column="0" Grid.Row="3" Orientation="Vertical" Margin="10">
                         <Label FontSize="16">Уровень английского языка</Label>
                         <ComboBox FontSize="16" 
-                                  SelectedItem="{Binding WorkerEnglishLevel, UpdateSourceTrigger=PropertyChanged}" 
+                                  SelectedItem="{Binding WorkerEnglishLevel, UpdateSourceTrigger=PropertyChanged}"
                                   materialDesign:HintAssist.Hint="Выберите уровень английского языка">
                             <ComboBoxItem>A1</ComboBoxItem>
                             <ComboBoxItem>A2</ComboBoxItem>
