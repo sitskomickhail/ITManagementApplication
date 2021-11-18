@@ -84,6 +84,7 @@
     <Compile Include="Exceptions\HandlerExecutionException.cs" />
     <Compile Include="Handlers\Base\BaseActionHandler.cs" />
     <Compile Include="Handlers\Connectors\StartConnectionActionHandler.cs" />
+    <Compile Include="Handlers\Workers\CreateNewWorkerActionHandler.cs" />
     <Compile Include="Handlers\Workers\GetWorkerByIdActionHandler.cs" />
     <Compile Include="Handlers\Workers\GetWorkersListActionHandler.cs" />
     <Compile Include="Handlers\Workers\LoginWorkerActionHandler.cs" />
@@ -100,12 +101,14 @@
     <Compile Include="Models\Enums\PageComponent.cs" />
     <Compile Include="Models\Enums\UserRoles.cs" />
     <Compile Include="Models\RequestModels\Connectors\StartConnectionRequestModel.cs" />
+    <Compile Include="Models\RequestModels\Workers\CreateNewWorkerRequestModel.cs" />
     <Compile Include="Models\RequestModels\Workers\GetWorkerByIdRequestModel.cs" />
     <Compile Include="Models\RequestModels\Workers\GetWorkerListRequestModel.cs" />
     <Compile Include="Models\RequestModels\Workers\LoginRequestModel.cs" />
     <Compile Include="Models\RequestModels\Workers\RegisterRequestModel.cs" />
     <Compile Include="Models\RequestModels\Workers\UpdateWorkerRequestModel.cs" />
     <Compile Include="Models\ResponseModels\Connectors\StartConnectionResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\Workers\CreateNewWorkerResponseModel.cs" />
     <Compile Include="Models\ResponseModels\Workers\WorkerGridResponseModel.cs" />
     <Compile Include="Models\ResponseModels\Workers\GetWorkerByIdResponseModel.cs" />
     <Compile Include="Models\ResponseModels\Workers\GetWorkerListResponseModel.cs" />
@@ -126,6 +129,7 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\CredentialControls\LoginControlViewModel.cs" />
     <Compile Include="ViewModels\CredentialControls\RegisterControlViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\WorkerCreateViewModel.cs" />
     <Compile Include="ViewModels\UserControls\WorkersListViewModel.cs" />
     <Compile Include="Views\AdministratorControls\AdministratorMainControl.xaml.cs">
       <DependentUpon>AdministratorMainControl.xaml</DependentUpon>
@@ -135,6 +139,9 @@
     </Compile>
     <Compile Include="Views\CredentialControls\RegisterControl.xaml.cs">
       <DependentUpon>RegisterControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\WorkerCreateControl.xaml.cs">
+      <DependentUpon>WorkerCreateControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\WorkersListControl.xaml.cs">
       <DependentUpon>WorkersListControl.xaml</DependentUpon>
@@ -176,6 +183,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CredentialControls\RegisterControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\WorkerCreateControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

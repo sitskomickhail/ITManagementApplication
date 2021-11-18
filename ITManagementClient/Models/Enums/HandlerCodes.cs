@@ -9,5 +9,6 @@
         GET_WORKER_BY_ID = 5,
         GET_WORKERS_LIST = 6,
         UPDATE_WORKER = 7,
+        CREATE_WORKER = 8,
     }
 }

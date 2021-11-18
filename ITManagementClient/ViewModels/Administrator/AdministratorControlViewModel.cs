@@ -28,6 +28,7 @@ namespace ITManagementClient.ViewModels.Administrator
         }
 
         public ICommand ShowWorkerListCommand { get; set; }
+        public ICommand ShowWorkerCreationCommand { get; set; }
 
         public AdministratorControlViewModel()
         {
@@ -45,7 +46,7 @@ namespace ITManagementClient.ViewModels.Administrator
             }
 
             ShowWorkerListCommand = new RelayCommand(ShowWorkerListCommandExecute);
-            //CurrentControlViewModel = new WorkersListViewModel();
+            ShowWorkerCreationCommand = new RelayCommand(ShowWorkerCreationCommandExecute);
         }
 
         private void ChangeViewModel(object obj)
@@ -56,10 +57,10 @@ namespace ITManagementClient.ViewModels.Administrator
                 throw new NullReferenceException($"{viewModelName} View Model was not found");
 
             var viewModel = AdministratorControls[viewModelName];
-            //var viewModelInstance = (IControlViewModel)viewModel.GetType().GetConstructor(Type.EmptyTypes)?.Invoke(new object[] { });
+            var viewModelInstance = (IControlViewModel)viewModel.GetType().GetConstructor(Type.EmptyTypes)?.Invoke(new object[] { });
 
-            //AdministratorControls[viewModelName] = viewModelInstance;
-            //Mediator.Subscribe(viewModelName, ChangeViewModel);
+            AdministratorControls[viewModelName] = viewModelInstance;
+            Mediator.Subscribe(viewModelName, ChangeViewModel);
 
             CurrentControlViewModel = viewModel;
             Mediator.Notify("RefreshAllControls", this);
@@ -68,6 +69,11 @@ namespace ITManagementClient.ViewModels.Administrator
         private void ShowWorkerListCommandExecute(object obj)
         {
             Mediator.Notify(nameof(WorkersListViewModel), nameof(WorkersListViewModel));
+        }
+
+        private void ShowWorkerCreationCommandExecute(object obj)
+        {
+            Mediator.Notify(nameof(WorkerCreateViewModel), nameof(WorkerCreateViewModel));
         }
     }
 }

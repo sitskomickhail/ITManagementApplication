@@ -24,6 +24,7 @@ public class RequestHandlerProvider implements IRequestHandlerProvider {
         requestHandlers.add(new GetWorkersListRequestHandler());
         requestHandlers.add(new UpdateWorkerRequestHandler());
         requestHandlers.add(new GetWorkerByIdRequestHandler());
+        requestHandlers.add(new CreateWorkerRequestHandler());
     }
 
     public TransferResponseModel Execute(TransferRequestModel requestModel) {

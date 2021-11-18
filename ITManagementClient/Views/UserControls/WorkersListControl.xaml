@@ -101,9 +101,12 @@
 
                     <Button Grid.Column="1"
                             Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                            Style="{DynamicResource MaterialDesignFlatButton}"
+                            Style="{DynamicResource  MaterialDesignPaperButton}"
+                            Padding="10"
                             Margin="4"
+                            FontSize="16"
                             VerticalAlignment="Center"
+                            MinHeight="40"
                             Content="Сохранить изменения"
                             Grid.Row="4">
                         <i:Interaction.Triggers>

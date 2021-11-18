@@ -23,7 +23,7 @@ public class WorkerContext {
         preparedStatement.setInt(2, worker.getPosition());
         preparedStatement.setDouble(3, worker.getSalary() == null ? 0 : worker.getSalary());
         preparedStatement.setDate(4, worker.getBirthDate());
-        preparedStatement.setDate(5, worker.getHireDate());
+        preparedStatement.setDate(5, new Date(new java.util.Date().getTime()));
         preparedStatement.setBoolean(6, true);
         preparedStatement.setString(7, worker.getEnglishLevel());
         if (worker.getDepartmentId() == null) {

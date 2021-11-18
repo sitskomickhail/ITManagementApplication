@@ -49,6 +49,11 @@
                             <TextBlock Margin="8 0 0 0" Text="Регистрация пользователя" />
                         </StackPanel>
                     </TreeViewItem.Header>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding ShowWorkerCreationCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </TreeViewItem>
             </TreeViewItem>
             <TreeViewItem Header="УПРАВЛЕНИЕ ЗАЯВКАМИ" IsExpanded="False">
@@ -72,6 +77,8 @@
                         </StackPanel>
                     </TreeViewItem.Header>
                 </TreeViewItem>
+            </TreeViewItem>
+            <TreeViewItem Header="УПРАВЛЕНИЕ ДЕПАРТАМЕНТАМИ" IsExpanded="True">
             </TreeViewItem>
         </TreeView>
         <ContentControl Content="{Binding CurrentControlViewModel}" Margin="10" Grid.Column="1"/>
