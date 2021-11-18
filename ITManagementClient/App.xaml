@@ -28,6 +28,9 @@
             <DataTemplate DataType="{x:Type userViewModels:WorkersListViewModel }">
                 <userControls:WorkersListControl/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type userViewModels:WorkerCreateViewModel}">
+                <userControls:WorkerCreateControl/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

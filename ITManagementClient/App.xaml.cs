@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 using ITManagementClient.Handlers.Base;
 using ITManagementClient.Handlers.Connectors;
 using ITManagementClient.Managers;
@@ -14,13 +15,13 @@ namespace ITManagementClient
     /// </summary>
     public partial class App : Application
     {
-        protected override void OnStartup(StartupEventArgs e)
+        protected override async void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
             BaseActionHandler<StartConnectionRequestModel, StartConnectionResponseModel> actionHandler = new StartConnectionActionHandler();
 
-            var connectionResponse = actionHandler.ExecuteHandler(new StartConnectionRequestModel());
+            var connectionResponse = await actionHandler.ExecuteHandler(new StartConnectionRequestModel());
             TcpHandlerManager.GetTcpHandlerManager().SetTcpPort(connectionResponse.Port);
 
             MainWindow app = new MainWindow();
