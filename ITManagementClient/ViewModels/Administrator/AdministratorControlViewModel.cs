@@ -62,7 +62,7 @@ namespace ITManagementClient.ViewModels.Administrator
             AdministratorControls[viewModelName] = viewModelInstance;
             Mediator.Subscribe(viewModelName, ChangeViewModel);
 
-            CurrentControlViewModel = viewModel;
+            CurrentControlViewModel = viewModelInstance;
             Mediator.Notify("RefreshAllControls", this);
         }
 

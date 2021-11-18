@@ -45,6 +45,14 @@ namespace ITManagementClient.ViewModels
             set { _workerNavElementsVisibility = value; OnPropertyChanged(nameof(WorkerNavElementsVisibility)); }
         }
 
+        private Visibility _pVisibility;
+
+        public Visibility ProgressBarVisibility
+        {
+            get => _pVisibility;
+            set { _pVisibility = value; OnPropertyChanged(nameof(ProgressBarVisibility)); }
+        }
+
         public ICommand CloseApplicationCommand { get; set; }
 
         public ICommand LogoutUserCommand { get; set; }
@@ -71,8 +79,12 @@ namespace ITManagementClient.ViewModels
             CurrentPageViewModel = PageViewModels[nameof(LoginControlViewModel)];
             Mediator.Subscribe("SnackbarMessageShow", ShowSnackbar);
             Mediator.Subscribe("EnableUserManagementControls", EnableUserManagementControls);
+            Mediator.Subscribe("ShowProgressBar", ShowProgressBar);
+            Mediator.Subscribe("HideProgressBar", HideProgressBar);
 
             WorkerNavElementsVisibility = Visibility.Hidden;
+            ProgressBarVisibility = Visibility.Hidden;
+
             CloseApplicationCommand = new RelayCommand(ShutdownApplication);
             LogoutUserCommand = new RelayCommand(LogoutUserCommandExecute);
             ShowUserInfoCommand = new RelayCommand(ShowUserInfoCommandExecute);
@@ -157,6 +169,16 @@ namespace ITManagementClient.ViewModels
             {
                 //Mediator.Notify(User info popup);
             }
+        }
+
+        private void ShowProgressBar(object obj)
+        {
+            ProgressBarVisibility = Visibility.Visible;
+        }
+
+        private void HideProgressBar(object obj)
+        {
+            ProgressBarVisibility = Visibility.Hidden;
         }
     }
 }

@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Threading;
+using ITManagementClient.Navigation;
 
 namespace ITManagementClient.Infrastructure
 {
@@ -27,7 +30,15 @@ namespace ITManagementClient.Infrastructure
 
         public void Execute(object parameter)
         {
-            _executeAction(parameter);
+            Task.Run(() =>
+            {
+                Dispatcher.CurrentDispatcher.Invoke(() =>
+                {
+                    Mediator.Notify("ShowProgressBar");
+                    _executeAction(parameter);
+                    Mediator.Notify("HideProgressBar");
+                });
+            });
         }
 
         public event EventHandler CanExecuteChanged

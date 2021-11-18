@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
+using System.Windows;
 using System.Windows.Input;
 using ITManagementClient.Handlers.Base;
 using ITManagementClient.Handlers.Workers;
@@ -45,7 +45,6 @@ namespace ITManagementClient.ViewModels.UserControls
             UserRoles.ResourceManager.GetDescription()
         };
 
-        private UserRoles _editingRole;
         private string _selectedRole;
         public string SelectedRole
         {
@@ -94,6 +93,8 @@ namespace ITManagementClient.ViewModels.UserControls
             set { _workerAccountActive = value; OnPropertyChanged(nameof(WorkerAccountActive)); }
         }
 
+        public IEnumerable<string> EnglishLevelsList { get; set; } = new List<string> {"A1", "A2", "B1", "B2", "C1", "C2" };
+
         private string _workerEnglishLevel;
         public string WorkerEnglishLevel
         {
@@ -139,6 +140,8 @@ namespace ITManagementClient.ViewModels.UserControls
         public WorkersListViewModel()
         {
             WorkersList = new ObservableCollection<WorkerObservableModel>();
+            WorkersList.Add(new WorkerObservableModel() { ShowWorkerDetailsCommand = new RelayCommand(ShowWorkerDetailsCommandExecute) });
+
             SearchParameter = String.Empty;
 
             SaveUpdatedWorkerCommand = new RelayCommand(SaveUpdatedWorkerCommandExecute);
@@ -172,7 +175,7 @@ namespace ITManagementClient.ViewModels.UserControls
                 WorkerSalary = actionResult.Salary.ToString();
                 SelectedRole = ((UserRoles)actionResult.Position).GetDescription();
             }
-            catch { }
+            catch { /**/ }
         }
 
         private void SaveUpdatedWorkerCommandExecute(object obj)
@@ -193,7 +196,7 @@ namespace ITManagementClient.ViewModels.UserControls
 
                 SearchByParameterCommand.Execute(null);
             }
-            catch { }
+            catch { /**/ }
         }
 
         private void SearchByParameterCommandExecute(object obj)
@@ -205,23 +208,26 @@ namespace ITManagementClient.ViewModels.UserControls
                     SearchParameter = SearchParameter
                 });
 
-                WorkersList.Clear();    
-                int listCounter = 1;
-                foreach (var worker in actionResult.WorkersList)
+                Application.Current.Dispatcher.Invoke(() =>
                 {
-                    WorkersList.Add(new WorkerObservableModel
+                    WorkersList.Clear();
+                    int listCounter = 1;
+                    foreach (var worker in actionResult.WorkersList)
                     {
-                        Name = worker.Name,
-                        WorkerId = worker.WorkerId,
-                        Salary = worker.Salary,
-                        HireDate = worker.HireDate.ToString("dd.MM.yyyy"),
-                        Department = worker.Department,
-                        Number = listCounter++,
-                        ShowWorkerDetailsCommand = new RelayCommand(ShowWorkerDetailsCommandExecute)
-                    });
-                }
+                        WorkersList.Add(new WorkerObservableModel
+                        {
+                            Name = worker.Name,
+                            WorkerId = worker.WorkerId,
+                            Salary = worker.Salary,
+                            HireDate = worker.HireDate.ToString("dd.MM.yyyy"),
+                            Department = worker.Department,
+                            Number = listCounter++,
+                            ShowWorkerDetailsCommand = new RelayCommand(ShowWorkerDetailsCommandExecute)
+                        });
+                    }
+                });
             }
-            catch { }
+            catch { /**/ }
         }
     }
 }

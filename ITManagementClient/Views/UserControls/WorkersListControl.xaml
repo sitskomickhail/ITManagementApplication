@@ -78,14 +78,9 @@
                     <StackPanel Grid.Column="0" Grid.Row="3" Orientation="Vertical" Margin="10">
                         <Label FontSize="16">Уровень английского языка</Label>
                         <ComboBox FontSize="16" 
+                                  ItemsSource="{Binding EnglishLevelsList, UpdateSourceTrigger=PropertyChanged}"
                                   SelectedItem="{Binding WorkerEnglishLevel, UpdateSourceTrigger=PropertyChanged}"
                                   materialDesign:HintAssist.Hint="Выберите уровень английского языка">
-                            <ComboBoxItem>A1</ComboBoxItem>
-                            <ComboBoxItem>A2</ComboBoxItem>
-                            <ComboBoxItem>B1</ComboBoxItem>
-                            <ComboBoxItem>B2</ComboBoxItem>
-                            <ComboBoxItem>C1</ComboBoxItem>
-                            <ComboBoxItem>C2</ComboBoxItem>
                         </ComboBox>
                     </StackPanel>
 

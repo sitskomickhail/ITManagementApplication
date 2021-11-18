@@ -11,6 +11,16 @@
         WindowStyle="None"
         Title="MainWindow">
     <Grid>
+        <Grid ZIndex="9999" 
+              Background="#95a8a8a7" 
+              Visibility="{Binding ProgressBarVisibility, UpdateSourceTrigger=PropertyChanged}">
+            <ProgressBar
+                Style="{StaticResource MaterialDesignCircularProgressBar}"
+                Value="0"
+                IsIndeterminate="True" 
+                Height="100"
+                Width="100"/>
+        </Grid>
         <GroupBox
             Style="{DynamicResource MaterialDesignGroupBox}"
             materialDesign:ShadowAssist.ShadowDepth="Depth3"
