@@ -3,6 +3,7 @@ package handlers;
 import com.google.gson.Gson;
 import constants.ExecutionResults;
 import handlers.base.BaseRequestHandler;
+import handlers.implementation.projects.*;
 import handlers.implementation.workers.*;
 import handlers.interfaces.IRequestHandlerProvider;
 import models.transferModels.TransferRequestModel;
@@ -25,6 +26,8 @@ public class RequestHandlerProvider implements IRequestHandlerProvider {
         requestHandlers.add(new UpdateWorkerRequestHandler());
         requestHandlers.add(new GetWorkerByIdRequestHandler());
         requestHandlers.add(new CreateWorkerRequestHandler());
+        requestHandlers.add(new SearchProjectsRequestHandler());
+        requestHandlers.add(new GetProjectByIdRequestHandler());
     }
 
     public TransferResponseModel Execute(TransferRequestModel requestModel) {

@@ -9,4 +9,6 @@ public class HandlerCodes {
     public static final int GET_WORKERS_LIST = 6;
     public static final int UPDATE_WORKER = 7;
     public static final int CREATE_WORKER = 8;
+    public static final int GET_PROJECTS_LIST = 9;
+    public static final int GET_PROJECT_BY_ID = 10;
 }

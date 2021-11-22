@@ -93,7 +93,7 @@ namespace ITManagementClient.ViewModels.UserControls
             set { _workerAccountActive = value; OnPropertyChanged(nameof(WorkerAccountActive)); }
         }
 
-        public IEnumerable<string> EnglishLevelsList { get; set; } = new List<string> {"A1", "A2", "B1", "B2", "C1", "C2" };
+        public IEnumerable<string> EnglishLevelsList { get; set; } = new List<string> { "A1", "A2", "B1", "B2", "C1", "C2" };
 
         private string _workerEnglishLevel;
         public string WorkerEnglishLevel
@@ -150,7 +150,10 @@ namespace ITManagementClient.ViewModels.UserControls
             UpdateWorkerActionHandler = new UpdateWorkerActionHandler();
             GetWorkerByIdActionHandler = new GetWorkerByIdActionHandler();
             GetWorkersListActionHandler = new GetWorkersListActionHandler();
+        }
 
+        public void LoadInstance()
+        {
             SearchByParameterCommand.Execute(null);
         }
 

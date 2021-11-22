@@ -10,5 +10,7 @@
         GET_WORKERS_LIST = 6,
         UPDATE_WORKER = 7,
         CREATE_WORKER = 8,
+        GET_PROJECTS_LIST = 9,
+        GET_PROJECT_BY_ID = 10,
     }
 }

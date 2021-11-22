@@ -17,8 +17,8 @@ namespace ITManagementClient.ViewModels
 {
     public class MainWindowViewModel : BaseViewModel
     {
-        private Dictionary<string, IPageViewModel> _pageViewModels;
-        public Dictionary<string, IPageViewModel> PageViewModels => _pageViewModels ?? (_pageViewModels = new Dictionary<string, IPageViewModel>());
+        private Dictionary<string, Type> _pageViewModels;
+        public Dictionary<string, Type> PageViewModels => _pageViewModels ?? (_pageViewModels = new Dictionary<string, Type>());
 
         private IPageViewModel _currentPageViewModel;
         public IPageViewModel CurrentPageViewModel
@@ -65,18 +65,20 @@ namespace ITManagementClient.ViewModels
             var types = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes()).Where(x =>
                 typeof(IPageViewModel).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract);
 
+            var navigationTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes()).Where(x =>
+                typeof(INavigationPageViewModel).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract);
+
             foreach (var viewModel in types)
             {
-                var viewModelInstance = (IPageViewModel)viewModel.GetConstructor(Type.EmptyTypes)?.Invoke(new object[] { });
+                //var viewModelInstance = (IPageViewModel)viewModel.GetConstructor(Type.EmptyTypes)?.Invoke(new object[] { });
 
-                if (viewModelInstance != null)
-                {
-                    PageViewModels.Add(viewModel.Name, viewModelInstance);
+                //if (viewModelInstance != null)
+                //{
+                    PageViewModels.Add(viewModel.Name, viewModel);
                     Mediator.Subscribe(viewModel.Name, ChangeViewModel);
-                }
+                //}
             }
 
-            CurrentPageViewModel = PageViewModels[nameof(LoginControlViewModel)];
             Mediator.Subscribe("SnackbarMessageShow", ShowSnackbar);
             Mediator.Subscribe("EnableUserManagementControls", EnableUserManagementControls);
             Mediator.Subscribe("ShowProgressBar", ShowProgressBar);
@@ -88,19 +90,17 @@ namespace ITManagementClient.ViewModels
             CloseApplicationCommand = new RelayCommand(ShutdownApplication);
             LogoutUserCommand = new RelayCommand(LogoutUserCommandExecute);
             ShowUserInfoCommand = new RelayCommand(ShowUserInfoCommandExecute);
+
+            ChangeViewModel(nameof(LoginControlViewModel));
         }
 
         private void ChangeViewModel(object obj)
         {
             var viewModelName = (string)obj;
 
-            if (!PageViewModels.Keys.Contains(viewModelName))
-                throw new NullReferenceException($"{viewModelName} View Model was not found");
-
             var viewModel = PageViewModels[viewModelName];
-            var viewModelInstance = (IPageViewModel)viewModel.GetType().GetConstructor(Type.EmptyTypes)?.Invoke(new object[] { });
+            var viewModelInstance = (IPageViewModel)viewModel.GetConstructor(Type.EmptyTypes)?.Invoke(new object[] { });
 
-            PageViewModels[viewModelName] = viewModelInstance;
             Mediator.Subscribe(viewModelName, ChangeViewModel);
             Mediator.Subscribe("RefreshAllControls", RefreshAllControls);
 

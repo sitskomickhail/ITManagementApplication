@@ -6,5 +6,7 @@ namespace ITManagementClient.ViewModels.Interfaces
     public interface IControlViewModel
     {
         IEnumerable<PageDefinition> PageDefinitions { get; }
+
+        void LoadInstance();
     }
 }

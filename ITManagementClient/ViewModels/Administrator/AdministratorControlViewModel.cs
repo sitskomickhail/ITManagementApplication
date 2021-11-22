@@ -7,6 +7,7 @@ using ITManagementClient.Models.Enums;
 using ITManagementClient.Navigation;
 using ITManagementClient.ViewModels.Base;
 using ITManagementClient.ViewModels.Interfaces;
+using ITManagementClient.ViewModels.Projects;
 using ITManagementClient.ViewModels.UserControls;
 
 namespace ITManagementClient.ViewModels.Administrator
@@ -29,6 +30,9 @@ namespace ITManagementClient.ViewModels.Administrator
 
         public ICommand ShowWorkerListCommand { get; set; }
         public ICommand ShowWorkerCreationCommand { get; set; }
+        public ICommand ShowDepartmentsListCommand { get; set; }
+        public ICommand ShowDepartmentCreationCommand { get; set; }
+        public ICommand ShowProjectsListCommand { get; set; }
 
         public AdministratorControlViewModel()
         {
@@ -47,6 +51,9 @@ namespace ITManagementClient.ViewModels.Administrator
 
             ShowWorkerListCommand = new RelayCommand(ShowWorkerListCommandExecute);
             ShowWorkerCreationCommand = new RelayCommand(ShowWorkerCreationCommandExecute);
+            ShowDepartmentsListCommand = new RelayCommand(ShowDepartmentsListCommandExecute);
+            ShowDepartmentCreationCommand = new RelayCommand(ShowDepartmentCreationCommandExecute);
+            ShowProjectsListCommand = new RelayCommand(ShowProjectsListCommandExecute);
         }
 
         private void ChangeViewModel(object obj)
@@ -62,6 +69,7 @@ namespace ITManagementClient.ViewModels.Administrator
             AdministratorControls[viewModelName] = viewModelInstance;
             Mediator.Subscribe(viewModelName, ChangeViewModel);
 
+            viewModelInstance.LoadInstance();
             CurrentControlViewModel = viewModelInstance;
             Mediator.Notify("RefreshAllControls", this);
         }
@@ -74,6 +82,20 @@ namespace ITManagementClient.ViewModels.Administrator
         private void ShowWorkerCreationCommandExecute(object obj)
         {
             Mediator.Notify(nameof(WorkerCreateViewModel), nameof(WorkerCreateViewModel));
+        }
+
+        private void ShowDepartmentsListCommandExecute(object obj)
+        {
+        }
+
+        private void ShowDepartmentCreationCommandExecute(object obj)
+        {
+        }
+
+
+        private void ShowProjectsListCommandExecute(object obj)
+        {
+            Mediator.Notify(nameof(ProjectsListViewModel), nameof(ProjectsListViewModel));
         }
     }
 }

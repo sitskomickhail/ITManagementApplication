@@ -118,6 +118,8 @@ namespace ITManagementClient.ViewModels.UserControls
             CreateWorkerActionHandler = new CreateNewWorkerActionHandler();
         }
 
+        public void LoadInstance() { }
+
         private void CreateWorkerCommandExecute(object obj)
         {
             if (!Password.Equals(RepeatPassword))

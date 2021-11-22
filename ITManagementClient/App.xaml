@@ -8,7 +8,9 @@
              xmlns:administratorControls="clr-namespace:ITManagementClient.Views.AdministratorControls"
              xmlns:administratorViewModels="clr-namespace:ITManagementClient.ViewModels.Administrator"
              xmlns:userControls="clr-namespace:ITManagementClient.Views.UserControls"
-             xmlns:userViewModels="clr-namespace:ITManagementClient.ViewModels.UserControls">
+             xmlns:userViewModels="clr-namespace:ITManagementClient.ViewModels.UserControls"
+             xmlns:projects="clr-namespace:ITManagementClient.Views.Projects"
+             xmlns:projectViewModels="clr-namespace:ITManagementClient.ViewModels.Projects">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -30,6 +32,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type userViewModels:WorkerCreateViewModel}">
                 <userControls:WorkerCreateControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type projectViewModels:ProjectsListViewModel}">
+                <projects:ProjectsListControl/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
