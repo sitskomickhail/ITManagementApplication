@@ -10,7 +10,9 @@
              xmlns:userControls="clr-namespace:ITManagementClient.Views.UserControls"
              xmlns:userViewModels="clr-namespace:ITManagementClient.ViewModels.UserControls"
              xmlns:projects="clr-namespace:ITManagementClient.Views.Projects"
-             xmlns:projectViewModels="clr-namespace:ITManagementClient.ViewModels.Projects">
+             xmlns:projectViewModels="clr-namespace:ITManagementClient.ViewModels.Projects"
+             xmlns:requests="clr-namespace:ITManagementClient.Views.Requests"
+             xmlns:requestViewModels="clr-namespace:ITManagementClient.ViewModels.Requests">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -35,6 +37,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type projectViewModels:ProjectsListViewModel}">
                 <projects:ProjectsListControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type requestViewModels:RequestCreationViewModel}">
+                <requests:RequestCreationControl/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

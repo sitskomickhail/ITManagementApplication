@@ -8,6 +8,7 @@ using ITManagementClient.Navigation;
 using ITManagementClient.ViewModels.Base;
 using ITManagementClient.ViewModels.Interfaces;
 using ITManagementClient.ViewModels.Projects;
+using ITManagementClient.ViewModels.Requests;
 using ITManagementClient.ViewModels.UserControls;
 
 namespace ITManagementClient.ViewModels.Administrator
@@ -33,6 +34,7 @@ namespace ITManagementClient.ViewModels.Administrator
         public ICommand ShowDepartmentsListCommand { get; set; }
         public ICommand ShowDepartmentCreationCommand { get; set; }
         public ICommand ShowProjectsListCommand { get; set; }
+        public ICommand ShowRequestCreationCommand { get; set; }
 
         public AdministratorControlViewModel()
         {
@@ -54,6 +56,7 @@ namespace ITManagementClient.ViewModels.Administrator
             ShowDepartmentsListCommand = new RelayCommand(ShowDepartmentsListCommandExecute);
             ShowDepartmentCreationCommand = new RelayCommand(ShowDepartmentCreationCommandExecute);
             ShowProjectsListCommand = new RelayCommand(ShowProjectsListCommandExecute);
+            ShowRequestCreationCommand = new RelayCommand(ShowRequestCreationCommandExecute);
         }
 
         private void ChangeViewModel(object obj)
@@ -92,10 +95,14 @@ namespace ITManagementClient.ViewModels.Administrator
         {
         }
 
-
         private void ShowProjectsListCommandExecute(object obj)
         {
             Mediator.Notify(nameof(ProjectsListViewModel), nameof(ProjectsListViewModel));
+        }
+
+        private void ShowRequestCreationCommandExecute(object obj)
+        {
+            Mediator.Notify(nameof(RequestCreationViewModel), nameof(RequestCreationViewModel));
         }
     }
 }

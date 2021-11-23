@@ -11,4 +11,9 @@ public class HandlerCodes {
     public static final int CREATE_WORKER = 8;
     public static final int GET_PROJECTS_LIST = 9;
     public static final int GET_PROJECT_BY_ID = 10;
+    public static final int CREATE_REQUEST = 11;
+    public static final int GET_AVAILABLE_VACATION_DAYS = 12;
+    public static final int GET_USER_REQUESTS_HISTORY = 13;
+    public static final int GET_FULL_REQUEST_INFO = 14;
+    public static final int CHANGE_REQUEST_STATUS = 15;
 }

@@ -71,6 +71,11 @@
                             <TextBlock Margin="8 0 0 0" Text="Оформление заявки" />
                         </StackPanel>
                     </TreeViewItem.Header>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding ShowRequestCreationCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </TreeViewItem>
                 <TreeViewItem>
                     <TreeViewItem.Header>

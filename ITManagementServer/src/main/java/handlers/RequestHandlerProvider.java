@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import constants.ExecutionResults;
 import handlers.base.BaseRequestHandler;
 import handlers.implementation.projects.*;
+import handlers.implementation.requests.*;
 import handlers.implementation.workers.*;
 import handlers.interfaces.IRequestHandlerProvider;
 import models.transferModels.TransferRequestModel;
@@ -20,6 +21,7 @@ public class RequestHandlerProvider implements IRequestHandlerProvider {
     public RequestHandlerProvider() {
 
         requestHandlers = new ArrayList<>();
+
         requestHandlers.add(new RegisterWorkerRequestHandler());
         requestHandlers.add(new LoginWorkerRequestHandler());
         requestHandlers.add(new GetWorkersListRequestHandler());
@@ -28,6 +30,11 @@ public class RequestHandlerProvider implements IRequestHandlerProvider {
         requestHandlers.add(new CreateWorkerRequestHandler());
         requestHandlers.add(new SearchProjectsRequestHandler());
         requestHandlers.add(new GetProjectByIdRequestHandler());
+        requestHandlers.add(new ChangeRequestResolvingStatusRequestHandler());
+        requestHandlers.add(new CreateRequestRequestHandler());
+        requestHandlers.add(new GetAvailableUserVacationDaysRequestHandler());
+        requestHandlers.add(new GetFullRequestInfoRequestHandler());
+        requestHandlers.add(new GetUserRequestsHistoryRequestHandler());
     }
 
     public TransferResponseModel Execute(TransferRequestModel requestModel) {

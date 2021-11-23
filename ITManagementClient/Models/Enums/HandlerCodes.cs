@@ -1,4 +1,5 @@
-﻿namespace ITManagementClient.Models.Enums
+﻿// ReSharper disable InconsistentNaming
+namespace ITManagementClient.Models.Enums
 {
     public enum HandlerCodes
     {
@@ -12,5 +13,10 @@
         CREATE_WORKER = 8,
         GET_PROJECTS_LIST = 9,
         GET_PROJECT_BY_ID = 10,
+        CREATE_REQUEST = 11,
+        GET_AVAILABLE_VACATION_DAYS = 12,
+        GET_USER_REQUESTS_HISTORY = 13,
+        GET_FULL_REQUEST_INFO = 14,
+        CHANGE_REQUEST_STATUS = 15,
     }
 }
