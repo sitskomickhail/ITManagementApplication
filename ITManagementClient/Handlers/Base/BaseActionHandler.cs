@@ -32,7 +32,8 @@ namespace ITManagementClient.Handlers.Base
 
                 if (result.ExecutionCode == ExecutionCode.ERROR_CODE)
                 {
-                    throw new HandlerExecutionException(!String.IsNullOrEmpty(result.ExecutionResult) ? result.ExecutionResult : $"Exception in handler [{HandlerCode}]");
+                    var errorModel = JsonConvert.DeserializeObject<ErrorTransferResponseModel>(result.ExecutionResult);
+                    throw new HandlerExecutionException(!String.IsNullOrEmpty(errorModel?.ErrorMessage) ? errorModel.ErrorMessage : $"Exception in handler [{HandlerCode}]");
                 }
 
                 var successResultModel = JsonConvert.DeserializeObject<SuccessTransferResponseModel<TOutgoingModel>>(result.ExecutionResult);
@@ -59,7 +60,10 @@ namespace ITManagementClient.Handlers.Base
             return new TransferRequestModel
             {
                 ActionCode = HandlerCode,
-                ActionModel = JsonConvert.SerializeObject(model)
+                ActionModel = JsonConvert.SerializeObject(model, new JsonSerializerSettings
+                {
+                    DateFormatString = "MM.dd.yyyy",
+                })
             };
         }
     }

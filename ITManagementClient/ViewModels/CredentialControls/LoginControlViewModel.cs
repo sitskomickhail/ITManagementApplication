@@ -2,13 +2,14 @@
 using ITManagementClient.Handlers.Base;
 using ITManagementClient.Handlers.Workers;
 using ITManagementClient.Infrastructure;
+using ITManagementClient.Managers;
 using ITManagementClient.Models.RequestModels.Workers;
 using ITManagementClient.Models.ResponseModels.Workers;
 using ITManagementClient.Navigation;
 using ITManagementClient.ViewModels.Base;
 using ITManagementClient.ViewModels.Interfaces;
 
-namespace ITManagementClient.ViewModels.UserControls
+namespace ITManagementClient.ViewModels.CredentialControls
 {
     public class LoginControlViewModel : BaseViewModel, IPageViewModel
     {
@@ -29,7 +30,7 @@ namespace ITManagementClient.ViewModels.UserControls
         public ICommand NavigateToRegisterPage { get; set; }
         public ICommand LoginCommand { get; set; }
         public BaseActionHandler<LoginRequestModel, LoginResponseModel> LoginActionHandler { get; set; }
-        
+
         public LoginControlViewModel()
         {
             Login = "";
@@ -51,7 +52,8 @@ namespace ITManagementClient.ViewModels.UserControls
                     Login = Login
                 });
 
-                Mediator.Notify("EnableUserManagementElements");
+                UserManager.SetCurrentConnectedUser(Login, actionResult.UserId, actionResult.UserRole);
+                Mediator.Notify("EnableUserManagementControls");
             }
             catch { }
         }

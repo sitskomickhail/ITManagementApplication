@@ -11,6 +11,16 @@
         WindowStyle="None"
         Title="MainWindow">
     <Grid>
+        <Grid ZIndex="9999" 
+              Background="#95a8a8a7" 
+              Visibility="{Binding ProgressBarVisibility, UpdateSourceTrigger=PropertyChanged}">
+            <ProgressBar
+                Style="{StaticResource MaterialDesignCircularProgressBar}"
+                Value="0"
+                IsIndeterminate="True" 
+                Height="100"
+                Width="100"/>
+        </Grid>
         <GroupBox
             Style="{DynamicResource MaterialDesignGroupBox}"
             materialDesign:ShadowAssist.ShadowDepth="Depth3"
@@ -23,8 +33,10 @@
                     <Menu IsMainMenu="True" HorizontalAlignment="Right">
                         <MenuItem Icon="{materialDesign:PackIcon Kind=DotsVertical}" Width="50" Background="Transparent">
                             <MenuItem Header="My Profile" Icon="{materialDesign:PackIcon Kind=AccountOutline}"
+                                      Command="{Binding ShowUserInfoCommand}"
                                       Visibility="{Binding WorkerNavElementsVisibility, UpdateSourceTrigger=PropertyChanged}"></MenuItem>
                             <MenuItem Header="Logout" Icon="{materialDesign:PackIcon Kind=Logout}"
+                                      Command="{Binding LogoutUserCommand}"
                                       Visibility="{Binding WorkerNavElementsVisibility, UpdateSourceTrigger=PropertyChanged}"/>
                             <Separator />
                             <MenuItem Header="Exit" Icon="{materialDesign:PackIcon Kind=ExitToApp}" 

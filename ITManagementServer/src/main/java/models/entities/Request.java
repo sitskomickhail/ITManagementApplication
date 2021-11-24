@@ -1,13 +1,13 @@
 package models.entities;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Request {
     private int id;
     private Date createTime;
     private int type;
     private String requestDescription;
-    private boolean resolved;
+    private int resolveStatus;
     private String resolveNote;
     private int workerId;
 
@@ -43,13 +43,9 @@ public class Request {
         this.requestDescription = description;
     }
 
-    public boolean isResolved() {
-        return resolved;
-    }
+    public int getResolveStatus() { return resolveStatus; }
 
-    public void setResolved(boolean resolved) {
-        this.resolved = resolved;
-    }
+    public void setResolveStatus(int resolveStatus) { this.resolveStatus = resolveStatus; }
 
     public String getResolveNote() {
         return resolveNote;

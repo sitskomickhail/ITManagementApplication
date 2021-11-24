@@ -3,8 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ITManagementClient"
              xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:credentialViewModels="clr-namespace:ITManagementClient.ViewModels.CredentialControls"
+             xmlns:credentialControls="clr-namespace:ITManagementClient.Views.CredentialControls"
+             xmlns:administratorControls="clr-namespace:ITManagementClient.Views.AdministratorControls"
+             xmlns:administratorViewModels="clr-namespace:ITManagementClient.ViewModels.Administrator"
+             xmlns:userControls="clr-namespace:ITManagementClient.Views.UserControls"
              xmlns:userViewModels="clr-namespace:ITManagementClient.ViewModels.UserControls"
-             xmlns:credentialControls="clr-namespace:ITManagementClient.Views.CredentialControls">
+             xmlns:projects="clr-namespace:ITManagementClient.Views.Projects"
+             xmlns:projectViewModels="clr-namespace:ITManagementClient.ViewModels.Projects"
+             xmlns:requests="clr-namespace:ITManagementClient.Views.Requests"
+             xmlns:requestViewModels="clr-namespace:ITManagementClient.ViewModels.Requests">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -12,11 +20,29 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate DataType="{x:Type userViewModels:LoginControlViewModel}">
+            <DataTemplate DataType="{x:Type credentialViewModels:LoginControlViewModel}">
                 <credentialControls:LoginControl />
             </DataTemplate>
-            <DataTemplate DataType="{x:Type userViewModels:RegisterControlViewModel}">
+            <DataTemplate DataType="{x:Type credentialViewModels:RegisterControlViewModel}">
                 <credentialControls:RegisterControl />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type administratorViewModels:AdministratorControlViewModel}">
+                <administratorControls:AdministratorMainControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type userViewModels:WorkersListViewModel }">
+                <userControls:WorkersListControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type userViewModels:WorkerCreateViewModel}">
+                <userControls:WorkerCreateControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type projectViewModels:ProjectsListViewModel}">
+                <projects:ProjectsListControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type requestViewModels:RequestCreationViewModel}">
+                <requests:RequestCreationControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type requestViewModels:RequestsListViewModel}">
+                <requests:RequestsListControl/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

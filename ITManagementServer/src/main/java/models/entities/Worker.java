@@ -69,7 +69,7 @@ public class Worker {
         this.hireDate = hireDate;
     }
 
-    public boolean isActive() {
+    public boolean getActive() {
         return active;
     }
 

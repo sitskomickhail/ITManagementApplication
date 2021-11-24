@@ -6,9 +6,7 @@ import constants.HandlerCodes;
 import handlers.HandlerThread;
 import helpers.ConfigHelper;
 import helpers.RandomHelper;
-import models.requestModels.connectors.StartConnectionRequestModel;
 import models.responseModels.connectors.StartConnectionResponseModel;
-import models.transferModels.TransferRequestModel;
 import models.transferModels.TransferResponseModel;
 import models.transferModels.responses.SuccessTransferResponseModel;
 
@@ -18,12 +16,6 @@ public class Program {
     public static void main(String[] args) throws IOException {
         ConfigHelper configHelper = new ConfigHelper();
         String portConfig = null;
-
-        TransferRequestModel requestModel = new TransferRequestModel();
-        requestModel.ActionCode = HandlerCodes.START_CONNECTION;
-        requestModel.ActionModel = new Gson().toJson(new StartConnectionRequestModel());
-
-        System.out.println(new Gson().toJson(requestModel));
 
         try {
             portConfig = configHelper.GetPropertyValue("tcpPort");

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Controls;
 using System.Windows.Input;
 using ITManagementClient.Handlers.Base;
 using ITManagementClient.Handlers.Workers;
@@ -10,7 +9,7 @@ using ITManagementClient.Navigation;
 using ITManagementClient.ViewModels.Base;
 using ITManagementClient.ViewModels.Interfaces;
 
-namespace ITManagementClient.ViewModels.UserControls
+namespace ITManagementClient.ViewModels.CredentialControls
 {
     public class RegisterControlViewModel : BaseViewModel, IPageViewModel
     {

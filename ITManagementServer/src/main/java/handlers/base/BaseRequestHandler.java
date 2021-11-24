@@ -1,8 +1,11 @@
 package handlers.base;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import constants.ExecutionResults;
 import models.transferModels.TransferResponseModel;
+import models.transferModels.responses.ErrorTransferResponseModel;
+import models.transferModels.responses.SuccessTransferResponseModel;
 
 import java.lang.reflect.Type;
 
@@ -12,14 +15,20 @@ public abstract class BaseRequestHandler<ModelIn, ModelOut> {
         var responseModel = new TransferResponseModel();
 
         try {
-            ModelIn incomingModel = new Gson().fromJson(jsonModel, getIncomingModelType());
+            Gson gson = new GsonBuilder().setDateFormat("MM.dd.yyyy").create();
+            ModelIn incomingModel = gson.fromJson(jsonModel, getIncomingModelType());
 
             var resultModel = Execute(incomingModel);
-            responseModel.executionResult = new Gson().toJson(resultModel);
             responseModel.executionCode = ExecutionResults.SUCCESS_CODE;
+            var successResultModel = new SuccessTransferResponseModel<ModelOut>();
+            successResultModel.responseModel = resultModel;
+
+            responseModel.executionResult = gson.toJson(successResultModel);
         } catch (Exception ex) {
             responseModel.executionCode = ExecutionResults.ERROR_CODE;
-            responseModel.executionResult = ex.getMessage();
+            var errorModel = new ErrorTransferResponseModel();
+            errorModel.errorMessage = ex.getMessage();
+            responseModel.executionResult = new Gson().toJson(errorModel);
         }
 
         return responseModel;

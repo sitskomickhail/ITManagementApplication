@@ -33,4 +33,26 @@ public class DepartmentContext {
 
         return departments;
     }
+
+    public static Department getDepartmentById(int id) throws SQLException, IOException {
+        var connection = MySqlContext.getInstance().getConnection();
+
+        String sql = "SELECT * FROM Departments WHERE Id = ?";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, id);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        Department department = null;
+
+        while (resultSet.next()) {
+            department = new Department();
+            department.setTitle(resultSet.getString("Title"));
+            department.setWorkerDuties(resultSet.getString("WorkerDuties"));
+            department.setId(resultSet.getInt("Id"));
+        }
+
+        return department;
+    }
 }

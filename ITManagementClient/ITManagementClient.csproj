@@ -84,19 +84,72 @@
     <Compile Include="Exceptions\HandlerExecutionException.cs" />
     <Compile Include="Handlers\Base\BaseActionHandler.cs" />
     <Compile Include="Handlers\Connectors\StartConnectionActionHandler.cs" />
+    <Compile Include="Handlers\Projects\GetProjectByIdActionHandler.cs" />
+    <Compile Include="Handlers\Projects\SearchProjectsActionHandler.cs" />
+    <Compile Include="Handlers\Requests\ChangeRequestResolvingStatusActionHandler.cs" />
+    <Compile Include="Handlers\Requests\CreateRequestActionHandler.cs" />
+    <Compile Include="Handlers\Requests\FilterRequestsListActionHandler.cs" />
+    <Compile Include="Handlers\Requests\GetAvailableUserVacationDaysActionHandler.cs" />
+    <Compile Include="Handlers\Requests\GetFullRequestInfoActionHandler.cs" />
+    <Compile Include="Handlers\Requests\GetUserRequestsHistoryActionHandler.cs" />
+    <Compile Include="Handlers\Requests\UpdateRequestActionHandler.cs" />
+    <Compile Include="Handlers\Workers\CreateNewWorkerActionHandler.cs" />
+    <Compile Include="Handlers\Workers\GetWorkerByIdActionHandler.cs" />
+    <Compile Include="Handlers\Workers\GetWorkersListActionHandler.cs" />
     <Compile Include="Handlers\Workers\LoginWorkerActionHandler.cs" />
     <Compile Include="Handlers\Workers\RegisterWorkerActionHandler.cs" />
+    <Compile Include="Handlers\Workers\UpdateWorkerActionHandler.cs" />
+    <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Managers\Interfaces\ITcpHandlerManager.cs" />
     <Compile Include="Managers\TcpHandlerManager.cs" />
+    <Compile Include="Managers\ConnectedUserManager.cs" />
+    <Compile Include="Models\Common\ConnectedUserModel.cs" />
+    <Compile Include="Models\Common\ObservableModels\RequestsObservableModel.cs" />
+    <Compile Include="Models\Common\ObservableModels\ProjectObservableModel.cs" />
+    <Compile Include="Models\Common\ObservableModels\ProjectWorkerObservableModel.cs" />
+    <Compile Include="Models\Common\ObservableModels\WorkerObservableModel.cs" />
     <Compile Include="Models\Enums\ExecutionCode.cs" />
     <Compile Include="Models\Enums\HandlerCodes.cs" />
+    <Compile Include="Models\Enums\PageComponent.cs" />
+    <Compile Include="Models\Enums\RequestStatus.cs" />
+    <Compile Include="Models\Enums\RequestType.cs" />
     <Compile Include="Models\Enums\UserRoles.cs" />
     <Compile Include="Models\RequestModels\Connectors\StartConnectionRequestModel.cs" />
+    <Compile Include="Models\RequestModels\Projects\GetProjectByIdRequestModel.cs" />
+    <Compile Include="Models\RequestModels\Projects\SearchProjectsRequestModel.cs" />
+    <Compile Include="Models\RequestModels\Requests\ChangeRequestResolvingStatusRequestModel.cs" />
+    <Compile Include="Models\RequestModels\Requests\CreateRequestRequestModel.cs" />
+    <Compile Include="Models\RequestModels\Requests\FilterRequestsListRequestModel.cs" />
+    <Compile Include="Models\RequestModels\Requests\GetRequestFullInfoRequestModel.cs" />
+    <Compile Include="Models\RequestModels\Requests\GetUserRequestsHistoryRequestModel.cs" />
+    <Compile Include="Models\RequestModels\Requests\GetVacationAvailableDaysRequestModel.cs" />
+    <Compile Include="Models\RequestModels\Requests\UpdateRequestRequestModel.cs" />
+    <Compile Include="Models\RequestModels\Workers\CreateNewWorkerRequestModel.cs" />
+    <Compile Include="Models\RequestModels\Workers\GetWorkerByIdRequestModel.cs" />
+    <Compile Include="Models\RequestModels\Workers\GetWorkerListRequestModel.cs" />
     <Compile Include="Models\RequestModels\Workers\LoginRequestModel.cs" />
     <Compile Include="Models\RequestModels\Workers\RegisterRequestModel.cs" />
+    <Compile Include="Models\RequestModels\Workers\UpdateWorkerRequestModel.cs" />
     <Compile Include="Models\ResponseModels\Connectors\StartConnectionResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\Projects\GetProjectByIdResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\Projects\ProjectGridResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\Projects\ProjectWorkerResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\Projects\SearchProjectResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\Requests\ChangeRequestResolvingStatusResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\Requests\CreateRequestResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\Requests\FilterRequestsListResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\Requests\GetRequestFullInfoResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\Requests\GetUserRequestsHistoryResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\Requests\GetVacationAvailableDaysResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\Requests\MyRequestHistoryModel.cs" />
+    <Compile Include="Models\ResponseModels\Requests\UpdateRequestResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\Workers\CreateNewWorkerResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\Workers\WorkerGridResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\Workers\GetWorkerByIdResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\Workers\GetWorkerListResponseModel.cs" />
     <Compile Include="Models\ResponseModels\Workers\LoginResponseModel.cs" />
     <Compile Include="Models\ResponseModels\Workers\RegisterResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\Workers\UpdateWorkerResponseModel.cs" />
     <Compile Include="Models\TransferModels\ResponseModels\ErrorTransferResponseModel.cs" />
     <Compile Include="Models\TransferModels\ResponseModels\SuccessTransferResponseModel.cs" />
     <Compile Include="Models\TransferModels\TransferRequestModel.cs" />
@@ -105,15 +158,41 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\Interfaces\ITcpService.cs" />
     <Compile Include="Services\TcpService.cs" />
+    <Compile Include="ViewModels\Administrator\AdministratorControlViewModel.cs" />
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IControlViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\INavigationPageViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\UserControls\LoginControlViewModel.cs" />
-    <Compile Include="ViewModels\UserControls\RegisterControlViewModel.cs" />
+    <Compile Include="ViewModels\CredentialControls\LoginControlViewModel.cs" />
+    <Compile Include="ViewModels\CredentialControls\RegisterControlViewModel.cs" />
+    <Compile Include="ViewModels\Projects\ProjectsListViewModel.cs" />
+    <Compile Include="ViewModels\Requests\RequestsListViewModel.cs" />
+    <Compile Include="ViewModels\Requests\RequestCreationViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\WorkerCreateViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\WorkersListViewModel.cs" />
+    <Compile Include="Views\AdministratorControls\AdministratorMainControl.xaml.cs">
+      <DependentUpon>AdministratorMainControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CredentialControls\LoginControl.xaml.cs">
       <DependentUpon>LoginControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CredentialControls\RegisterControl.xaml.cs">
       <DependentUpon>RegisterControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Projects\ProjectsListControl.xaml.cs">
+      <DependentUpon>ProjectsListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Requests\RequestCreationControl.xaml.cs">
+      <DependentUpon>RequestCreationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Requests\RequestsListControl.xaml.cs">
+      <DependentUpon>RequestsListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\WorkerCreateControl.xaml.cs">
+      <DependentUpon>WorkerCreateControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\WorkersListControl.xaml.cs">
+      <DependentUpon>WorkersListControl.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\AdminPasswordControl.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -124,6 +203,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\PasswordControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AdministratorControls\AdministratorMainControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -148,6 +231,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CredentialControls\RegisterControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Projects\ProjectsListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Requests\RequestCreationControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Requests\RequestsListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\WorkerCreateControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\WorkersListControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
