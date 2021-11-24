@@ -89,6 +89,7 @@
     <Compile Include="Handlers\Departments\GetFullDepartmentInfoActionHandler.cs" />
     <Compile Include="Handlers\Departments\RemoveDepartmentActionHandler.cs" />
     <Compile Include="Handlers\Departments\UpdateDepartmentActionHandler.cs" />
+    <Compile Include="Handlers\Projects\GetDeveloperProjectsActionHandler.cs" />
     <Compile Include="Handlers\Projects\GetProjectByIdActionHandler.cs" />
     <Compile Include="Handlers\Projects\SearchProjectsActionHandler.cs" />
     <Compile Include="Handlers\Requests\ChangeRequestResolvingStatusActionHandler.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="Models\RequestModels\Departments\GetFullDepartmentInfoRequestModel.cs" />
     <Compile Include="Models\RequestModels\Departments\UpdateDepartmentRequestModel.cs" />
     <Compile Include="Models\RequestModels\Projects\GetProjectByIdRequestModel.cs" />
+    <Compile Include="Models\RequestModels\Projects\GetDeveloperProjectsRequestModel.cs" />
     <Compile Include="Models\RequestModels\Projects\SearchProjectsRequestModel.cs" />
     <Compile Include="Models\RequestModels\Requests\ChangeRequestResolvingStatusRequestModel.cs" />
     <Compile Include="Models\RequestModels\Requests\CreateRequestRequestModel.cs" />
@@ -178,6 +180,8 @@
     <Compile Include="ViewModels\Administrator\AdministratorControlViewModel.cs" />
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />
     <Compile Include="ViewModels\Departments\ManageDepartmentsViewModel.cs" />
+    <Compile Include="ViewModels\Developer\DeveloperControlViewModel.cs" />
+    <Compile Include="ViewModels\Developer\DeveloperProjectsListViewModel.cs" />
     <Compile Include="ViewModels\HrManager\HrManagerControlViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IControlViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\INavigationPageViewModel.cs" />
@@ -200,6 +204,12 @@
     </Compile>
     <Compile Include="Views\Departments\ManageDepartmentsControl.xaml.cs">
       <DependentUpon>ManageDepartmentsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DeveloperControls\DeveloperMainControl.xaml.cs">
+      <DependentUpon>DeveloperMainControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DeveloperControls\DeveloperProjectsListControl.xaml.cs">
+      <DependentUpon>DeveloperProjectsListControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HrManagerControls\HrManagerMainControl.xaml.cs">
       <DependentUpon>HrManagerMainControl.xaml</DependentUpon>
@@ -236,6 +246,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Departments\ManageDepartmentsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DeveloperControls\DeveloperMainControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DeveloperControls\DeveloperProjectsListControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

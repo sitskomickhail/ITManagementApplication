@@ -43,6 +43,7 @@ public class RequestHandlerProvider implements IRequestHandlerProvider {
         requestHandlers.add(new GetFullDepartmentInfoRequestHandler());
         requestHandlers.add(new RemoveDepartmentRequestHandler());
         requestHandlers.add(new UpdateDepartmentRequestHandler());
+        requestHandlers.add(new GetDeveloperProjectsRequestHandler());
     }
 
     public TransferResponseModel Execute(TransferRequestModel requestModel) {

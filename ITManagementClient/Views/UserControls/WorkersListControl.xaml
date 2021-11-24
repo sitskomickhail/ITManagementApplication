@@ -191,7 +191,8 @@
                                         Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Label Content="{Binding Salary, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                <Label Content="{Binding Salary, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                       Visibility="{Binding SalaryColumnVisibility, UpdateSourceTrigger=PropertyChanged}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

@@ -23,4 +23,5 @@ public class HandlerCodes {
     public static final int CREATE_DEPARTMENT = 20;
     public static final int DELETE_DEPARTMENT = 21;
     public static final int GET_DEPARTMENT_FULL_INFO = 22;
+    public static final int GET_DEVELOPER_PROJECTS = 23;
 }

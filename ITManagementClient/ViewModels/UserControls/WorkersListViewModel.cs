@@ -20,7 +20,11 @@ namespace ITManagementClient.ViewModels.UserControls
 {
     public class WorkersListViewModel : BaseViewModel, IControlViewModel
     {
-        public IEnumerable<PageDefinition> PageDefinitions => new List<PageDefinition> { PageDefinition.Administrator, PageDefinition.HumanResource };
+        public IEnumerable<PageDefinition> PageDefinitions => new List<PageDefinition>
+        {
+            PageDefinition.Administrator, PageDefinition.HumanResource,
+            PageDefinition.HumanResource, PageDefinition.Developer
+        };
 
         public ObservableCollection<WorkerObservableModel> WorkersList { get; set; }
 
@@ -343,7 +347,8 @@ namespace ITManagementClient.ViewModels.UserControls
                             HireDate = worker.HireDate.ToString("dd.MM.yyyy"),
                             Department = worker.Department,
                             Number = listCounter++,
-                            ShowWorkerDetailsCommand = new RelayCommand(ShowWorkerDetailsCommandExecute)
+                            ShowWorkerDetailsCommand = new RelayCommand(ShowWorkerDetailsCommandExecute),
+                            SalaryColumnVisibility = SalaryVisibility
                         });
                     }
                 });

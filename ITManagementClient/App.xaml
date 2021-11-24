@@ -16,7 +16,9 @@
              xmlns:departments="clr-namespace:ITManagementClient.Views.Departments"
              xmlns:departmentViewModels="clr-namespace:ITManagementClient.ViewModels.Departments"
              xmlns:humanResources="clr-namespace:ITManagementClient.Views.HrManagerControls"
-             xmlns:hrViewModels="clr-namespace:ITManagementClient.ViewModels.HrManager">
+             xmlns:hrViewModels="clr-namespace:ITManagementClient.ViewModels.HrManager"
+             xmlns:developerControls="clr-namespace:ITManagementClient.Views.DeveloperControls"
+             xmlns:developerViewModels="clr-namespace:ITManagementClient.ViewModels.Developer">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -53,6 +55,12 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type hrViewModels:HrManagerControlViewModel}">
                 <humanResources:HrManagerMainControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type developerViewModels:DeveloperControlViewModel}">
+                <developerControls:DeveloperMainControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type developerViewModels:DeveloperProjectsListViewModel}">
+                <developerControls:DeveloperProjectsListControl/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

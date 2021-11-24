@@ -41,6 +41,38 @@ public class ProjectsContext {
         return projects;
     }
 
+    public static ArrayList<Project> SearchProjectsByParameterAndDeveloper(String searchParameter, int developerId) throws IOException, SQLException {
+        var connection = MySqlContext.getInstance().getConnection();
+
+        String sql = "SELECT * FROM projects as p " +
+                "INNER JOIN itmanagementdb.workerprojects as wp ON p.Id = wp.ProjectId " +
+                "INNER JOIN itmanagementdb.workers as w on wp.WorkerId = w.Id " +
+                "WHERE (p.Title LIKE '%" + searchParameter + "%' OR p.Description LIKE '%" + searchParameter + "%' OR " +
+                "p.TechnologiesStack LIKE '%" + searchParameter + "%' OR p.StartDate LIKE '%" + searchParameter + "%') " +
+                "AND w.Id = " + developerId;
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        ArrayList<Project> projects = new ArrayList<>();
+        while (resultSet.next()) {
+            Project project = new Project();
+
+            project.setId(resultSet.getInt("Id"));
+            project.setTitle(resultSet.getString("Title"));
+            project.setDescription(resultSet.getString("Description"));
+            project.setTechnologiesStack(resultSet.getString("TechnologiesStack"));
+            project.setStartDate(resultSet.getDate("StartDate"));
+            project.setActive(resultSet.getBoolean("Active"));
+
+            projects.add(project);
+        }
+
+        connection.close();
+        return projects;
+    }
+
     public static ArrayList<GridProjectWorkerContextModel> FilterProjectsById(int projectId) throws SQLException, IOException {
         var connection = MySqlContext.getInstance().getConnection();
 

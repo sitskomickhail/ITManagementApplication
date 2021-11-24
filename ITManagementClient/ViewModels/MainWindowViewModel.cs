@@ -10,6 +10,7 @@ using ITManagementClient.Navigation;
 using ITManagementClient.ViewModels.Administrator;
 using ITManagementClient.ViewModels.Base;
 using ITManagementClient.ViewModels.CredentialControls;
+using ITManagementClient.ViewModels.Developer;
 using ITManagementClient.ViewModels.HrManager;
 using ITManagementClient.ViewModels.Interfaces;
 using MaterialDesignThemes.Wpf;
@@ -125,7 +126,7 @@ namespace ITManagementClient.ViewModels
                         Mediator.Notify(nameof(AdministratorControlViewModel), nameof(AdministratorControlViewModel));
                         break;
                     case UserRoles.Developer:
-                        //Mediator.Notify(nameof(AdministratorControlViewModel));
+                        Mediator.Notify(nameof(DeveloperControlViewModel), nameof(DeveloperControlViewModel));
                         break;
                     case UserRoles.HrManager:
                         Mediator.Notify(nameof(HrManagerControlViewModel), nameof(HrManagerControlViewModel));

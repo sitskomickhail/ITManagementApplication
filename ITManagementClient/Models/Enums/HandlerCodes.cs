@@ -25,5 +25,6 @@ namespace ITManagementClient.Models.Enums
         CREATE_DEPARTMENT = 20,
         DELETE_DEPARTMENT = 21,
         GET_DEPARTMENT_FULL_INFO = 22,
+        GET_DEVELOPER_PROJECTS = 23,
     }
 }
