@@ -3,6 +3,7 @@ package handlers;
 import com.google.gson.Gson;
 import constants.ExecutionResults;
 import handlers.base.BaseRequestHandler;
+import handlers.implementation.departments.*;
 import handlers.implementation.projects.*;
 import handlers.implementation.requests.*;
 import handlers.implementation.workers.*;
@@ -37,6 +38,11 @@ public class RequestHandlerProvider implements IRequestHandlerProvider {
         requestHandlers.add(new GetUserRequestsHistoryRequestHandler());
         requestHandlers.add(new FilterRequestsRequestHandler());
         requestHandlers.add(new UpdateRequestRequestHandler());
+        requestHandlers.add(new CreateDepartmentRequestHandler());
+        requestHandlers.add(new GetDepartmentsListRequestHandler());
+        requestHandlers.add(new GetFullDepartmentInfoRequestHandler());
+        requestHandlers.add(new RemoveDepartmentRequestHandler());
+        requestHandlers.add(new UpdateDepartmentRequestHandler());
     }
 
     public TransferResponseModel Execute(TransferRequestModel requestModel) {

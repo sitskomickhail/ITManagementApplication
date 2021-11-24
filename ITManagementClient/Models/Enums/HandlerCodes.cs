@@ -20,5 +20,10 @@ namespace ITManagementClient.Models.Enums
         CHANGE_REQUEST_STATUS = 15,
         FILTER_REQUESTS_LIST = 16,
         UPDATE_REQUEST = 17,
+        GET_DEPARTMENTS_LIST = 18,
+        UPDATE_DEPARTMENT = 19,
+        CREATE_DEPARTMENT = 20,
+        DELETE_DEPARTMENT = 21,
+        GET_DEPARTMENT_FULL_INFO = 22,
     }
 }

@@ -93,37 +93,20 @@
                     </i:Interaction.Triggers>
                 </TreeViewItem>
             </TreeViewItem>
-            <TreeViewItem Header="УПРАВЛЕНИЕ ДЕПАРТАМЕНТАМИ" IsExpanded="False">
-                <TreeViewItem>
-                    <TreeViewItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Viewbox Width="16" Height="16">
-                                <materialDesign:PackIcon Kind="Graph" Width="24" Height="24"/>
-                            </Viewbox>
-                            <TextBlock Margin="8 0 0 0" Text="Список департаментов" />
-                        </StackPanel>
-                    </TreeViewItem.Header>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeftButtonUp">
-                            <i:InvokeCommandAction Command="{Binding ShowDepartmentsListCommand}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </TreeViewItem>
-                <TreeViewItem>
-                    <TreeViewItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Viewbox Width="16" Height="16">
-                                <materialDesign:PackIcon Kind="BriefcasePlusOutline" Width="24" Height="24"/>
-                            </Viewbox>
-                            <TextBlock Margin="8 0 0 0" Text="Добавление департаментов" />
-                        </StackPanel>
-                    </TreeViewItem.Header>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeftButtonUp">
-                            <i:InvokeCommandAction Command="{Binding ShowDepartmentCreationCommand}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </TreeViewItem>
+            <TreeViewItem IsExpanded="False">
+                <TreeViewItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Viewbox Width="16" Height="16">
+                            <materialDesign:PackIcon Kind="Graph" Width="24" Height="24"/>
+                        </Viewbox>
+                        <TextBlock Margin="8 0 0 0" Text="УПРАВЛЕНИЕ ДЕПАРТАМЕНТАМИ" />
+                    </StackPanel>
+                </TreeViewItem.Header>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                        <i:InvokeCommandAction Command="{Binding ManageDepartmentsCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </TreeViewItem>
         </TreeView>
         <ContentControl Content="{Binding CurrentControlViewModel}" Margin="10" Grid.Column="1"/>

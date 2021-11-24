@@ -18,4 +18,9 @@ public class HandlerCodes {
     public static final int CHANGE_REQUEST_STATUS = 15;
     public static final int FILTER_REQUESTS_LIST  = 16;
     public static final int UPDATE_REQUEST = 17;
+    public static final int GET_DEPARTMENTS_LIST = 18;
+    public static final int UPDATE_DEPARTMENT = 19;
+    public static final int CREATE_DEPARTMENT = 20;
+    public static final int DELETE_DEPARTMENT = 21;
+    public static final int GET_DEPARTMENT_FULL_INFO = 22;
 }

@@ -12,7 +12,9 @@
              xmlns:projects="clr-namespace:ITManagementClient.Views.Projects"
              xmlns:projectViewModels="clr-namespace:ITManagementClient.ViewModels.Projects"
              xmlns:requests="clr-namespace:ITManagementClient.Views.Requests"
-             xmlns:requestViewModels="clr-namespace:ITManagementClient.ViewModels.Requests">
+             xmlns:requestViewModels="clr-namespace:ITManagementClient.ViewModels.Requests"
+             xmlns:departments="clr-namespace:ITManagementClient.Views.Departments"
+             xmlns:departmentViewModels="clr-namespace:ITManagementClient.ViewModels.Departments">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -43,6 +45,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type requestViewModels:RequestsListViewModel}">
                 <requests:RequestsListControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type departmentViewModels:ManageDepartmentsViewModel}">
+                <departments:ManageDepartmentsControl/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

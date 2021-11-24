@@ -80,6 +80,32 @@ public class WorkerContext {
         return worker;
     }
 
+    public static ArrayList<GridWorkerContextModel> GetWorkerByDepartmentId(int departmentId) throws IOException, SQLException {
+        var connection = MySqlContext.getInstance().getConnection();
+
+        String sql = "SELECT * FROM Workers WHERE DepartmentId = ?";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, departmentId);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        ArrayList<GridWorkerContextModel> gridWorkersList = new ArrayList<>();
+        while (resultSet.next()) {
+            GridWorkerContextModel gridWorker = new GridWorkerContextModel();
+
+            gridWorker.setId(resultSet.getInt("Id"));
+            gridWorker.setName(resultSet.getString("Name"));
+            gridWorker.setSalary(resultSet.getDouble("Salary"));
+            gridWorker.setHireDate(resultSet.getDate("HireDate"));
+
+            gridWorkersList.add(gridWorker);
+        }
+
+        connection.close();
+        return gridWorkersList;
+    }
+
     public static ArrayList<GridWorkerContextModel> SearchWorkerByParameter(String searchParameter) throws IOException, SQLException {
         var connection = MySqlContext.getInstance().getConnection();
 
