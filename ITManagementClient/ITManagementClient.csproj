@@ -178,6 +178,7 @@
     <Compile Include="ViewModels\Administrator\AdministratorControlViewModel.cs" />
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />
     <Compile Include="ViewModels\Departments\ManageDepartmentsViewModel.cs" />
+    <Compile Include="ViewModels\HrManager\HrManagerControlViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IControlViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\INavigationPageViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
@@ -199,6 +200,9 @@
     </Compile>
     <Compile Include="Views\Departments\ManageDepartmentsControl.xaml.cs">
       <DependentUpon>ManageDepartmentsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HrManagerControls\HrManagerMainControl.xaml.cs">
+      <DependentUpon>HrManagerMainControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Projects\ProjectsListControl.xaml.cs">
       <DependentUpon>ProjectsListControl.xaml</DependentUpon>
@@ -232,6 +236,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Departments\ManageDepartmentsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HrManagerControls\HrManagerMainControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

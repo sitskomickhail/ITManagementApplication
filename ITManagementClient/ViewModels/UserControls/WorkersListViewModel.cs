@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using ITManagementClient.Handlers.Base;
 using ITManagementClient.Handlers.Workers;
 using ITManagementClient.Helpers;
 using ITManagementClient.Infrastructure;
+using ITManagementClient.Managers;
 using ITManagementClient.Models.Common.ObservableModels;
 using ITManagementClient.Models.Enums;
 using ITManagementClient.Models.RequestModels.Workers;
@@ -18,7 +20,7 @@ namespace ITManagementClient.ViewModels.UserControls
 {
     public class WorkersListViewModel : BaseViewModel, IControlViewModel
     {
-        public IEnumerable<PageDefinition> PageDefinitions => new List<PageDefinition> { PageDefinition.Administrator };
+        public IEnumerable<PageDefinition> PageDefinitions => new List<PageDefinition> { PageDefinition.Administrator, PageDefinition.HumanResource };
 
         public ObservableCollection<WorkerObservableModel> WorkersList { get; set; }
 
@@ -27,6 +29,18 @@ namespace ITManagementClient.ViewModels.UserControls
         {
             get => _workerName;
             set { _workerName = value; OnPropertyChanged(nameof(WorkerName)); }
+        }
+
+        private readonly IEnumerable<UserRoles> WorkerNameEnableRoles = new List<UserRoles> { UserRoles.Administrator, UserRoles.HrManager, UserRoles.ResourceManager };
+        private bool _isWorkerNameEnabled;
+        public bool IsWorkerNameEnabled
+        {
+            get => _isWorkerNameEnabled;
+            set
+            {
+                _isWorkerNameEnabled = value;
+                OnPropertyChanged(nameof(IsWorkerNameEnabled));
+            }
         }
 
         private Dictionary<string, UserRoles> _userRoles = new Dictionary<string, UserRoles>()
@@ -58,6 +72,18 @@ namespace ITManagementClient.ViewModels.UserControls
             }
         }
 
+        private readonly IEnumerable<UserRoles> SelectingRolesEnableRoles = new List<UserRoles> { UserRoles.Administrator };
+        private bool _isSelectingRoleEnabled;
+        public bool IsSelectingRoleEnabled
+        {
+            get => _isSelectingRoleEnabled;
+            set
+            {
+                _isSelectingRoleEnabled = value;
+                OnPropertyChanged(nameof(IsSelectingRoleEnabled));
+            }
+        }
+
         private string _workerSalary;
         public string WorkerSalary
         {
@@ -72,11 +98,42 @@ namespace ITManagementClient.ViewModels.UserControls
             }
         }
 
+        private readonly IEnumerable<UserRoles> WorkerSalaryEnableRoles = new List<UserRoles> { UserRoles.Administrator, UserRoles.ResourceManager };
+        private bool _isWorkerSalaryEnabled;
+        public bool IsWorkerSalaryEnabled
+        {
+            get => _isWorkerSalaryEnabled;
+            set
+            {
+                _isWorkerSalaryEnabled = value;
+                OnPropertyChanged(nameof(IsWorkerSalaryEnabled));
+            }
+        }
+
+        private Visibility _salaryVisibility;
+        public Visibility SalaryVisibility
+        {
+            get => _salaryVisibility;
+            set { _salaryVisibility = value; OnPropertyChanged(nameof(SalaryVisibility)); }
+        }
+
         private DateTime _workerBirthDate;
         public DateTime WorkerBirthDate
         {
             get => _workerBirthDate;
             set { _workerBirthDate = value; OnPropertyChanged(nameof(WorkerBirthDate)); }
+        }
+
+        private readonly IEnumerable<UserRoles> WorkerBirthDateEnableRoles = new List<UserRoles> { UserRoles.Administrator, UserRoles.HrManager };
+        private bool _isWorkerBirthDateEnabled;
+        public bool IsWorkerBirthDateEnabled
+        {
+            get => _isWorkerBirthDateEnabled;
+            set
+            {
+                _isWorkerBirthDateEnabled = value;
+                OnPropertyChanged(nameof(IsWorkerBirthDateEnabled));
+            }
         }
 
         private DateTime _workerHireDate;
@@ -93,6 +150,18 @@ namespace ITManagementClient.ViewModels.UserControls
             set { _workerAccountActive = value; OnPropertyChanged(nameof(WorkerAccountActive)); }
         }
 
+        private readonly IEnumerable<UserRoles> WorkerAccountActiveEnableRoles = new List<UserRoles> { UserRoles.Administrator };
+        private bool _isWorkerAccountActiveEnabled;
+        public bool IsWorkerAccountActiveEnabled
+        {
+            get => _isWorkerAccountActiveEnabled;
+            set
+            {
+                _isWorkerAccountActiveEnabled = value;
+                OnPropertyChanged(nameof(IsWorkerAccountActiveEnabled));
+            }
+        }
+
         public IEnumerable<string> EnglishLevelsList { get; set; } = new List<string> { "A1", "A2", "B1", "B2", "C1", "C2" };
 
         private string _workerEnglishLevel;
@@ -102,11 +171,47 @@ namespace ITManagementClient.ViewModels.UserControls
             set { _workerEnglishLevel = value; OnPropertyChanged(nameof(WorkerEnglishLevel)); }
         }
 
+        private readonly IEnumerable<UserRoles> WorkerEnglishLevelEnableRoles = new List<UserRoles> { UserRoles.Administrator, UserRoles.ResourceManager, UserRoles.HrManager };
+        private bool _isWorkerEnglishLevelEnabled;
+        public bool IsWorkerEnglishLevelEnabled
+        {
+            get => _isWorkerEnglishLevelEnabled;
+            set
+            {
+                _isWorkerEnglishLevelEnabled = value;
+                OnPropertyChanged(nameof(IsWorkerEnglishLevelEnabled));
+            }
+        }
+
         private string _workerDepartmentName;
         public string WorkerDepartmentName
         {
             get => _workerDepartmentName;
             set { _workerDepartmentName = value; OnPropertyChanged(nameof(WorkerDepartmentName)); }
+        }
+
+        private readonly IEnumerable<UserRoles> WorkerDepartmentEnableRoles = new List<UserRoles> { UserRoles.ResourceManager };
+        private bool _isWorkerDepartmentEnabled;
+        public bool IsWorkerDepartmentEnabled
+        {
+            get => _isWorkerDepartmentEnabled;
+            set
+            {
+                _isWorkerDepartmentEnabled = value;
+                OnPropertyChanged(nameof(IsWorkerDepartmentEnabled));
+            }
+        }
+
+        private readonly IEnumerable<UserRoles> SaveButtonEnableRoles = new List<UserRoles> { UserRoles.Administrator, UserRoles.ResourceManager, UserRoles.HrManager };
+        private bool _isSaveButtonEnabled;
+        public bool IsSaveButtonEnabled
+        {
+            get => _isSaveButtonEnabled;
+            set
+            {
+                _isSaveButtonEnabled = value;
+                OnPropertyChanged(nameof(IsSaveButtonEnabled));
+            }
         }
 
         private string _login;
@@ -154,6 +259,19 @@ namespace ITManagementClient.ViewModels.UserControls
 
         public void LoadInstance()
         {
+            var currentRole = UserManager.GetCurrentConnectedUser().Role;
+
+            IsSaveButtonEnabled = SaveButtonEnableRoles.Contains(currentRole);
+            IsWorkerSalaryEnabled = WorkerSalaryEnableRoles.Contains(currentRole);
+            IsSelectingRoleEnabled = SelectingRolesEnableRoles.Contains(currentRole);
+            IsWorkerAccountActiveEnabled = WorkerAccountActiveEnableRoles.Contains(currentRole);
+            IsWorkerBirthDateEnabled = WorkerBirthDateEnableRoles.Contains(currentRole);
+            IsWorkerDepartmentEnabled = WorkerDepartmentEnableRoles.Contains(currentRole);
+            IsWorkerEnglishLevelEnabled = WorkerEnglishLevelEnableRoles.Contains(currentRole);
+            IsWorkerNameEnabled = WorkerNameEnableRoles.Contains(currentRole);
+
+            SalaryVisibility = WorkerSalaryEnableRoles.Contains(currentRole) ? Visibility.Visible : Visibility.Hidden;
+
             SearchByParameterCommand.Execute(null);
         }
 

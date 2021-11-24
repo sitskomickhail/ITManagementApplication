@@ -10,6 +10,7 @@ using ITManagementClient.Navigation;
 using ITManagementClient.ViewModels.Administrator;
 using ITManagementClient.ViewModels.Base;
 using ITManagementClient.ViewModels.CredentialControls;
+using ITManagementClient.ViewModels.HrManager;
 using ITManagementClient.ViewModels.Interfaces;
 using MaterialDesignThemes.Wpf;
 
@@ -70,13 +71,8 @@ namespace ITManagementClient.ViewModels
 
             foreach (var viewModel in types)
             {
-                //var viewModelInstance = (IPageViewModel)viewModel.GetConstructor(Type.EmptyTypes)?.Invoke(new object[] { });
-
-                //if (viewModelInstance != null)
-                //{
-                    PageViewModels.Add(viewModel.Name, viewModel);
-                    Mediator.Subscribe(viewModel.Name, ChangeViewModel);
-                //}
+                PageViewModels.Add(viewModel.Name, viewModel);
+                Mediator.Subscribe(viewModel.Name, ChangeViewModel);
             }
 
             Mediator.Subscribe("SnackbarMessageShow", ShowSnackbar);
@@ -132,7 +128,7 @@ namespace ITManagementClient.ViewModels
                         //Mediator.Notify(nameof(AdministratorControlViewModel));
                         break;
                     case UserRoles.HrManager:
-                        //Mediator.Notify(nameof(AdministratorControlViewModel));
+                        Mediator.Notify(nameof(HrManagerControlViewModel), nameof(HrManagerControlViewModel));
                         break;
                     case UserRoles.ResourceManager:
                         //Mediator.Notify(nameof(AdministratorControlViewModel));

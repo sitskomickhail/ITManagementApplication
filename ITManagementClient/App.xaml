@@ -14,7 +14,9 @@
              xmlns:requests="clr-namespace:ITManagementClient.Views.Requests"
              xmlns:requestViewModels="clr-namespace:ITManagementClient.ViewModels.Requests"
              xmlns:departments="clr-namespace:ITManagementClient.Views.Departments"
-             xmlns:departmentViewModels="clr-namespace:ITManagementClient.ViewModels.Departments">
+             xmlns:departmentViewModels="clr-namespace:ITManagementClient.ViewModels.Departments"
+             xmlns:humanResources="clr-namespace:ITManagementClient.Views.HrManagerControls"
+             xmlns:hrViewModels="clr-namespace:ITManagementClient.ViewModels.HrManager">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -48,6 +50,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type departmentViewModels:ManageDepartmentsViewModel}">
                 <departments:ManageDepartmentsControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type hrViewModels:HrManagerControlViewModel}">
+                <humanResources:HrManagerMainControl/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
