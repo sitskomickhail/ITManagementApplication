@@ -16,4 +16,6 @@ public class HandlerCodes {
     public static final int GET_USER_REQUESTS_HISTORY = 13;
     public static final int GET_FULL_REQUEST_INFO = 14;
     public static final int CHANGE_REQUEST_STATUS = 15;
+    public static final int FILTER_REQUESTS_LIST  = 16;
+    public static final int UPDATE_REQUEST = 17;
 }

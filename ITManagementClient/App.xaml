@@ -41,6 +41,9 @@
             <DataTemplate DataType="{x:Type requestViewModels:RequestCreationViewModel}">
                 <requests:RequestCreationControl/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type requestViewModels:RequestsListViewModel}">
+                <requests:RequestsListControl/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

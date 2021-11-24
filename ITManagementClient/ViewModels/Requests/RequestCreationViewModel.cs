@@ -143,8 +143,7 @@ namespace ITManagementClient.ViewModels.Requests
             }
         }
 
-
-        public ObservableCollection<MyRequestObservableModel> MyRequestsList { get; set; }
+        public ObservableCollection<RequestsObservableModel> MyRequestsList { get; set; }
 
         public ICommand CreateVacationRequestCommand { get; set; }
         public ICommand CreateDismissionRequestCommand { get; set; }
@@ -160,9 +159,9 @@ namespace ITManagementClient.ViewModels.Requests
 
         public RequestCreationViewModel()
         {
-            MyRequestsList = new ObservableCollection<MyRequestObservableModel>();
+            MyRequestsList = new ObservableCollection<RequestsObservableModel>();
 
-            MyRequestsList.Add(new MyRequestObservableModel
+            MyRequestsList.Add(new RequestsObservableModel
             {
                 ShowMoreInfoCommand = new RelayCommand(ShowMoreRequestInfoCommandExecute),
                 CancelRequestCommand = new RelayCommand(CancelRequestCommandExecute)
@@ -303,7 +302,7 @@ namespace ITManagementClient.ViewModels.Requests
                     int listCounter = 1;
                     foreach (var worker in actionResult.RequestsList)
                     {
-                        MyRequestsList.Add(new MyRequestObservableModel
+                        MyRequestsList.Add(new RequestsObservableModel
                         {
                             Number = listCounter++,
                             RequestType = worker.RequestType.GetDescription(),

@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace ITManagementClient.Models.Common.ObservableModels
 {
-    public class MyRequestObservableModel
+    public class RequestsObservableModel
     {
         public int Number { get; set; }
 

@@ -35,6 +35,8 @@ public class RequestHandlerProvider implements IRequestHandlerProvider {
         requestHandlers.add(new GetAvailableUserVacationDaysRequestHandler());
         requestHandlers.add(new GetFullRequestInfoRequestHandler());
         requestHandlers.add(new GetUserRequestsHistoryRequestHandler());
+        requestHandlers.add(new FilterRequestsRequestHandler());
+        requestHandlers.add(new UpdateRequestRequestHandler());
     }
 
     public TransferResponseModel Execute(TransferRequestModel requestModel) {

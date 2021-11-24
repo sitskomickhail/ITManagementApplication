@@ -86,6 +86,11 @@
                             <TextBlock Margin="8 0 0 0" Text="Просмотр списка неисправностей" />
                         </StackPanel>
                     </TreeViewItem.Header>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding ShowRequestsListCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </TreeViewItem>
             </TreeViewItem>
             <TreeViewItem Header="УПРАВЛЕНИЕ ДЕПАРТАМЕНТАМИ" IsExpanded="False">

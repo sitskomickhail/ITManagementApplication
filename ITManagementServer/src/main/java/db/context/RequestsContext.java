@@ -105,6 +105,23 @@ public class RequestsContext {
         return requestsList;
     }
 
+    public static ArrayList<Request> FilterRequestsByTypes(List<Integer> typesList) throws IOException, SQLException {
+        var connection = MySqlContext.getInstance().getConnection();
+
+        String sql = "SELECT * FROM Requests WHERE Type = " + typesList.get(0) + " OR Type = " + typesList.get(1);
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        ArrayList<Request> requestsList = new ArrayList<>();
+        while (resultSet.next()) {
+            requestsList.add(fillRequestByResult(resultSet));
+        }
+
+        connection.close();
+        return requestsList;
+    }
+
     private static Request fillRequestByResult(ResultSet resultSet) throws SQLException {
         var request = new Request();
 

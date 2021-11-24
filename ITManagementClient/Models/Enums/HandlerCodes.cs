@@ -18,5 +18,7 @@ namespace ITManagementClient.Models.Enums
         GET_USER_REQUESTS_HISTORY = 13,
         GET_FULL_REQUEST_INFO = 14,
         CHANGE_REQUEST_STATUS = 15,
+        FILTER_REQUESTS_LIST = 16,
+        UPDATE_REQUEST = 17,
     }
 }

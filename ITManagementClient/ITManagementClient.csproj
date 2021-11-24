@@ -88,9 +88,11 @@
     <Compile Include="Handlers\Projects\SearchProjectsActionHandler.cs" />
     <Compile Include="Handlers\Requests\ChangeRequestResolvingStatusActionHandler.cs" />
     <Compile Include="Handlers\Requests\CreateRequestActionHandler.cs" />
+    <Compile Include="Handlers\Requests\FilterRequestsListActionHandler.cs" />
     <Compile Include="Handlers\Requests\GetAvailableUserVacationDaysActionHandler.cs" />
     <Compile Include="Handlers\Requests\GetFullRequestInfoActionHandler.cs" />
     <Compile Include="Handlers\Requests\GetUserRequestsHistoryActionHandler.cs" />
+    <Compile Include="Handlers\Requests\UpdateRequestActionHandler.cs" />
     <Compile Include="Handlers\Workers\CreateNewWorkerActionHandler.cs" />
     <Compile Include="Handlers\Workers\GetWorkerByIdActionHandler.cs" />
     <Compile Include="Handlers\Workers\GetWorkersListActionHandler.cs" />
@@ -102,7 +104,7 @@
     <Compile Include="Managers\TcpHandlerManager.cs" />
     <Compile Include="Managers\ConnectedUserManager.cs" />
     <Compile Include="Models\Common\ConnectedUserModel.cs" />
-    <Compile Include="Models\Common\ObservableModels\MyRequestObservableModel.cs" />
+    <Compile Include="Models\Common\ObservableModels\RequestsObservableModel.cs" />
     <Compile Include="Models\Common\ObservableModels\ProjectObservableModel.cs" />
     <Compile Include="Models\Common\ObservableModels\ProjectWorkerObservableModel.cs" />
     <Compile Include="Models\Common\ObservableModels\WorkerObservableModel.cs" />
@@ -117,9 +119,11 @@
     <Compile Include="Models\RequestModels\Projects\SearchProjectsRequestModel.cs" />
     <Compile Include="Models\RequestModels\Requests\ChangeRequestResolvingStatusRequestModel.cs" />
     <Compile Include="Models\RequestModels\Requests\CreateRequestRequestModel.cs" />
+    <Compile Include="Models\RequestModels\Requests\FilterRequestsListRequestModel.cs" />
     <Compile Include="Models\RequestModels\Requests\GetRequestFullInfoRequestModel.cs" />
     <Compile Include="Models\RequestModels\Requests\GetUserRequestsHistoryRequestModel.cs" />
     <Compile Include="Models\RequestModels\Requests\GetVacationAvailableDaysRequestModel.cs" />
+    <Compile Include="Models\RequestModels\Requests\UpdateRequestRequestModel.cs" />
     <Compile Include="Models\RequestModels\Workers\CreateNewWorkerRequestModel.cs" />
     <Compile Include="Models\RequestModels\Workers\GetWorkerByIdRequestModel.cs" />
     <Compile Include="Models\RequestModels\Workers\GetWorkerListRequestModel.cs" />
@@ -133,10 +137,12 @@
     <Compile Include="Models\ResponseModels\Projects\SearchProjectResponseModel.cs" />
     <Compile Include="Models\ResponseModels\Requests\ChangeRequestResolvingStatusResponseModel.cs" />
     <Compile Include="Models\ResponseModels\Requests\CreateRequestResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\Requests\FilterRequestsListResponseModel.cs" />
     <Compile Include="Models\ResponseModels\Requests\GetRequestFullInfoResponseModel.cs" />
     <Compile Include="Models\ResponseModels\Requests\GetUserRequestsHistoryResponseModel.cs" />
     <Compile Include="Models\ResponseModels\Requests\GetVacationAvailableDaysResponseModel.cs" />
     <Compile Include="Models\ResponseModels\Requests\MyRequestHistoryModel.cs" />
+    <Compile Include="Models\ResponseModels\Requests\UpdateRequestResponseModel.cs" />
     <Compile Include="Models\ResponseModels\Workers\CreateNewWorkerResponseModel.cs" />
     <Compile Include="Models\ResponseModels\Workers\WorkerGridResponseModel.cs" />
     <Compile Include="Models\ResponseModels\Workers\GetWorkerByIdResponseModel.cs" />
@@ -160,7 +166,7 @@
     <Compile Include="ViewModels\CredentialControls\LoginControlViewModel.cs" />
     <Compile Include="ViewModels\CredentialControls\RegisterControlViewModel.cs" />
     <Compile Include="ViewModels\Projects\ProjectsListViewModel.cs" />
-    <Compile Include="ViewModels\Requests\MalfunctionRequestsListViewModel.cs" />
+    <Compile Include="ViewModels\Requests\RequestsListViewModel.cs" />
     <Compile Include="ViewModels\Requests\RequestCreationViewModel.cs" />
     <Compile Include="ViewModels\UserControls\WorkerCreateViewModel.cs" />
     <Compile Include="ViewModels\UserControls\WorkersListViewModel.cs" />
@@ -178,6 +184,9 @@
     </Compile>
     <Compile Include="Views\Requests\RequestCreationControl.xaml.cs">
       <DependentUpon>RequestCreationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Requests\RequestsListControl.xaml.cs">
+      <DependentUpon>RequestsListControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\WorkerCreateControl.xaml.cs">
       <DependentUpon>WorkerCreateControl.xaml</DependentUpon>
@@ -230,6 +239,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Requests\RequestCreationControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Requests\RequestsListControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
