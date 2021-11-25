@@ -49,6 +49,7 @@ public class RequestHandlerProvider implements IRequestHandlerProvider {
         requestHandlers.add(new GetListOfAvailableDevelopersRequestHandler());
         requestHandlers.add(new RemoveProjectWorkerRequestHandler());
         requestHandlers.add(new UpdateWorkerCostRequestHandler());
+        requestHandlers.add(new CreateProjectRequestHandler());
     }
 
     public TransferResponseModel Execute(TransferRequestModel requestModel) {

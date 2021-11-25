@@ -32,9 +32,6 @@
                            FontSize="16">IT-management app</Label>
                     <Menu IsMainMenu="True" HorizontalAlignment="Right">
                         <MenuItem Icon="{materialDesign:PackIcon Kind=DotsVertical}" Width="50" Background="Transparent">
-                            <MenuItem Header="My Profile" Icon="{materialDesign:PackIcon Kind=AccountOutline}"
-                                      Command="{Binding ShowUserInfoCommand}"
-                                      Visibility="{Binding WorkerNavElementsVisibility, UpdateSourceTrigger=PropertyChanged}"></MenuItem>
                             <MenuItem Header="Logout" Icon="{materialDesign:PackIcon Kind=Logout}"
                                       Command="{Binding LogoutUserCommand}"
                                       Visibility="{Binding WorkerNavElementsVisibility, UpdateSourceTrigger=PropertyChanged}"/>

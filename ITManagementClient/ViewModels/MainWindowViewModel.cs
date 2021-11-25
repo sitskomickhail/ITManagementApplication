@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using ITManagementClient.Handlers.Base;
+using ITManagementClient.Handlers.Connectors;
 using ITManagementClient.Infrastructure;
 using ITManagementClient.Managers;
 using ITManagementClient.Models.Enums;
+using ITManagementClient.Models.RequestModels.Connectors;
+using ITManagementClient.Models.ResponseModels.Connectors;
 using ITManagementClient.Navigation;
 using ITManagementClient.ViewModels.Administrator;
 using ITManagementClient.ViewModels.Base;
@@ -62,6 +66,8 @@ namespace ITManagementClient.ViewModels
 
         public ICommand ShowUserInfoCommand { get; set; }
 
+        public BaseActionHandler<CloseConnectionRequestModel, CloseConnectionResponseModel> CloseConnectionActionHandler { get; set; }
+
         public MainWindowViewModel()
         {
             MessageQueue = new SnackbarMessageQueue(new TimeSpan(0, 0, 0, 3));
@@ -88,6 +94,8 @@ namespace ITManagementClient.ViewModels
             CloseApplicationCommand = new RelayCommand(ShutdownApplication);
             LogoutUserCommand = new RelayCommand(LogoutUserCommandExecute);
             ShowUserInfoCommand = new RelayCommand(ShowUserInfoCommandExecute);
+
+            CloseConnectionActionHandler = new CloseConnectionActionHandler();
 
             ChangeViewModel(nameof(LoginControlViewModel));
         }
@@ -149,7 +157,16 @@ namespace ITManagementClient.ViewModels
 
         private void ShutdownApplication(object obj)
         {
-            Application.Current.Shutdown();
+            try
+            {
+                CloseConnectionActionHandler.ExecuteHandler(new CloseConnectionRequestModel());
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    Application.Current.Shutdown();
+                });
+            }
+            catch { /**/ }
         }
 
         private void LogoutUserCommandExecute(object obj)

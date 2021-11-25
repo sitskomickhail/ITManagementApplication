@@ -8,6 +8,7 @@ import models.entities.Project;
 
 import javax.xml.transform.Result;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -76,6 +77,25 @@ public class ProjectsContext {
         }
 
         return project;
+    }
+
+    public static void CreateProject(String title, String description, String technologiesStack, Date startDate) throws SQLException, IOException {
+        var connection = MySqlContext.getInstance().getConnection();
+
+        String sql = "INSERT INTO Projects " +
+                "(`Title`, `Description`, `TechnologiesStack`, `StartDate`, `Active`) " +
+                "VALUES (?, ?, ?, ?, ?);";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+        preparedStatement.setString(1, title);
+        preparedStatement.setString(2, description);
+        preparedStatement.setString(3, technologiesStack);
+        preparedStatement.setDate(4, startDate);
+        preparedStatement.setBoolean(5, true);
+
+        preparedStatement.executeUpdate();
+        connection.close();
     }
 
     public static void UpdateProject(Project project) throws IOException, SQLException {

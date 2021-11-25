@@ -57,7 +57,7 @@
                     <TreeViewItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Viewbox Width="16" Height="16">
-                                <materialDesign:PackIcon Kind="FileDocumentMultiple" Width="24" Height="24"/>
+                                <materialDesign:PackIcon Kind="ApplicationBrackets" Width="24" Height="24"/>
                             </Viewbox>
                             <TextBlock Margin="8 0 0 0" Text="Список проектов" />
                         </StackPanel>
@@ -72,7 +72,7 @@
                     <TreeViewItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Viewbox Width="16" Height="16">
-                                <materialDesign:PackIcon Kind="FileDocumentMultiple" Width="24" Height="24"/>
+                                <materialDesign:PackIcon Kind="ApplicationImport" Width="24" Height="24"/>
                             </Viewbox>
                             <TextBlock Margin="8 0 0 0" Text="Добавление проекта" />
                         </StackPanel>

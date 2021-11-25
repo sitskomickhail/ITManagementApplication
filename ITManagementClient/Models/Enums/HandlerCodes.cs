@@ -30,6 +30,7 @@ namespace ITManagementClient.Models.Enums
         REMOVE_WORKER_FROM_PROJECT = 25,
         ADD_WORKER_TO_PROJECT = 26,
         UPDATE_WORKER_PROJECT_COST = 27,
-        GET_LIST_OF_AVAILABLE_DEVELOPERS = 28
+        GET_LIST_OF_AVAILABLE_DEVELOPERS = 28,
+        CREATE_PROJECT = 29
     }
 }

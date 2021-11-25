@@ -29,4 +29,5 @@ public class HandlerCodes {
     public static final int ADD_WORKER_TO_PROJECT = 26;
     public static final int UPDATE_WORKER_PROJECT_COST = 27;
     public static final int GET_LIST_OF_AVAILABLE_DEVELOPERS = 28;
+    public static final int CREATE_PROJECT = 29;
 }

@@ -46,6 +46,9 @@
             <DataTemplate DataType="{x:Type projectViewModels:ProjectsListViewModel}">
                 <projects:ProjectsListControl/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type projectViewModels:ProjectCreationViewModel}">
+                <projects:ProjectCreationControl/>
+            </DataTemplate>
             <DataTemplate DataType="{x:Type requestViewModels:RequestCreationViewModel}">
                 <requests:RequestCreationControl/>
             </DataTemplate>

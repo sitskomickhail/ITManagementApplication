@@ -83,12 +83,14 @@
     </Compile>
     <Compile Include="Exceptions\HandlerExecutionException.cs" />
     <Compile Include="Handlers\Base\BaseActionHandler.cs" />
+    <Compile Include="Handlers\Connectors\CloseConnectionActionHandler.cs" />
     <Compile Include="Handlers\Connectors\StartConnectionActionHandler.cs" />
     <Compile Include="Handlers\Departments\CreateDepartmentActionHandler.cs" />
     <Compile Include="Handlers\Departments\GetDepartmentsListActionHandler.cs" />
     <Compile Include="Handlers\Departments\GetFullDepartmentInfoActionHandler.cs" />
     <Compile Include="Handlers\Departments\RemoveDepartmentActionHandler.cs" />
     <Compile Include="Handlers\Departments\UpdateDepartmentActionHandler.cs" />
+    <Compile Include="Handlers\Projects\CreateProjectActionHandler.cs" />
     <Compile Include="Handlers\Projects\GetDeveloperProjectsActionHandler.cs" />
     <Compile Include="Handlers\Projects\GetProjectByIdActionHandler.cs" />
     <Compile Include="Handlers\Projects\SearchProjectsActionHandler.cs" />
@@ -127,12 +129,14 @@
     <Compile Include="Models\Enums\RequestStatus.cs" />
     <Compile Include="Models\Enums\RequestType.cs" />
     <Compile Include="Models\Enums\UserRoles.cs" />
+    <Compile Include="Models\RequestModels\Connectors\CloseConnectionRequestModel.cs" />
     <Compile Include="Models\RequestModels\Connectors\StartConnectionRequestModel.cs" />
     <Compile Include="Models\RequestModels\Departments\CreateDepartmentsRequestModel.cs" />
     <Compile Include="Models\RequestModels\Departments\DeleteDepartmentRequestModel.cs" />
     <Compile Include="Models\RequestModels\Departments\GetDepartmentsListRequestModel.cs" />
     <Compile Include="Models\RequestModels\Departments\GetFullDepartmentInfoRequestModel.cs" />
     <Compile Include="Models\RequestModels\Departments\UpdateDepartmentRequestModel.cs" />
+    <Compile Include="Models\RequestModels\Projects\CreateProjectRequestModel.cs" />
     <Compile Include="Models\RequestModels\Projects\GetProjectByIdRequestModel.cs" />
     <Compile Include="Models\RequestModels\Projects\GetDeveloperProjectsRequestModel.cs" />
     <Compile Include="Models\RequestModels\Projects\SearchProjectsRequestModel.cs" />
@@ -154,6 +158,7 @@
     <Compile Include="Models\RequestModels\Workers\LoginRequestModel.cs" />
     <Compile Include="Models\RequestModels\Workers\RegisterRequestModel.cs" />
     <Compile Include="Models\RequestModels\Workers\UpdateWorkerRequestModel.cs" />
+    <Compile Include="Models\ResponseModels\Connectors\CloseConnectionResponseModel.cs" />
     <Compile Include="Models\ResponseModels\Connectors\StartConnectionResponseModel.cs" />
     <Compile Include="Models\ResponseModels\Departments\CreateDepartmentsResponseModel.cs" />
     <Compile Include="Models\ResponseModels\Departments\DeleteDepartmentResponseModel.cs" />
@@ -161,6 +166,7 @@
     <Compile Include="Models\ResponseModels\Departments\GetDepartmentsListResponseModel.cs" />
     <Compile Include="Models\ResponseModels\Departments\GetFullDepartmentInfoResponseModel.cs" />
     <Compile Include="Models\ResponseModels\Departments\UpdateDepartmentResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\Projects\CreateProjectResponseModel.cs" />
     <Compile Include="Models\ResponseModels\Projects\GetProjectByIdResponseModel.cs" />
     <Compile Include="Models\ResponseModels\Projects\ProjectGridResponseModel.cs" />
     <Compile Include="Models\ResponseModels\Projects\ProjectWorkerResponseModel.cs" />
@@ -204,6 +210,7 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\CredentialControls\LoginControlViewModel.cs" />
     <Compile Include="ViewModels\CredentialControls\RegisterControlViewModel.cs" />
+    <Compile Include="ViewModels\Projects\ProjectCreationViewModel.cs" />
     <Compile Include="ViewModels\Projects\ProjectsListViewModel.cs" />
     <Compile Include="ViewModels\Requests\RequestsListViewModel.cs" />
     <Compile Include="ViewModels\Requests\RequestCreationViewModel.cs" />
@@ -231,6 +238,9 @@
     </Compile>
     <Compile Include="Views\HrManagerControls\HrManagerMainControl.xaml.cs">
       <DependentUpon>HrManagerMainControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Projects\ProjectCreationControl.xaml.cs">
+      <DependentUpon>ProjectCreationControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Projects\ProjectsListControl.xaml.cs">
       <DependentUpon>ProjectsListControl.xaml</DependentUpon>
@@ -306,6 +316,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CredentialControls\RegisterControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Projects\ProjectCreationControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

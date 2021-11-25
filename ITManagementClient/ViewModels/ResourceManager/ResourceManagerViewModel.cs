@@ -7,6 +7,7 @@ using ITManagementClient.Models.Enums;
 using ITManagementClient.Navigation;
 using ITManagementClient.ViewModels.Base;
 using ITManagementClient.ViewModels.Interfaces;
+using ITManagementClient.ViewModels.Projects;
 using ITManagementClient.ViewModels.Requests;
 using ITManagementClient.ViewModels.UserControls;
 
@@ -89,7 +90,7 @@ namespace ITManagementClient.ViewModels.ResourceManager
 
         private void ProjectCreationCommandExecute(object obj)
         {
-            //Mediator.Notify(nameof(ResourceProjectsListViewModel), nameof(ResourceProjectsListViewModel));
+            Mediator.Notify(nameof(ProjectCreationViewModel), nameof(ProjectCreationViewModel));
         }
     }
 }
