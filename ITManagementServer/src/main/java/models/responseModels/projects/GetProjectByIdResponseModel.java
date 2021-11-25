@@ -1,14 +1,14 @@
 package models.responseModels.projects;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 public class GetProjectByIdResponseModel {
-    private String Title ;
-
+    private String Title;
     private String Description;
-
     private String TechnologiesStack;
-
+    private Date StartDate;
+    private boolean IsActive;
     private ArrayList<ProjectWorkerResponseModel> Workers;
 
     public GetProjectByIdResponseModel() {
@@ -37,6 +37,22 @@ public class GetProjectByIdResponseModel {
 
     public void setTechnologiesStack(String technologiesStack) {
         TechnologiesStack = technologiesStack;
+    }
+
+    public Date getStartDate() {
+        return StartDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        StartDate = startDate;
+    }
+
+    public boolean isActive() {
+        return IsActive;
+    }
+
+    public void setActive(boolean active) {
+        IsActive = active;
     }
 
     public ArrayList<ProjectWorkerResponseModel> getWorkers() {

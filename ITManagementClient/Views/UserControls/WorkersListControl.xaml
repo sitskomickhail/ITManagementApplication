@@ -30,27 +30,35 @@
 
                     <StackPanel Orientation="Vertical" Margin="10">
                         <Label FontSize="16">Имя работника</Label>
-                        <TextBox FontSize="16" Text="{Binding WorkerName, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox FontSize="16"
+                                 IsEnabled="{Binding IsWorkerNameEnabled, UpdateSourceTrigger=PropertyChanged}"
+                                 Text="{Binding WorkerName, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical" Margin="10">
                         <Label FontSize="16">Роль</Label>
                         <ComboBox FontSize="16" 
                                   ItemsSource="{Binding RolesList,  UpdateSourceTrigger=PropertyChanged}" 
+                                  IsEnabled="{Binding IsSelectingRoleEnabled, UpdateSourceTrigger=PropertyChanged}"
                                   SelectedItem="{Binding SelectedRole, UpdateSourceTrigger=PropertyChanged}" 
                                   materialDesign:HintAssist.Hint="Выберите роль">
                         </ComboBox>
                     </StackPanel>
 
                     <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical" Margin="10">
-                        <Label FontSize="16">Заработная плата</Label>
-                        <TextBox FontSize="16" Text="{Binding WorkerSalary, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label FontSize="16"
+                               Visibility="{Binding SalaryVisibility, UpdateSourceTrigger=PropertyChanged}">Заработная плата</Label>
+                        <TextBox FontSize="16" 
+                                 Visibility="{Binding SalaryVisibility, UpdateSourceTrigger=PropertyChanged}"
+                                 IsEnabled="{Binding IsWorkerSalaryEnabled, UpdateSourceTrigger=PropertyChanged}"
+                                 Text="{Binding WorkerSalary, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical" Margin="10">
                         <Label FontSize="16">Дата рождения</Label>
                         <DatePicker FontSize="14"
                             materialDesign:HintAssist.Hint="Выберите дату"
+                            IsEnabled="{Binding IsWorkerBirthDateEnabled, UpdateSourceTrigger=PropertyChanged}"
                             SelectedDate="{Binding WorkerBirthDate, UpdateSourceTrigger=PropertyChanged}"
                             Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                     </StackPanel>
@@ -70,6 +78,7 @@
                             <ToggleButton
                                 Style="{StaticResource MaterialDesignSwitchDarkToggleButton}"
                                 ToolTip="MaterialDesignSwitchDarkToggleButton"
+                                IsEnabled="{Binding IsWorkerAccountActiveEnabled, UpdateSourceTrigger=PropertyChanged}"
                                 IsChecked="{Binding WorkerAccountActive, UpdateSourceTrigger=PropertyChanged}" />
                             <Label FontSize="14">Да</Label>
                         </StackPanel>
@@ -80,13 +89,18 @@
                         <ComboBox FontSize="16" 
                                   ItemsSource="{Binding EnglishLevelsList, UpdateSourceTrigger=PropertyChanged}"
                                   SelectedItem="{Binding WorkerEnglishLevel, UpdateSourceTrigger=PropertyChanged}"
+                                  IsEnabled="{Binding IsWorkerEnglishLevelEnabled, UpdateSourceTrigger=PropertyChanged}"
                                   materialDesign:HintAssist.Hint="Выберите уровень английского языка">
                         </ComboBox>
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Vertical" Margin="10">
                         <Label FontSize="16">Департамент (отдел)</Label>
-                        <TextBox FontSize="16" IsEnabled="False" Text="{Binding WorkerDepartmentName, UpdateSourceTrigger=PropertyChanged}"/>
+                        <ComboBox FontSize="16" 
+                                  ItemsSource="{Binding DepartmentsList, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedItem="{Binding WorkerDepartmentName, UpdateSourceTrigger=PropertyChanged}"
+                                  IsEnabled="{Binding IsWorkerDepartmentEnabled, UpdateSourceTrigger=PropertyChanged}"
+                                  materialDesign:HintAssist.Hint="Выберите отдел работы сотрудника"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="0" Grid.Row="4" Orientation="Vertical" Margin="10">
@@ -98,6 +112,7 @@
                             Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                             Style="{DynamicResource  MaterialDesignPaperButton}"
                             Padding="10"
+                            IsEnabled="{Binding IsSaveButtonEnabled, UpdateSourceTrigger=PropertyChanged}"
                             Margin="4"
                             FontSize="16"
                             VerticalAlignment="Center"
@@ -178,7 +193,8 @@
                                         Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Label Content="{Binding Salary, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                <Label Content="{Binding Salary, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                       Visibility="{Binding SalaryColumnVisibility, UpdateSourceTrigger=PropertyChanged}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

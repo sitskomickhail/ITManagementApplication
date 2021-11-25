@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Windows;
 using System.Windows.Input;
 
 namespace ITManagementClient.Models.Common.ObservableModels
@@ -12,5 +12,6 @@ namespace ITManagementClient.Models.Common.ObservableModels
         public string Department { get; set; }
         public decimal Salary { get; set; }
         public string HireDate { get; set; }
+        public Visibility SalaryColumnVisibility { get; set; }
     }
 }

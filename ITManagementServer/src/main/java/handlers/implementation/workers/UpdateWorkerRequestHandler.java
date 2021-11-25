@@ -34,6 +34,7 @@ public class UpdateWorkerRequestHandler extends BaseRequestHandler<UpdateWorkerR
         worker.setActive(model.isActive());
         worker.setEnglishLevel(model.getEnglishLevel());
         worker.setLogin(model.getLogin());
+        worker.setDepartmentId(model.getDepartmentId());
 
         WorkerContext.UpdateWorkerEntity(worker);
 

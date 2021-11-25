@@ -1,0 +1,435 @@
+﻿<UserControl x:Class="ITManagementClient.Views.ResourceManagerControls.ResourceProjectsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ITManagementClient.Views.ResourceManagerControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="900">
+    <DockPanel>
+        <materialDesign:DialogHost>
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel
+                    Margin="16">
+                    <TextBlock
+                        Text="Введите стоимость работы сотрудника" />
+                    <TextBox
+                        Margin="0 8 0 0"
+                        HorizontalAlignment="Stretch"
+                        Text="{Binding UpdatingWorkerCost, UpdateSourceTrigger=PropertyChanged}" />
+                    <StackPanel
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                        <Button
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            IsDefault="True"
+                            Margin="0 8 8 0"
+                            Content="ОБНОВИТЬ"
+                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                            <Button.CommandParameter>
+                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                    True
+                                </system:Boolean>
+                            </Button.CommandParameter>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding UpdateWorkerCostCommand}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="MouseLeftButtonDown">
+                                    <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            IsCancel="True"
+                            Margin="0 8 8 0"
+                            Content="ОТМЕНИТЬ"
+                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                            <Button.CommandParameter>
+                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                    False
+                                </system:Boolean>
+                            </Button.CommandParameter>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+
+            <materialDesign:DrawerHost x:Name="DrawerHost"
+                                       BottomDrawerCornerRadius="20 20 0 0"
+                                       BottomDrawerBackground="#423f3e">
+     
+                <materialDesign:DrawerHost.TopDrawerContent>
+                    <Grid Height="250" >
+
+                        <DataGrid Grid.Row="5" 
+                              ItemsSource="{Binding AppendingWorkersList}"
+                              CanUserAddRows="False"
+                              AutoGenerateColumns="False" 
+                              HeadersVisibility="All">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="#" Width="0.3*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding Number, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Имя работника"
+                                            Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Отдел"
+                                            Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding Department, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Зарплата"
+                                            Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding Salary, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn CanUserResize="False" Width="0.8*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button Style="{DynamicResource  MaterialDesignPaperButton}"
+                                                        Background="#213d25"
+                                                   Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                                    VerticalAlignment="Center"
+                                                    MinHeight="40"
+                                                    Content="Добавить работника">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="Click">
+                                                            <i:InvokeCommandAction Command="{Binding AddWorkerToProjectCommand }"
+                                                                               CommandParameter="{Binding WorkerId}"/>
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </materialDesign:DrawerHost.TopDrawerContent>
+
+                <materialDesign:DrawerHost.BottomDrawerContent>
+                    <Grid Height="700" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.12*"></RowDefinition>
+                            <RowDefinition Height="0.12*"></RowDefinition>
+                            <RowDefinition Height="0.12*"></RowDefinition>
+                            <RowDefinition Height="0.16*"></RowDefinition>
+                            <RowDefinition Height="0.08*"></RowDefinition>
+                            <RowDefinition Height="0.5*"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Orientation="Vertical" Margin="10">
+                            <Label FontSize="16">Название проекта</Label>
+                            <TextBox FontSize="16" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged }"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10">
+                            <Label FontSize="16">Описание работ</Label>
+                            <TextBox FontSize="16" Text="{Binding ProjectDescription, UpdateSourceTrigger=PropertyChanged }"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2" Orientation="Vertical" Margin="10">
+                            <Label FontSize="16">Технологический стек</Label>
+                            <TextBox FontSize="16" 
+                                 AcceptsTab="True"
+                                 Height="50"
+                                 Text="{Binding TechnologiesStack, UpdateSourceTrigger=PropertyChanged }"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="3" Orientation="Vertical" Margin="10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.5*"/>
+                                    <ColumnDefinition Width="0.5*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Orientation="Vertical">
+                                    <Label FontSize="16">Дата начала работ</Label>
+                                    <DatePicker FontSize="14"
+                                    SelectedDate="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}"
+                                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Orientation="Vertical">
+                                    <Label FontSize="16">Проект активен</Label>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                                        <Label FontSize="14">Нет</Label>
+                                        <ToggleButton
+                                        Style="{StaticResource MaterialDesignSwitchDarkToggleButton}"
+                                        ToolTip="MaterialDesignSwitchDarkToggleButton"
+                                        IsChecked="{Binding IsActive, UpdateSourceTrigger=PropertyChanged}" />
+                                        <Label FontSize="14">Да</Label>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+
+                        <Button Grid.Row="4"
+                            Style="{DynamicResource  MaterialDesignPaperButton}"
+                            Padding="10"
+                            Background="#6e542d"
+                            Margin="0, 10"
+                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                            FontSize="14"
+                            VerticalAlignment="Center"
+                            MinHeight="40"
+                            Content="Обновить проект">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding UpdateProjectCommand }"
+                                                       CommandParameter="{Binding EditingProjectId}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+
+                        <DataGrid Grid.Row="5" 
+                              ItemsSource="{Binding ProjectWorkersList}"
+                              CanUserAddRows="False"
+                              AutoGenerateColumns="False" 
+                              HeadersVisibility="All">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="#" Width="0.3*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding Position, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Имя работника"
+                                            Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Отдел"
+                                            Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding Department, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Стоимость работ"
+                                            Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding Cost, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn CanUserResize="False">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border BorderBrush="Brown"
+                                        Background="Black"
+                                        BorderThickness="1"
+                                        CornerRadius="4">
+                                                    <Button Background="Transparent"
+                                                Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                                CommandParameter="{x:Static Dock.Bottom}"
+                                            BorderBrush="Transparent">
+                                                        <StackPanel HorizontalAlignment="Center"
+                                                    CanHorizontallyScroll="False"
+                                                    Orientation="Horizontal">
+                                                            <Label FontWeight="Bold"
+                                                   FontSize="10">Убрать работника</Label>
+                                                        </StackPanel>
+                                                        <i:Interaction.Triggers>
+                                                            <i:EventTrigger EventName="Click">
+                                                                <i:InvokeCommandAction Command="{Binding RemoveWorkerFromProjectCommand}"
+                                                                           CommandParameter="{Binding WorkerId}"/>
+                                                            </i:EventTrigger>
+                                                        </i:Interaction.Triggers>
+                                                    </Button>
+                                                </Border>
+                                                <Border BorderBrush="Yellow"
+                                                    Background="Black"
+                                                    BorderThickness="1"
+                                                    CornerRadius="4">
+                                                    <Button Background="Transparent"
+                                                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                                        BorderBrush="Transparent">
+                                                        <StackPanel HorizontalAlignment="Center"
+                                                                CanHorizontallyScroll="False"
+                                                                Orientation="Horizontal">
+                                                            <Label FontWeight="Bold"
+                                                               FontSize="10">Изменить</Label>
+                                                        </StackPanel>
+                                                        <i:Interaction.Triggers>
+                                                            <i:EventTrigger EventName="Click">
+                                                                <i:InvokeCommandAction Command="{Binding GetWorkerCostOnProjectCommand}"
+                                                                CommandParameter="{Binding WorkerId}"/>
+                                                            </i:EventTrigger>
+                                                        </i:Interaction.Triggers>
+                                                    </Button>
+                                                </Border>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </materialDesign:DrawerHost.BottomDrawerContent>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.08*"></RowDefinition>
+                        <RowDefinition Height="0.92*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Border BorderBrush="{DynamicResource PrimaryHueMidBrush}" 
+                        BorderThickness="2" 
+                        CornerRadius="5"
+                        Padding="5, 0, 0, 20">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                                <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBox
+                                FontSize="16"
+                                materialDesign:HintAssist.Hint="Поиск"
+                                materialDesign:HintAssist.HelperText="Введите значение, чтобы произвести поиск по нескольким полям">
+                                <TextBox.Text>
+                                    <Binding
+                                        Path="SearchParameter"
+                                        UpdateSourceTrigger="PropertyChanged">
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Button Grid.Column="1"
+                                    Margin="5, 5, 5, 0"
+                                    Command="{Binding SearchByParameterCommand}">Поиск</Button>
+                        </Grid>
+                    </Border>
+                    <DataGrid Grid.Row="1" ItemsSource="{Binding ProjectsList}"
+                          CanUserAddRows="False"
+                          Margin="0, 30, 0, 0"
+                          AutoGenerateColumns="False" 
+                          HeadersVisibility="All">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="#"
+                                        Width="0.25*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding Number, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Название проекта"
+                                        Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Стек работ"
+                                        Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding TechnologiesStack, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Начало работы"
+                                        Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding StartDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Активен"
+                                        Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding Active, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn CanUserResize="False">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Border BorderBrush="Brown"
+                                        Background="Black"
+                                        BorderThickness="1"
+                                        CornerRadius="4">
+                                                <Button Background="Transparent"
+                                                Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                                                CommandParameter="{x:Static Dock.Bottom}"
+                                            BorderBrush="Transparent">
+                                                    <StackPanel HorizontalAlignment="Center"
+                                                    CanHorizontallyScroll="False"
+                                                    Orientation="Horizontal">
+                                                        <Label FontWeight="Bold"
+                                                   FontSize="10">Подробнее...</Label>
+                                                    </StackPanel>
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="Click">
+                                                            <i:InvokeCommandAction Command="{Binding ShowProjectDetailsCommand}"
+                                                                           CommandParameter="{Binding ProjectId}"/>
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Button>
+                                            </Border>
+                                            <Border BorderBrush="{DynamicResource MaterialDesignLightBackground}"
+                                                Background="Black"
+                                                BorderThickness="1"
+                                                Margin="1, 0"
+                                                CornerRadius="4">
+                                                <Button Background="Transparent"
+                                                    Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                                                    CommandParameter="{x:Static Dock.Top}"
+                                                    BorderBrush="Transparent">
+                                                    <StackPanel HorizontalAlignment="Center"
+                                                            CanHorizontallyScroll="False"
+                                                            Orientation="Horizontal">
+                                                        <Label FontWeight="Bold"
+                                                           FontSize="10">Назначить работника</Label>
+                                                    </StackPanel>
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="Click">
+                                                            <i:InvokeCommandAction Command="{Binding ShowExistingDevelopers}"
+                                                                               CommandParameter="{Binding ProjectId}"/>
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Button>
+                                            </Border>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </materialDesign:DrawerHost>
+        </materialDesign:DialogHost>
+    </DockPanel>
+</UserControl>

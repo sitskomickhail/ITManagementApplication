@@ -11,5 +11,6 @@ namespace ITManagementClient.Models.Common.ObservableModels
         public string TechnologiesStack { get; set; }
         public string StartDate { get; set; }
         public string Active { get; set; }
+        public ICommand ShowExistingDevelopers { get; set; }
     }
 }

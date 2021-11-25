@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ITManagementClient.Models.ResponseModels.Projects
 {
@@ -9,6 +10,10 @@ namespace ITManagementClient.Models.ResponseModels.Projects
         public string Description { get; set; }
 
         public string TechnologiesStack { get; set; }
+
+        public DateTime StartDate { get; set; }
+
+        public bool IsActive { get; set; }
 
         public List<ProjectWorkerResponseModel> Workers { get; set; }
     }

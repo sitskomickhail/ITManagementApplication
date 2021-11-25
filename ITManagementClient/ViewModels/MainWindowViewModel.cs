@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using ITManagementClient.Handlers.Base;
+using ITManagementClient.Handlers.Connectors;
 using ITManagementClient.Infrastructure;
 using ITManagementClient.Managers;
 using ITManagementClient.Models.Enums;
+using ITManagementClient.Models.RequestModels.Connectors;
+using ITManagementClient.Models.ResponseModels.Connectors;
 using ITManagementClient.Navigation;
 using ITManagementClient.ViewModels.Administrator;
 using ITManagementClient.ViewModels.Base;
 using ITManagementClient.ViewModels.CredentialControls;
+using ITManagementClient.ViewModels.Developer;
+using ITManagementClient.ViewModels.HrManager;
 using ITManagementClient.ViewModels.Interfaces;
+using ITManagementClient.ViewModels.ResourceManager;
 using MaterialDesignThemes.Wpf;
 
 namespace ITManagementClient.ViewModels
@@ -59,6 +66,8 @@ namespace ITManagementClient.ViewModels
 
         public ICommand ShowUserInfoCommand { get; set; }
 
+        public BaseActionHandler<CloseConnectionRequestModel, CloseConnectionResponseModel> CloseConnectionActionHandler { get; set; }
+
         public MainWindowViewModel()
         {
             MessageQueue = new SnackbarMessageQueue(new TimeSpan(0, 0, 0, 3));
@@ -70,13 +79,8 @@ namespace ITManagementClient.ViewModels
 
             foreach (var viewModel in types)
             {
-                //var viewModelInstance = (IPageViewModel)viewModel.GetConstructor(Type.EmptyTypes)?.Invoke(new object[] { });
-
-                //if (viewModelInstance != null)
-                //{
-                    PageViewModels.Add(viewModel.Name, viewModel);
-                    Mediator.Subscribe(viewModel.Name, ChangeViewModel);
-                //}
+                PageViewModels.Add(viewModel.Name, viewModel);
+                Mediator.Subscribe(viewModel.Name, ChangeViewModel);
             }
 
             Mediator.Subscribe("SnackbarMessageShow", ShowSnackbar);
@@ -90,6 +94,8 @@ namespace ITManagementClient.ViewModels
             CloseApplicationCommand = new RelayCommand(ShutdownApplication);
             LogoutUserCommand = new RelayCommand(LogoutUserCommandExecute);
             ShowUserInfoCommand = new RelayCommand(ShowUserInfoCommandExecute);
+
+            CloseConnectionActionHandler = new CloseConnectionActionHandler();
 
             ChangeViewModel(nameof(LoginControlViewModel));
         }
@@ -129,13 +135,13 @@ namespace ITManagementClient.ViewModels
                         Mediator.Notify(nameof(AdministratorControlViewModel), nameof(AdministratorControlViewModel));
                         break;
                     case UserRoles.Developer:
-                        //Mediator.Notify(nameof(AdministratorControlViewModel));
+                        Mediator.Notify(nameof(DeveloperControlViewModel), nameof(DeveloperControlViewModel));
                         break;
                     case UserRoles.HrManager:
-                        //Mediator.Notify(nameof(AdministratorControlViewModel));
+                        Mediator.Notify(nameof(HrManagerControlViewModel), nameof(HrManagerControlViewModel));
                         break;
                     case UserRoles.ResourceManager:
-                        //Mediator.Notify(nameof(AdministratorControlViewModel));
+                        Mediator.Notify(nameof(ResourceManagerViewModel), nameof(ResourceManagerViewModel));
                         break;
                     default:
                         Mediator.Notify("SnackbarMessageShow", "Incorrect role");
@@ -151,7 +157,16 @@ namespace ITManagementClient.ViewModels
 
         private void ShutdownApplication(object obj)
         {
-            Application.Current.Shutdown();
+            try
+            {
+                CloseConnectionActionHandler.ExecuteHandler(new CloseConnectionRequestModel());
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    Application.Current.Shutdown();
+                });
+            }
+            catch { /**/ }
         }
 
         private void LogoutUserCommandExecute(object obj)
