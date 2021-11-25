@@ -1,18 +1,21 @@
-package models.responseModels.projects;
+package models.requestModels.projects;
 
 import java.sql.Date;
-import java.util.ArrayList;
 
-public class GetProjectByIdResponseModel {
+public class UpdateProjectRequestModel {
+    private int ProjectId;
     private String Title;
     private String Description;
     private String TechnologiesStack;
     private Date StartDate;
     private boolean IsActive;
-    private ArrayList<ProjectWorkerResponseModel> Workers;
 
-    public GetProjectByIdResponseModel() {
-        Workers = new ArrayList<>();
+    public int getProjectId() {
+        return ProjectId;
+    }
+
+    public void setProjectId(int projectId) {
+        ProjectId = projectId;
     }
 
     public String getTitle() {
@@ -53,13 +56,5 @@ public class GetProjectByIdResponseModel {
 
     public void setActive(boolean active) {
         IsActive = active;
-    }
-
-    public ArrayList<ProjectWorkerResponseModel> getWorkers() {
-        return Workers;
-    }
-
-    public void setWorkers(ArrayList<ProjectWorkerResponseModel> workers) {
-        Workers = workers;
     }
 }

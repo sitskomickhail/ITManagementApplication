@@ -20,5 +20,7 @@ namespace ITManagementClient.Models.RequestModels.Workers
         public string EnglishLevel { get; set; }
 
         public string Login { get; set; }
+
+        public int? DepartmentId { get; set; }
     }
 }

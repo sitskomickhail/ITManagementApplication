@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace ITManagementClient.Models.ResponseModels.Projects
+namespace ITManagementClient.Models.RequestModels.Projects
 {
-    public class GetProjectByIdResponseModel
+    public class UpdateProjectRequestModel
     {
+        public int ProjectId { get; set; }
+
         public string Title { get; set; }
 
         public string Description { get; set; }
@@ -14,7 +15,5 @@ namespace ITManagementClient.Models.ResponseModels.Projects
         public DateTime StartDate { get; set; }
 
         public bool IsActive { get; set; }
-
-        public List<ProjectWorkerResponseModel> Workers { get; set; }
     }
 }

@@ -24,4 +24,9 @@ public class HandlerCodes {
     public static final int DELETE_DEPARTMENT = 21;
     public static final int GET_DEPARTMENT_FULL_INFO = 22;
     public static final int GET_DEVELOPER_PROJECTS = 23;
+    public static final int UPDATE_PROJECT = 24;
+    public static final int REMOVE_WORKER_FROM_PROJECT = 25;
+    public static final int ADD_WORKER_TO_PROJECT = 26;
+    public static final int UPDATE_WORKER_PROJECT_COST = 27;
+    public static final int GET_LIST_OF_AVAILABLE_DEVELOPERS = 28;
 }

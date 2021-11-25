@@ -96,9 +96,11 @@
 
                     <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Vertical" Margin="10">
                         <Label FontSize="16">Департамент (отдел)</Label>
-                        <TextBox FontSize="16" 
-                                 IsEnabled="{Binding IsWorkerDepartmentEnabled, UpdateSourceTrigger=PropertyChanged}"
-                                 Text="{Binding WorkerDepartmentName, UpdateSourceTrigger=PropertyChanged}"/>
+                        <ComboBox FontSize="16" 
+                                  ItemsSource="{Binding DepartmentsList, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedItem="{Binding WorkerDepartmentName, UpdateSourceTrigger=PropertyChanged}"
+                                  IsEnabled="{Binding IsWorkerDepartmentEnabled, UpdateSourceTrigger=PropertyChanged}"
+                                  materialDesign:HintAssist.Hint="Выберите отдел работы сотрудника"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="0" Grid.Row="4" Orientation="Vertical" Margin="10">

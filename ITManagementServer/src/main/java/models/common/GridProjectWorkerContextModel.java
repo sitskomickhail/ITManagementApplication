@@ -1,13 +1,19 @@
 package models.common;
 
+import java.sql.Date;
+
 public class GridProjectWorkerContextModel {
     private int projectId;
+    private int workerId;
     private String projectName;
     private String description;
     private String technologiesStack;
     private String workerName;
     private String department;
     private Double cost;
+    private Date startDate;
+    private boolean isActive;
+    private int userRole;
 
     public int getProjectId() {
         return projectId;
@@ -15,6 +21,14 @@ public class GridProjectWorkerContextModel {
 
     public void setProjectId(int projectId) {
         this.projectId = projectId;
+    }
+
+    public int getWorkerId() {
+        return workerId;
+    }
+
+    public void setWorkerId(int workerId) {
+        this.workerId = workerId;
     }
 
     public String getProjectName() {
@@ -63,5 +77,29 @@ public class GridProjectWorkerContextModel {
 
     public void setCost(Double cost) {
         this.cost = cost;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public int getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(int userRole) {
+        this.userRole = userRole;
     }
 }

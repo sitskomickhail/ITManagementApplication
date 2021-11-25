@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using ITManagementClient.Handlers.Base;
+using ITManagementClient.Handlers.Departments;
 using ITManagementClient.Handlers.Workers;
 using ITManagementClient.Helpers;
 using ITManagementClient.Infrastructure;
 using ITManagementClient.Managers;
 using ITManagementClient.Models.Common.ObservableModels;
 using ITManagementClient.Models.Enums;
+using ITManagementClient.Models.RequestModels.Departments;
 using ITManagementClient.Models.RequestModels.Workers;
+using ITManagementClient.Models.ResponseModels.Departments;
 using ITManagementClient.Models.ResponseModels.Workers;
 using ITManagementClient.ViewModels.Base;
 using ITManagementClient.ViewModels.Interfaces;
@@ -23,7 +27,7 @@ namespace ITManagementClient.ViewModels.UserControls
         public IEnumerable<PageDefinition> PageDefinitions => new List<PageDefinition>
         {
             PageDefinition.Administrator, PageDefinition.HumanResource,
-            PageDefinition.HumanResource, PageDefinition.Developer
+            PageDefinition.ResourceManager, PageDefinition.Developer
         };
 
         public ObservableCollection<WorkerObservableModel> WorkersList { get; set; }
@@ -187,6 +191,10 @@ namespace ITManagementClient.ViewModels.UserControls
             }
         }
 
+        private Dictionary<string, int> _departments;
+
+        public ObservableCollection<string> DepartmentsList { get; set; }
+
         private string _workerDepartmentName;
         public string WorkerDepartmentName
         {
@@ -241,24 +249,30 @@ namespace ITManagementClient.ViewModels.UserControls
 
         public ICommand SearchByParameterCommand { get; set; }
         public ICommand SaveUpdatedWorkerCommand { get; set; }
+        public ICommand GetAvailableDepartmentsCommand { get; set; }
 
         public BaseActionHandler<UpdateWorkerRequestModel, UpdateWorkerResponseModel> UpdateWorkerActionHandler { get; set; }
         public BaseActionHandler<GetWorkerByIdRequestModel, GetWorkerByIdResponseModel> GetWorkerByIdActionHandler { get; set; }
         public BaseActionHandler<GetWorkerListRequestModel, GetWorkerListResponseModel> GetWorkersListActionHandler { get; set; }
+        public BaseActionHandler<GetDepartmentsListRequestModel, GetDepartmentsListResponseModel> GetDepartmentsListActionHandler { get; set; }
 
         public WorkersListViewModel()
         {
             WorkersList = new ObservableCollection<WorkerObservableModel>();
+            DepartmentsList = new ObservableCollection<string>();
             WorkersList.Add(new WorkerObservableModel() { ShowWorkerDetailsCommand = new RelayCommand(ShowWorkerDetailsCommandExecute) });
 
             SearchParameter = String.Empty;
+            _departments = new Dictionary<string, int>();
 
             SaveUpdatedWorkerCommand = new RelayCommand(SaveUpdatedWorkerCommandExecute);
             SearchByParameterCommand = new RelayCommand(SearchByParameterCommandExecute);
+            GetAvailableDepartmentsCommand = new RelayCommand(GetAvailableDepartmentsCommandExecute);
 
             UpdateWorkerActionHandler = new UpdateWorkerActionHandler();
             GetWorkerByIdActionHandler = new GetWorkerByIdActionHandler();
             GetWorkersListActionHandler = new GetWorkersListActionHandler();
+            GetDepartmentsListActionHandler = new GetDepartmentsListActionHandler();
         }
 
         public void LoadInstance()
@@ -289,6 +303,10 @@ namespace ITManagementClient.ViewModels.UserControls
                     WorkerId = workerId
                 });
 
+                GetAvailableDepartmentsCommand.Execute(null);
+
+                Thread.Sleep(100);
+
                 Login = actionResult.Login;
                 EditingWorkerId = actionResult.WorkerId;
                 WorkerEnglishLevel = actionResult.EnglishLevel;
@@ -316,7 +334,8 @@ namespace ITManagementClient.ViewModels.UserControls
                     EnglishLevel = WorkerEnglishLevel,
                     Position = _userRoles[SelectedRole],
                     Salary = Decimal.Parse(WorkerSalary),
-                    WorkerId = EditingWorkerId
+                    WorkerId = EditingWorkerId,
+                    DepartmentId = String.IsNullOrEmpty(WorkerDepartmentName) ? new int?() : _departments[WorkerDepartmentName]
                 });
 
                 SearchByParameterCommand.Execute(null);
@@ -345,7 +364,7 @@ namespace ITManagementClient.ViewModels.UserControls
                             WorkerId = worker.WorkerId,
                             Salary = worker.Salary,
                             HireDate = worker.HireDate.ToString("dd.MM.yyyy"),
-                            Department = worker.Department,
+                            Department = worker.Department ?? String.Empty,
                             Number = listCounter++,
                             ShowWorkerDetailsCommand = new RelayCommand(ShowWorkerDetailsCommandExecute),
                             SalaryColumnVisibility = SalaryVisibility
@@ -354,6 +373,27 @@ namespace ITManagementClient.ViewModels.UserControls
                 });
             }
             catch { /**/ }
+        }
+
+        private void GetAvailableDepartmentsCommandExecute(object obj)
+        {
+            var actionResult = GetDepartmentsListActionHandler.ExecuteHandler(new GetDepartmentsListRequestModel
+            {
+                SearchParameter = SearchParameter
+            });
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                DepartmentsList.Clear();
+                _departments.Clear();
+                DepartmentsList.Add(String.Empty);
+                foreach (var department in actionResult.Departments)
+                {
+                    DepartmentsList.Add(department.Title);
+                    _departments.Add(department.Title, department.DepartmentId);
+                }
+            });
+
         }
     }
 }

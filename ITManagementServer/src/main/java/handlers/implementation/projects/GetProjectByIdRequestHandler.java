@@ -1,6 +1,7 @@
 package handlers.implementation.projects;
 
 import constants.HandlerCodes;
+import constants.UserRoles;
 import db.context.ProjectsContext;
 import handlers.base.BaseRequestHandler;
 import models.requestModels.projects.GetProjectByIdRequestModel;
@@ -30,13 +31,16 @@ public class GetProjectByIdRequestHandler extends BaseRequestHandler<GetProjectB
             responseModel.setDescription(projectInfo.getDescription());
             responseModel.setTechnologiesStack(projectInfo.getTechnologiesStack());
             responseModel.setTitle(projectInfo.getProjectName());
+            responseModel.setActive(projectInfo.isActive());
+            responseModel.setStartDate(projectInfo.getStartDate());
 
-            if(projectInfo.getCost() != 0 && projectInfo.getWorkerName() != null) {
+            if (projectInfo.getWorkerName() != null && projectInfo.getUserRole() != UserRoles.Administrator) {
                 var projectWorker = new ProjectWorkerResponseModel();
 
                 projectWorker.setCost(projectInfo.getCost());
                 projectWorker.setDepartment(projectInfo.getDepartment());
                 projectWorker.setName(projectInfo.getWorkerName());
+                projectWorker.setWorkerId(projectInfo.getWorkerId());
 
                 responseModel.getWorkers().add(projectWorker);
             }

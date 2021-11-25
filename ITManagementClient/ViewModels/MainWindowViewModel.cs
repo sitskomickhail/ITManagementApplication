@@ -13,6 +13,7 @@ using ITManagementClient.ViewModels.CredentialControls;
 using ITManagementClient.ViewModels.Developer;
 using ITManagementClient.ViewModels.HrManager;
 using ITManagementClient.ViewModels.Interfaces;
+using ITManagementClient.ViewModels.ResourceManager;
 using MaterialDesignThemes.Wpf;
 
 namespace ITManagementClient.ViewModels
@@ -132,7 +133,7 @@ namespace ITManagementClient.ViewModels
                         Mediator.Notify(nameof(HrManagerControlViewModel), nameof(HrManagerControlViewModel));
                         break;
                     case UserRoles.ResourceManager:
-                        //Mediator.Notify(nameof(AdministratorControlViewModel));
+                        Mediator.Notify(nameof(ResourceManagerViewModel), nameof(ResourceManagerViewModel));
                         break;
                     default:
                         Mediator.Notify("SnackbarMessageShow", "Incorrect role");

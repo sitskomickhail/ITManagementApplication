@@ -19,6 +19,8 @@ public class UpdateWorkerRequestModel {
 
     private String Login;
 
+    private Integer DepartmentId;
+
     public int getWorkerId() {
         return WorkerId;
     }
@@ -81,5 +83,13 @@ public class UpdateWorkerRequestModel {
 
     public void setLogin(String login) {
         Login = login;
+    }
+
+    public Integer getDepartmentId() {
+        return DepartmentId;
+    }
+
+    public void setDepartmentId(Integer departmentId) {
+        DepartmentId = departmentId;
     }
 }
