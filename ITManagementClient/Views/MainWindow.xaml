@@ -8,8 +8,8 @@
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         WindowState="Maximized"
-        WindowStyle="None"
-        Title="MainWindow">
+        WindowStyle="SingleBorderWindow"
+        Title="IT management | Управление персоналом">
     <Grid>
         <Grid ZIndex="9999" 
               Background="#95a8a8a7" 
