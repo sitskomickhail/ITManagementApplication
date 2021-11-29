@@ -206,7 +206,7 @@ namespace ITManagementClient.ViewModels.Requests
                     return;
                 }
 
-                if (DateTime.Parse(VacationStartLimitDate) < DateTime.Now)
+                if (StartVacationDate < DateTime.Now)
                 {
                     Mediator.Notify("SnackbarMessageShow", "Некорректная дата начала отпуска");
                     return;
@@ -216,7 +216,7 @@ namespace ITManagementClient.ViewModels.Requests
                 {
                     RequestType = Models.Enums.RequestType.Vacation,
                     WorkerId = UserManager.GetCurrentConnectedUser().Id,
-                    RequestDescription = $"Отпуск начиная с {DateTime.Parse(VacationStartLimitDate):dd.MM.yyyy} на {VacationDaysReserved} дней"
+                    RequestDescription = $"Отпуск начиная с {StartVacationDate:dd.MM.yyyy} на {VacationDaysReserved} дней"
                 });
 
                 Mediator.Notify("SnackbarMessageShow", "Заявка на отпуск успешно создана");
