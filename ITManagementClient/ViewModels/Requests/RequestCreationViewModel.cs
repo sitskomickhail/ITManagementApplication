@@ -277,7 +277,7 @@ namespace ITManagementClient.ViewModels.Requests
 
                 CreateRequestActionHandler.ExecuteHandler(new CreateRequestRequestModel()
                 {
-                    RequestType = Models.Enums.RequestType.Dismission,
+                    RequestType = Models.Enums.RequestType.Access,
                     WorkerId = UserManager.GetCurrentConnectedUser().Id,
                     RequestDescription = requestDescription
                 });

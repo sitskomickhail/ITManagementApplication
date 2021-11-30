@@ -209,6 +209,8 @@ namespace ITManagementClient.ViewModels.ResourceManager
                 IsActive = actionResult.IsActive;
                 StartDate = actionResult.StartDate;
                 EditingProjectId = projectId;
+
+                SearchByParameterCommand.Execute(null);
             }
             catch { /**/ }
         }
