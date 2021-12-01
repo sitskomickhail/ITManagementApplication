@@ -29,7 +29,8 @@ public class RegisterWorkerRequestHandler extends BaseRequestHandler<RegisterReq
             throw new Exception("Некорректный ключ доступа");
         }
 
-        var foundWorker = WorkerContext.GetWorkerByLogin(registerRequestModel.getLogin());
+        var workerContext = new WorkerContext();
+        var foundWorker = workerContext.GetWorkerByLogin(registerRequestModel.getLogin());
 
         if (foundWorker != null) {
             throw new Exception("Пользователь с таким логином уже существует.");

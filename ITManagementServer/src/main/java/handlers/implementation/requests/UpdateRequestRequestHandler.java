@@ -1,7 +1,10 @@
 package handlers.implementation.requests;
 
 import constants.HandlerCodes;
+import constants.RequestsResolveStatuses;
+import constants.RequestsTypes;
 import db.context.RequestsContext;
+import db.context.WorkerContext;
 import handlers.base.BaseRequestHandler;
 import models.requestModels.requests.UpdateRequestRequestModel;
 import models.responseModels.requests.UpdateRequestResponseModel;
@@ -27,6 +30,13 @@ public class UpdateRequestRequestHandler extends BaseRequestHandler<UpdateReques
         request.setResolveNote(model.getResolveNote());
 
         RequestsContext.UpdateRequest(request);
+
+        if(request.getResolveStatus() == RequestsResolveStatuses.Solved && request.getType() == RequestsTypes.Dismission) {
+            var worker = WorkerContext.GetWorkerById(request.getWorkerId());
+            worker.setActive(false);
+
+            WorkerContext.UpdateWorkerEntity(worker);
+        }
 
         return new UpdateRequestResponseModel();
     }

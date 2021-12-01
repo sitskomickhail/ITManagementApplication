@@ -8,7 +8,6 @@ import models.requestModels.workers.CreateWorkerRequestModel;
 import models.responseModels.workers.CreateWorkerResponseModel;
 
 import java.lang.reflect.Type;
-import java.sql.Date;
 
 public class CreateWorkerRequestHandler extends BaseRequestHandler<CreateWorkerRequestModel, CreateWorkerResponseModel> {
     @Override
@@ -23,7 +22,9 @@ public class CreateWorkerRequestHandler extends BaseRequestHandler<CreateWorkerR
 
     @Override
     protected CreateWorkerResponseModel Execute(CreateWorkerRequestModel model) throws Exception {
-        var foundWorker = WorkerContext.GetWorkerByLogin(model.getLogin());
+
+        var workerContext = new WorkerContext();
+        var foundWorker = workerContext.GetWorkerByLogin(model.getLogin());
 
         if (foundWorker != null) {
             throw new Exception("Пользователь с таким логином уже существует.");

@@ -5,6 +5,8 @@ import db.context.WorkerContext;
 import handlers.base.BaseRequestHandler;
 
 import helpers.PasswordHelper;
+import managers.WorkerManager;
+import managers.interfaces.IWorkerManager;
 import models.requestModels.workers.LoginRequestModel;
 import models.responseModels.workers.LoginResponseModel;
 
@@ -21,22 +23,20 @@ public class LoginWorkerRequestHandler extends BaseRequestHandler<LoginRequestMo
         return LoginRequestModel.class;
     }
 
+    private IWorkerManager _workerManager;
+
+    public LoginWorkerRequestHandler() {
+        _workerManager = new WorkerManager();
+    }
+
     @Override
-    protected LoginResponseModel Execute(LoginRequestModel loginRequestModel) throws Exception {
-        var worker = WorkerContext.GetWorkerByLogin(loginRequestModel.getLogin());
+    protected LoginResponseModel Execute(LoginRequestModel model) throws Exception {
+        var worker = _workerManager.getAndValidateUser(model.getLogin(), model.getPassword());
 
-        if (worker == null) {
-            throw new Exception("Логин или пароль неверны");
-        }
+        LoginResponseModel responseModel = new LoginResponseModel();
+        responseModel.setUserId(worker.getId());
+        responseModel.setUserRole(worker.getPosition());
 
-        if (!PasswordHelper.VerifyUserPassword(loginRequestModel.getPassword(), worker.getSalt(), worker.getPassword())) {
-            throw new Exception("Логин или пароль неверны");
-        }
-
-        LoginResponseModel model = new LoginResponseModel();
-        model.setUserId(worker.getId());
-        model.setUserRole(worker.getPosition());
-
-        return model;
+        return responseModel;
     }
 }

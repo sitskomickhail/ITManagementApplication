@@ -61,7 +61,7 @@ public class WorkerContext {
         return worker;
     }
 
-    public static Worker GetWorkerByLogin(String login) throws IOException, SQLException {
+    public Worker GetWorkerByLogin(String login) throws IOException, SQLException {
         var connection = MySqlContext.getInstance().getConnection();
 
         String sql = "SELECT * FROM Workers WHERE Login = ?";
